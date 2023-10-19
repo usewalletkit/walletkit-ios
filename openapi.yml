@@ -1,0 +1,1774 @@
+openapi: 3.0.1
+info:
+  title: WalletKit
+  version: ''
+paths:
+  /activity:
+    get:
+      description: Retrieves activity history on a specific wallet address.
+      operationId: activity_list
+      tags:
+        - Activity
+      parameters:
+        - name: network
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Network'
+        - name: wallet_address
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            nullable: true
+        - name: page_size
+          in: query
+          required: false
+          schema:
+            type: integer
+            nullable: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListWalletActivityResponseItem'
+        '400':
+          description: ''
+      summary: List Wallet Activity
+      security: &ref_0
+        - BearerAuth: []
+  /gas/buy:
+    post:
+      description: >-
+        Tops up gas to the destination wallet address (default to project wallet
+        if not provided explicitly).
+      operationId: gas_buy
+      tags:
+        - Gas
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuyGasResponse'
+        '400':
+          description: ''
+      summary: Buy Gas
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                network:
+                  $ref: '#/components/schemas/Network'
+                amount:
+                  type: string
+                destination_address:
+                  type: string
+                  nullable: true
+              required:
+                - network
+                - amount
+  /nfts/collections:
+    post:
+      description: >
+        Creates an NFT Collection with provided metadata.
+
+        An NFT collection refers to a group of non-fungible tokens (NFTs) that
+        are created and released together, often following a specific theme or
+        concept. NFTs are unique digital assets that are stored on a blockchain,
+        represent ownership or proof of authenticity of a particular item,
+        artwork, or digital content.
+
+        The created nft collection's address can be found by
+        `/transactions/status-by-id`
+
+        endpoint once the transaction is succeeded.
+      operationId: nfts_create
+      tags:
+        - Nfts
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionSubmissionResponse'
+        '400':
+          description: ''
+      summary: Create NFT Collection
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                network:
+                  $ref: '#/components/schemas/Network'
+                name:
+                  type: string
+                  description: collection name
+                symbol:
+                  type: string
+                  description: Collection symbol used for identification purposes
+                image_url:
+                  type: string
+                  description: URL to the collection logo image
+                base_uri:
+                  type: string
+                  nullable: true
+                  description: >-
+                    Base URI for computing tokenURI which resolves to token
+                    metadata JSON. If set, the resulting URI for each token will
+                    be the concatenation of the baseURI and the tokenId (or
+                    tokenURI if tokenURI is set when minting the NFT).
+                developer_secret:
+                  $ref: '#/components/schemas/DeveloperSecret'
+                  nullable: true
+                user_pin:
+                  $ref: '#/components/schemas/UserPin'
+                  nullable: true
+              required:
+                - network
+                - name
+                - symbol
+                - image_url
+    get:
+      description: List NFT collections owned by wallet
+      operationId: nfts_list-nft-collections
+      tags:
+        - Nfts
+      parameters:
+        - name: network
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Network'
+        - name: wallet_address
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: page number starting from 1
+          required: false
+          schema:
+            type: integer
+            nullable: true
+        - name: page_size
+          in: query
+          description: size of each page
+          required: false
+          schema:
+            type: integer
+            nullable: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListNftCollectionsResponseItem'
+        '400':
+          description: ''
+      summary: List NFT Collections
+      security: *ref_0
+  /nfts/mint:
+    post:
+      description: Mints a NFT from a collection
+      operationId: nfts_mint-nft
+      tags:
+        - Nfts
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionSubmissionResponse'
+        '400':
+          description: ''
+      summary: Mint NFT
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                network:
+                  $ref: '#/components/schemas/Network'
+                contract_address:
+                  type: string
+                  description: address of the NFT collection smart contract to mint from.
+                recipient:
+                  type: string
+                  nullable: true
+                  description: >-
+                    wallet address where the NFT should be delivered. defaults
+                    to the sender's address.
+                metadata:
+                  $ref: '#/components/schemas/MintNftRequestMetadata'
+                  nullable: true
+                  description: Metadata JSON object.
+                uri:
+                  type: string
+                  nullable: true
+                  description: >-
+                    uri the the nft metadata.json, schema define in
+                    https://eips.ethereum.org/EIPS/eip-721#specification. Use
+                    the metadata field instead if the metadata.json doesn't
+                    exist and needs to be created and hosted.
+                developer_secret:
+                  $ref: '#/components/schemas/DeveloperSecret'
+                  nullable: true
+                user_pin:
+                  $ref: '#/components/schemas/UserPin'
+                  nullable: true
+              required:
+                - network
+                - contract_address
+  /nfts/transfer:
+    post:
+      description: >-
+        Transfers NFT from `from` to `recipient`. The from address must be
+        wallet created in the project.
+      operationId: nfts_transfer-nft
+      tags:
+        - Nfts
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionSubmissionResponse'
+        '400':
+          description: ''
+      summary: Transfer NFT
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                network:
+                  $ref: '#/components/schemas/Network'
+                from:
+                  type: string
+                  description: from address of the transfer
+                contract_address:
+                  type: string
+                  description: collection contract address
+                recipient:
+                  type: string
+                  description: recipient of the NFT transfer
+                token_id:
+                  type: string
+                  nullable: true
+                developer_secret:
+                  $ref: '#/components/schemas/DeveloperSecret'
+                  nullable: true
+                user_pin:
+                  $ref: '#/components/schemas/UserPin'
+                  nullable: true
+              required:
+                - network
+                - from
+                - contract_address
+                - recipient
+  /nfts:
+    get:
+      description: List NFTs by wallet or by collection address
+      operationId: nfts_list-nfts
+      tags:
+        - Nfts
+      parameters:
+        - name: network
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Network'
+        - name: wallet_address
+          in: query
+          description: >-
+            query by wallet address. If provided, contract_address should not be
+            set.
+          required: false
+          schema:
+            type: string
+            nullable: true
+        - name: contract_address
+          in: query
+          description: >-
+            query by collection address. If provided, wallet_address should not
+            be set.
+          required: false
+          schema:
+            type: string
+            nullable: true
+        - name: page
+          in: query
+          description: page number, starting from 1
+          required: false
+          schema:
+            type: integer
+            nullable: true
+        - name: page_size
+          in: query
+          description: size of each page
+          required: false
+          schema:
+            type: integer
+            nullable: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListNftsResponseItem'
+        '400':
+          description: ''
+      summary: List NFTs
+      security: *ref_0
+  /nfts/collection-by-address:
+    get:
+      description: Get NFT collection by collection address
+      operationId: nfts_get-nft-collection
+      tags:
+        - Nfts
+      parameters:
+        - name: network
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/Network'
+            nullable: true
+        - name: collection_address
+          in: query
+          description: address of the NFT contract
+          required: false
+          schema:
+            type: string
+            nullable: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetNftCollectionResponse'
+        '400':
+          description: ''
+      summary: Get NFT Collection
+      security: *ref_0
+  /nfts/upload:
+    post:
+      description: Upload NFT image to IPFS
+      operationId: nfts_nft-image-upload
+      tags:
+        - Nfts
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NftImageUploadResponse'
+        '400':
+          description: ''
+      summary: Upload NFT image
+      security: *ref_0
+  /tokens/tokens:
+    get:
+      description: Gets the metadata for a token.
+      operationId: tokens_get
+      tags:
+        - Tokens
+      parameters:
+        - name: network
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Network'
+        - name: token
+          in: query
+          description: token contract address or symbol in case of the gas token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTokenResponse'
+        '400':
+          description: ''
+      summary: Get Token
+      security: *ref_0
+  /tokens:
+    post:
+      description: Creates an on-chain token with provided metadata.
+      operationId: tokens_create
+      tags:
+        - Tokens
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionSubmissionResponse'
+        '400':
+          description: ''
+      summary: Create Token
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                network:
+                  $ref: '#/components/schemas/Network'
+                name:
+                  type: string
+                symbol:
+                  type: string
+                decimals:
+                  type: string
+                  description: >-
+                    Specify how many decimals places a token has. E.g. To be
+                    able to transfer 1.5 XYZ token, decimals must be at least 1
+                    since that number has a single decimal places.
+                display_decimals:
+                  type: string
+                  nullable: true
+                  description: Decimals to display on WalletKit dashboard.
+                logo_url:
+                  type: string
+                  nullable: true
+                  description: url of the token logo.
+                initial_supply:
+                  type: string
+                  description: The amount of tokens to be minted to the token creator.
+                developer_secret:
+                  $ref: '#/components/schemas/DeveloperSecret'
+                  nullable: true
+                user_pin:
+                  $ref: '#/components/schemas/UserPin'
+                  nullable: true
+              required:
+                - network
+                - name
+                - symbol
+                - decimals
+                - initial_supply
+  /tokens/transfer:
+    post:
+      description: >-
+        Transfers the specified amount of tokens from `from` to `recipient`. The
+        from address can only be the ones created in the project.
+      operationId: tokens_transfer
+      tags:
+        - Tokens
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionSubmissionResponse'
+        '400':
+          description: ''
+      summary: Transfer Token
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                network:
+                  $ref: '#/components/schemas/Network'
+                from:
+                  type: string
+                  description: from address of the transfer
+                token:
+                  type: string
+                  description: >-
+                    token contract address or symbol in case of the gas token to
+                    be transferred.
+                recipient:
+                  type: string
+                  description: recipient of the transfer
+                amount:
+                  type: string
+                  description: amount to be transferred.
+                developer_secret:
+                  $ref: '#/components/schemas/DeveloperSecret'
+                  nullable: true
+                user_pin:
+                  $ref: '#/components/schemas/UserPin'
+                  nullable: true
+              required:
+                - network
+                - from
+                - token
+                - recipient
+                - amount
+  /tokens/mint:
+    post:
+      description: Mints specified amount of token to the recipient.
+      operationId: tokens_mint
+      tags:
+        - Tokens
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionSubmissionResponse'
+        '400':
+          description: ''
+      summary: Mint Token
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                network:
+                  $ref: '#/components/schemas/Network'
+                contract_address:
+                  type: string
+                recipient:
+                  type: string
+                amount:
+                  type: string
+                developer_secret:
+                  $ref: '#/components/schemas/DeveloperSecret'
+                  nullable: true
+                user_pin:
+                  $ref: '#/components/schemas/UserPin'
+                  nullable: true
+              required:
+                - network
+                - contract_address
+                - recipient
+                - amount
+  /tokens/balances:
+    get:
+      description: >-
+        Retrieves a list of token balances associated with a specific wallet
+        address on a given network.
+      operationId: tokens_list-balances
+      tags:
+        - Tokens
+      parameters:
+        - name: network
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Network'
+        - name: wallet_address
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListTokenBalancesResponseItem'
+        '400':
+          description: ''
+      summary: List Token Balances
+      security: *ref_0
+  /tokens/batch-transfer:
+    post:
+      description: >
+        Batch transfers from the `from` wallet to the list of 
+
+        `recipients` with the provided amount. The `from` address can only be
+        the ones 
+
+        created in the project. Transfers within a batch are processed
+        atomically 
+
+        in a single transaction, resulting in significantly lower average costs 
+
+        compared to individual transfers
+      operationId: tokens_batch-transfer
+      tags:
+        - Tokens
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionSubmissionResponse'
+        '400':
+          description: ''
+      summary: Batch Transfer Token
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                network:
+                  $ref: '#/components/schemas/Network'
+                from:
+                  type: string
+                  description: from address of the transfer
+                token:
+                  type: string
+                  description: >-
+                    token contract address or symbol in case of the gas token to
+                    be transferred.
+                transfers:
+                  type: array
+                  items:
+                    $ref: >-
+                      #/components/schemas/BatchTransferTokenRequestTransfersItem
+                  description: transfers in this batch, max batch size is 50 transfers.
+                developer_secret:
+                  $ref: '#/components/schemas/DeveloperSecret'
+                  nullable: true
+                user_pin:
+                  $ref: '#/components/schemas/UserPin'
+                  nullable: true
+              required:
+                - network
+                - from
+                - token
+                - transfers
+  /transactions/status-by-hash:
+    get:
+      description: Retrieves the status of a transaction by its hash.
+      operationId: transactions_get-status
+      tags:
+        - Transactions
+      parameters:
+        - name: network
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Network'
+        - name: transaction_hash
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTransactionStatusByHashResponse'
+        '400':
+          description: ''
+      summary: Transaction Status By Hash
+      security: *ref_0
+  /transactions/sign-and-send:
+    post:
+      description: >-
+        This endpoint allows arbitrary smart contract function calls. It can be
+        used to interact with smart contracts that are not supported by the
+        Token/NFT APIs.
+      operationId: transactions_sign-and-send
+      tags:
+        - Transactions
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionSubmissionResponse'
+        '400':
+          description: ''
+      summary: Sign and Send
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                network:
+                  $ref: '#/components/schemas/Network'
+                signer_wallet_address:
+                  type: string
+                  description: address can only be the ones created in the project.
+                unsigned_transaction:
+                  $ref: '#/components/schemas/SignAndSendRequestUnsignedTransaction'
+                  description: input of a transaction to be signed.
+                developer_secret:
+                  $ref: '#/components/schemas/DeveloperSecret'
+                  nullable: true
+                user_pin:
+                  $ref: '#/components/schemas/UserPin'
+                  nullable: true
+              required:
+                - network
+                - signer_wallet_address
+                - unsigned_transaction
+  /transactions/status-by-id:
+    get:
+      description: >-
+        Retrieves the status of a transaction by its id returned from the APIs
+        that change the state of blockchain` (e.g. /tokens/transfer)`
+      operationId: transactions_status-by-id
+      tags:
+        - Transactions
+      parameters:
+        - name: id
+          in: query
+          description: >-
+            transaction id returned in POST requests that result in a
+            transaction. e.g. Transfer Token
+          required: false
+          schema:
+            type: string
+            nullable: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTransactionStatusByIdResponse'
+        '400':
+          description: ''
+      summary: Transaction Status by ID
+      security: *ref_0
+  /users/login-anonymously:
+    post:
+      description: Create an anonymous user session
+      operationId: users_login-anonymously
+      tags:
+        - Users
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        '400':
+          description: ''
+      summary: Login Anonymously
+  /users/login-with-email:
+    post:
+      description: Log a user in with their email.
+      operationId: users_login-with-email
+      tags:
+        - Users
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginWithEmailResponse'
+        '400':
+          description: ''
+      summary: Login with Email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+              required:
+                - email
+  /users/verify-login:
+    post:
+      description: Verify a user's login code.
+      operationId: users_verify-login
+      tags:
+        - Users
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        '400':
+          description: ''
+      summary: Verify Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                verification_code:
+                  type: string
+              required:
+                - user_id
+                - verification_code
+  /users/refresh-token:
+    post:
+      description: Refresh an access token
+      operationId: users_refresh-token
+      tags:
+        - Users
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        '400':
+          description: ''
+      summary: Refresh Token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                session_id:
+                  type: string
+                refresh_token:
+                  type: string
+              required:
+                - session_id
+                - refresh_token
+  /wallets/get-by-network:
+    get:
+      description: Get a wallet for a user by network
+      operationId: wallets_get-by-network
+      tags:
+        - Wallets
+      parameters:
+        - name: network
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Network'
+          examples:
+            Example1:
+              value: Base
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Wallet'
+              examples:
+                Example1:
+                  value:
+                    id: 5884bd1d-ecb3-41ea-bcc7-e9e3d229618f
+                    created_at: '2023-07-21T22:03:16Z'
+                    network: Polygon
+                    name: Joe's wallet
+                    owner_id: 58c9095e-24db-43eb-b49d-b78f72573a29
+                    address: '0x976Cf57B7EE1D84E73BE9115457889d49a8A1335'
+        '400':
+          description: ''
+      summary: Get User Wallet by Network
+      security: *ref_0
+  /wallets/get-by-id:
+    get:
+      description: Get a wallet by id
+      operationId: wallets_get-by-id
+      tags:
+        - Wallets
+      parameters:
+        - name: network
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Network'
+          examples:
+            Example1:
+              value: Base
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+          examples:
+            Example1:
+              value: 5884bd1d-ecb3-41ea-bcc7-e9e3d229618f
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Wallet'
+              examples:
+                Example1:
+                  value:
+                    id: 5884bd1d-ecb3-41ea-bcc7-e9e3d229618f
+                    created_at: '2023-07-21T22:03:16Z'
+                    network: Polygon
+                    name: Joe's wallet
+                    owner_id: 58c9095e-24db-43eb-b49d-b78f72573a29
+                    address: '0x976Cf57B7EE1D84E73BE9115457889d49a8A1335'
+        '400':
+          description: ''
+      summary: Get Wallet by ID
+      security: *ref_0
+  /wallets/get-by-address:
+    get:
+      description: Get a wallet by network and address
+      operationId: wallets_get-by-address
+      tags:
+        - Wallets
+      parameters:
+        - name: network
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Network'
+        - name: address
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Wallet'
+        '400':
+          description: ''
+      summary: Get Wallet by Address
+      security: *ref_0
+  /wallets/get-by-owner-id:
+    get:
+      description: Get a wallet by network and owner id
+      operationId: wallets_get-by-owner-id
+      tags:
+        - Wallets
+      parameters:
+        - name: network
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Network'
+        - name: ownerID
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Wallet'
+        '400':
+          description: ''
+      summary: Get Wallet by Owner ID
+      security: *ref_0
+  /wallets:
+    post:
+      description: Creates a wallet with provided metadata.
+      operationId: wallets_create
+      tags:
+        - Wallets
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWalletResponse'
+              examples:
+                Example1:
+                  value:
+                    id: 5884bd1d-ecb3-41ea-bcc7-e9e3d229618f
+                    created_at: '2023-07-21T22:03:16Z'
+                    network: Polygon
+                    name: Joe's wallet
+                    owner_id: 58c9095e-24db-43eb-b49d-b78f72573a29
+                    address: '0x976Cf57B7EE1D84E73BE9115457889d49a8A1335'
+        '400':
+          description: ''
+      summary: Create Wallet
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWalletRequest'
+            examples:
+              Example1:
+                value:
+                  network: Polygon
+                  name: My Wallet
+                  owner_id: 58c9095e-24db-43eb-b49d-b78f72573a29
+                  control_mode: developer
+                  developer_secret: testnet-secret
+    get:
+      description: Lists wallets created in the project. Supports filter by network.
+      operationId: wallets_list
+      tags:
+        - Wallets
+      parameters:
+        - name: network
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/Network'
+            nullable: true
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            nullable: true
+        - name: page_size
+          in: query
+          required: false
+          schema:
+            type: string
+            nullable: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListWalletsResponseItem'
+      summary: List Wallets
+      security: *ref_0
+  /wallets/change-user-pin:
+    post:
+      description: Change pin for user controlled wallets
+      operationId: wallets_change-user-pin
+      tags:
+        - Wallets
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeUserPinResponse'
+              examples:
+                Example1:
+                  value:
+                    success: true
+        '400':
+          description: ''
+      summary: Change User Pin
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeUserPinRequest'
+            examples:
+              Example1:
+                value:
+                  network: Polygon
+                  address: '0x976Cf57B7EE1D84E73BE9115457889d49a8A1335'
+                  old_user_pin: '123456'
+                  new_user_pin: '654321'
+  /wallets/export:
+    post:
+      description: Export wallet mnemonic phrase
+      operationId: wallets_export
+      tags:
+        - Wallets
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportWalletResponse'
+              examples:
+                Example1:
+                  value:
+                    mnemonic_phrase: >-
+                      candy maple cake sugar pudding cream honey rich smooth
+                      crumble sweet treat
+        '400':
+          description: ''
+      summary: Export Wallet
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExportWalletRequest'
+            examples:
+              Example1:
+                value:
+                  network: Polygon
+                  address: '0x976Cf57B7EE1D84E73BE9115457889d49a8A1335'
+                  user_pin: '123456'
+components:
+  schemas:
+    ListWalletActivityResponseItem:
+      title: ListWalletActivityResponseItem
+      type: object
+      properties:
+        uuid:
+          type: string
+        network:
+          $ref: '#/components/schemas/Network'
+        type:
+          type: string
+        timestamp:
+          type: string
+        wallet_address:
+          type: string
+        transaction_hash:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/ListWalletActivityResponseItemMetadata'
+        Token:
+          $ref: '#/components/schemas/ListWalletActivityResponseItemToken'
+      required:
+        - uuid
+        - network
+        - type
+        - timestamp
+        - wallet_address
+        - transaction_hash
+        - metadata
+        - Token
+    ListWalletActivityResponseItemMetadata:
+      title: ListWalletActivityResponseItemMetadata
+      type: object
+      properties:
+        amount:
+          type: string
+      required:
+        - amount
+    ListWalletActivityResponseItemToken:
+      title: ListWalletActivityResponseItemToken
+      type: object
+      properties:
+        uuid:
+          type: string
+        network:
+          $ref: '#/components/schemas/Network'
+        contract_address:
+          type: string
+        name:
+          type: string
+        symbol:
+          type: string
+        decimals:
+          type: integer
+        display_decimals:
+          type: integer
+        logo_url:
+          type: string
+          nullable: true
+      required:
+        - uuid
+        - network
+        - contract_address
+        - name
+        - symbol
+        - decimals
+        - display_decimals
+    TokenSource:
+      title: TokenSource
+      type: string
+      enum:
+        - walletkit
+        - firebase
+        - supabase
+    Network:
+      title: Network
+      type: string
+      enum:
+        - Ethereum
+        - Polygon
+        - Base
+        - Polkadot
+        - Vara
+    DeveloperSecret:
+      title: DeveloperSecret
+      type: string
+      nullable: true
+      description: >-
+        On testnet, the developer_secret is always "testnet-secret". On mainnet,
+        the developer_secret is set by the developer during account activation.
+    UserPin:
+      title: UserPin
+      type: string
+      nullable: true
+      description: >-
+        A 6-digit numeric pin that is only known to the user, set during  wallet
+        creation. This pin is required to sign transactions from  this wallet.
+    TransactionSubmissionResponse:
+      title: TransactionSubmissionResponse
+      type: object
+      properties:
+        transaction_id:
+          type: string
+        network:
+          $ref: '#/components/schemas/Network'
+        status:
+          type: string
+      required:
+        - transaction_id
+        - network
+        - status
+    BuyGasResponse:
+      title: BuyGasResponse
+      type: object
+      properties:
+        transaction_id:
+          type: string
+        network:
+          $ref: '#/components/schemas/Network'
+        status:
+          type: string
+      required:
+        - transaction_id
+        - network
+        - status
+    MintNftRequestMetadata:
+      title: MintNftRequestMetadata
+      type: object
+      description: Metadata JSON object.
+      properties:
+        name:
+          type: string
+          description: Identifies the asset to which this NFT represents
+        description:
+          type: string
+          description: Describes the asset to which this NFT represents
+        image:
+          type: string
+          description: >-
+            A URI pointing to a resource with mime type image/* representing the
+            asset to which this NFT represents. Consider making any images at a
+            width between 320 and 1080 pixels and aspect ratio between 1.91:1
+            and 4:5 inclusive.
+      required:
+        - name
+        - description
+        - image
+    ListNftsResponseItem:
+      title: ListNftsResponseItem
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/ListNftsResponseItemMetadata'
+          nullable: true
+        owner_wallet_address:
+          type: string
+        contract_address:
+          type: string
+        token_id:
+          type: string
+      required:
+        - owner_wallet_address
+        - contract_address
+        - token_id
+    ListNftsResponseItemMetadata:
+      title: ListNftsResponseItemMetadata
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        image:
+          type: string
+      required:
+        - name
+        - description
+        - image
+    GetNftCollectionResponse:
+      title: GetNftCollectionResponse
+      type: object
+      properties:
+        network:
+          $ref: '#/components/schemas/Network'
+        contract_address:
+          type: string
+        name:
+          type: string
+        symbol:
+          type: string
+      required:
+        - network
+        - contract_address
+        - name
+        - symbol
+    ListNftCollectionsResponseItem:
+      title: ListNftCollectionsResponseItem
+      type: object
+      properties:
+        network:
+          $ref: '#/components/schemas/Network'
+        contract_address:
+          type: string
+        name:
+          type: string
+        image_url:
+          type: string
+      required:
+        - network
+        - contract_address
+        - name
+        - image_url
+    NftImageUploadResponse:
+      title: NftImageUploadResponse
+      type: object
+      properties:
+        ipfs_url:
+          type: string
+      required:
+        - ipfs_url
+    GetTokenResponse:
+      title: GetTokenResponse
+      type: object
+      properties:
+        uuid:
+          type: string
+        network:
+          $ref: '#/components/schemas/Network'
+        contract_address:
+          type: string
+        name:
+          type: string
+        symbol:
+          type: string
+        decimals:
+          type: integer
+        display_decimals:
+          type: integer
+        logo_url:
+          type: string
+          nullable: true
+      required:
+        - uuid
+        - network
+        - contract_address
+        - name
+        - symbol
+        - decimals
+        - display_decimals
+    ListTokenBalancesResponseItem:
+      title: ListTokenBalancesResponseItem
+      type: object
+      properties:
+        uuid:
+          type: string
+        network:
+          $ref: '#/components/schemas/Network'
+        contract_address:
+          type: string
+        name:
+          type: string
+        symbol:
+          type: string
+        decimals:
+          type: integer
+        display_decimals:
+          type: integer
+        logo_url:
+          type: string
+        Balance:
+          type: string
+      required:
+        - uuid
+        - network
+        - contract_address
+        - name
+        - symbol
+        - decimals
+        - display_decimals
+        - logo_url
+        - Balance
+    BatchTransferTokenRequestTransfersItem:
+      title: BatchTransferTokenRequestTransfersItem
+      type: object
+      properties:
+        recipient:
+          type: string
+          description: recipient of the transfer
+        amount:
+          type: string
+          description: amount to be transferred
+      required:
+        - recipient
+        - amount
+    GetTransactionStatusByHashResponse:
+      title: GetTransactionStatusByHashResponse
+      type: object
+      properties:
+        transaction_hash:
+          type: string
+        network:
+          $ref: '#/components/schemas/Network'
+        status:
+          type: string
+        contract_address:
+          type: string
+          nullable: true
+          description: >-
+            If the transaction is a contract creation, this field will be
+            populated with the contract address.
+      required:
+        - transaction_hash
+        - network
+        - status
+    GetTransactionStatusByIdResponse:
+      title: GetTransactionStatusByIdResponse
+      type: object
+      properties:
+        transaction_id:
+          type: string
+        transaction_hash:
+          type: string
+          nullable: true
+          description: >-
+            If the transaction has been sent to the blockchain (status =
+            pending/success/failed), this field will be populated with the
+            transaction hash.
+        network:
+          $ref: '#/components/schemas/Network'
+        status:
+          type: string
+        contract_address:
+          type: string
+          nullable: true
+          description: >-
+            If the transaction is a contract creation, this field will be
+            populated with the contract address.
+      required:
+        - transaction_id
+        - network
+        - status
+    SignAndSendRequestUnsignedTransaction:
+      title: SignAndSendRequestUnsignedTransaction
+      type: object
+      description: input of a transaction to be signed.
+      properties:
+        to:
+          type: string
+          description: >-
+            smart contract address or external owned account address to interact
+            with
+        value:
+          type: string
+          nullable: true
+          description: >-
+            optional. amount of native token to be transferred to the to address
+            in this transaction.
+        input:
+          type: string
+          nullable: true
+          description: >-
+            If it's a smart contract interaction, the calldata of the smart
+            contract function. (ABI-encoded function with arguments)
+      required:
+        - to
+    Session:
+      title: Session
+      type: object
+      properties:
+        id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        project_id:
+          type: string
+        user_id:
+          type: string
+        access_token:
+          type: string
+        access_token_expires_at:
+          type: string
+          format: date-time
+        refresh_token:
+          type: string
+        refresh_token_expires_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - created_at
+        - project_id
+        - user_id
+        - access_token
+        - access_token_expires_at
+        - refresh_token
+        - refresh_token_expires_at
+    LoginAnonymouslyResponse:
+      title: LoginAnonymouslyResponse
+      type: object
+      properties:
+        user_id:
+          type: string
+      required:
+        - user_id
+    LoginWithEmailResponse:
+      title: LoginWithEmailResponse
+      type: object
+      properties:
+        user_id:
+          type: string
+      required:
+        - user_id
+    WalletControlMode:
+      title: WalletControlMode
+      type: string
+      enum:
+        - developer
+        - user
+    ChangeUserPinRequest:
+      title: ChangeUserPinRequest
+      type: object
+      properties:
+        network:
+          $ref: '#/components/schemas/Network'
+        address:
+          type: string
+          example: '0x976Cf57B7EE1D84E73BE9115457889d49a8A1335'
+        old_user_pin:
+          $ref: '#/components/schemas/UserPin'
+        new_user_pin:
+          $ref: '#/components/schemas/UserPin'
+      required:
+        - network
+        - address
+        - old_user_pin
+        - new_user_pin
+    ChangeUserPinResponse:
+      title: ChangeUserPinResponse
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+      required:
+        - success
+    ExportWalletRequest:
+      title: ExportWalletRequest
+      type: object
+      properties:
+        network:
+          $ref: '#/components/schemas/Network'
+        address:
+          type: string
+          example: '0x976Cf57B7EE1D84E73BE9115457889d49a8A1335'
+        user_pin:
+          $ref: '#/components/schemas/UserPin'
+      required:
+        - network
+        - address
+        - user_pin
+    ExportWalletResponse:
+      title: ExportWalletResponse
+      type: object
+      properties:
+        mnemonic_phrase:
+          type: string
+          example: >-
+            candy maple cake sugar pudding cream honey rich smooth crumble sweet
+            treat
+      required:
+        - mnemonic_phrase
+    CreateWalletRequest:
+      title: CreateWalletRequest
+      type: object
+      properties:
+        network:
+          $ref: '#/components/schemas/Network'
+        name:
+          type: string
+          example: My Wallet
+        owner_id:
+          type: string
+          nullable: true
+          description: >-
+            An ID that you can use to associate the wallet with a user in your
+            application. e.g. user uuid. When creating wallets for the same
+            owner_id across different networks, the same seed phrase will be
+            used.
+        control_mode:
+          $ref: '#/components/schemas/WalletControlMode'
+          description: >-
+            Defines whether the developer or the user controls the wallet. When
+            control_mode is developer, the developer_secret must be provided.
+            When control_mode is user, the user_pin must be provided.
+        developer_secret:
+          $ref: '#/components/schemas/DeveloperSecret'
+          nullable: true
+        user_pin:
+          $ref: '#/components/schemas/UserPin'
+          nullable: true
+      required:
+        - network
+        - name
+        - control_mode
+    Wallet:
+      title: Wallet
+      type: object
+      properties:
+        id:
+          type: string
+          example: 5884bd1d-ecb3-41ea-bcc7-e9e3d229618f
+        created_at:
+          type: string
+          example: '2023-07-21T22:03:16Z'
+        network:
+          $ref: '#/components/schemas/Network'
+        name:
+          type: string
+          nullable: true
+        owner_id:
+          type: string
+          nullable: true
+        address:
+          type: string
+          example: '0x976Cf57B7EE1D84E73BE9115457889d49a8A1335'
+      required:
+        - id
+        - created_at
+        - network
+        - address
+    CreateWalletResponse:
+      title: CreateWalletResponse
+      type: object
+      properties:
+        id:
+          type: string
+          example: 5884bd1d-ecb3-41ea-bcc7-e9e3d229618f
+        created_at:
+          type: string
+          example: '2023-07-21T22:03:16Z'
+        network:
+          $ref: '#/components/schemas/Network'
+        name:
+          type: string
+          nullable: true
+        owner_id:
+          type: string
+          nullable: true
+        address:
+          type: string
+          example: '0x976Cf57B7EE1D84E73BE9115457889d49a8A1335'
+      required:
+        - id
+        - created_at
+        - network
+        - address
+    ListWalletsResponseItem:
+      title: ListWalletsResponseItem
+      type: object
+      properties:
+        id:
+          type: string
+        created_at:
+          type: string
+        network:
+          $ref: '#/components/schemas/Network'
+        name:
+          type: string
+          nullable: true
+        owner_id:
+          type: string
+          nullable: true
+        address:
+          type: string
+      required:
+        - id
+        - created_at
+        - network
+        - address
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+servers:
+  - url: https://testnet.usewalletkit.com
+    description: testnet
+  - url: https://mainnet.usewalletkit.com
+    description: mainnet
