@@ -1,0 +1,4 @@
+podAuthors: WalletKit
+podSource: "{ :git => 'https://github.com/usewalletkit/walletkit-ios.git', :tag => s.version.to_s }"
+projectName: WalletKit
+useSPMFileStructure: true
