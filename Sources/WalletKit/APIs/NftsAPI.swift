@@ -17,16 +17,16 @@ open class NftsAPI {
      
      - parameter nftsCreateRequest: (body)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func nftsCreate(nftsCreateRequest: NftsCreateRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func nftsCreate(nftsCreateRequest: NftsCreateRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<TransactionSubmissionResponse, ErrorResponse>) -> Void)) -> RequestTask {
         return nftsCreateWithRequestBuilder(nftsCreateRequest: nftsCreateRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }
@@ -65,16 +65,16 @@ open class NftsAPI {
      - parameter network: (query)  (optional)
      - parameter collectionAddress: (query) address of the NFT contract (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func nftsGetNftCollection(network: Network? = nil, collectionAddress: String? = nil, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: GetNftCollectionResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func nftsGetNftCollection(network: Network? = nil, collectionAddress: String? = nil, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<GetNftCollectionResponse, ErrorResponse>) -> Void)) -> RequestTask {
         return nftsGetNftCollectionWithRequestBuilder(network: network, collectionAddress: collectionAddress).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }
@@ -120,16 +120,16 @@ open class NftsAPI {
      - parameter page: (query) page number starting from 1 (optional)
      - parameter pageSize: (query) size of each page (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func nftsListNftCollections(network: Network, walletAddress: String, page: Int? = nil, pageSize: Int? = nil, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: [ListNftCollectionsResponseItem]?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func nftsListNftCollections(network: Network, walletAddress: String, page: Int? = nil, pageSize: Int? = nil, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<[ListNftCollectionsResponseItem], ErrorResponse>) -> Void)) -> RequestTask {
         return nftsListNftCollectionsWithRequestBuilder(network: network, walletAddress: walletAddress, page: page, pageSize: pageSize).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }
@@ -180,16 +180,16 @@ open class NftsAPI {
      - parameter page: (query) page number, starting from 1 (optional)
      - parameter pageSize: (query) size of each page (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func nftsListNfts(network: Network, walletAddress: String? = nil, contractAddress: String? = nil, page: Int? = nil, pageSize: Int? = nil, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: [ListNftsResponseItem]?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func nftsListNfts(network: Network, walletAddress: String? = nil, contractAddress: String? = nil, page: Int? = nil, pageSize: Int? = nil, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<[ListNftsResponseItem], ErrorResponse>) -> Void)) -> RequestTask {
         return nftsListNftsWithRequestBuilder(network: network, walletAddress: walletAddress, contractAddress: contractAddress, page: page, pageSize: pageSize).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }
@@ -238,16 +238,16 @@ open class NftsAPI {
      
      - parameter nftsMintNftRequest: (body)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func nftsMintNft(nftsMintNftRequest: NftsMintNftRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func nftsMintNft(nftsMintNftRequest: NftsMintNftRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<TransactionSubmissionResponse, ErrorResponse>) -> Void)) -> RequestTask {
         return nftsMintNftWithRequestBuilder(nftsMintNftRequest: nftsMintNftRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }
@@ -284,16 +284,16 @@ open class NftsAPI {
      Upload NFT image
      
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func nftsNftImageUpload(apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: NftImageUploadResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func nftsNftImageUpload(apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<NftImageUploadResponse, ErrorResponse>) -> Void)) -> RequestTask {
         return nftsNftImageUploadWithRequestBuilder().execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }
@@ -330,16 +330,16 @@ open class NftsAPI {
      
      - parameter nftsTransferNftRequest: (body)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func nftsTransferNft(nftsTransferNftRequest: NftsTransferNftRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func nftsTransferNft(nftsTransferNftRequest: NftsTransferNftRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<TransactionSubmissionResponse, ErrorResponse>) -> Void)) -> RequestTask {
         return nftsTransferNftWithRequestBuilder(nftsTransferNftRequest: nftsTransferNftRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }

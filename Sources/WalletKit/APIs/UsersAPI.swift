@@ -16,16 +16,16 @@ open class UsersAPI {
      Login Anonymously
      
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func usersLoginAnonymously(apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: Session?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func usersLoginAnonymously(apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<Session, ErrorResponse>) -> Void)) -> RequestTask {
         return usersLoginAnonymouslyWithRequestBuilder().execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }
@@ -59,16 +59,16 @@ open class UsersAPI {
      
      - parameter usersLoginWithEmailRequest: (body)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func usersLoginWithEmail(usersLoginWithEmailRequest: UsersLoginWithEmailRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: LoginWithEmailResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func usersLoginWithEmail(usersLoginWithEmailRequest: UsersLoginWithEmailRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<LoginWithEmailResponse, ErrorResponse>) -> Void)) -> RequestTask {
         return usersLoginWithEmailWithRequestBuilder(usersLoginWithEmailRequest: usersLoginWithEmailRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }
@@ -103,16 +103,16 @@ open class UsersAPI {
      
      - parameter usersRefreshTokenRequest: (body)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func usersRefreshToken(usersRefreshTokenRequest: UsersRefreshTokenRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: Session?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func usersRefreshToken(usersRefreshTokenRequest: UsersRefreshTokenRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<Session, ErrorResponse>) -> Void)) -> RequestTask {
         return usersRefreshTokenWithRequestBuilder(usersRefreshTokenRequest: usersRefreshTokenRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }
@@ -147,16 +147,16 @@ open class UsersAPI {
      
      - parameter usersVerifyLoginRequest: (body)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func usersVerifyLogin(usersVerifyLoginRequest: UsersVerifyLoginRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: Session?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func usersVerifyLogin(usersVerifyLoginRequest: UsersVerifyLoginRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<Session, ErrorResponse>) -> Void)) -> RequestTask {
         return usersVerifyLoginWithRequestBuilder(usersVerifyLoginRequest: usersVerifyLoginRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }

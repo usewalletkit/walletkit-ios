@@ -17,16 +17,16 @@ open class TokensAPI {
      
      - parameter tokensBatchTransferRequest: (body)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func tokensBatchTransfer(tokensBatchTransferRequest: TokensBatchTransferRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func tokensBatchTransfer(tokensBatchTransferRequest: TokensBatchTransferRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<TransactionSubmissionResponse, ErrorResponse>) -> Void)) -> RequestTask {
         return tokensBatchTransferWithRequestBuilder(tokensBatchTransferRequest: tokensBatchTransferRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }
@@ -64,16 +64,16 @@ open class TokensAPI {
      
      - parameter tokensCreateRequest: (body)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func tokensCreate(tokensCreateRequest: TokensCreateRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func tokensCreate(tokensCreateRequest: TokensCreateRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<TransactionSubmissionResponse, ErrorResponse>) -> Void)) -> RequestTask {
         return tokensCreateWithRequestBuilder(tokensCreateRequest: tokensCreateRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }
@@ -112,16 +112,16 @@ open class TokensAPI {
      - parameter network: (query)  
      - parameter token: (query) token contract address or symbol in case of the gas token 
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func tokensGet(network: Network, token: String, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: GetTokenResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func tokensGet(network: Network, token: String, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<GetTokenResponse, ErrorResponse>) -> Void)) -> RequestTask {
         return tokensGetWithRequestBuilder(network: network, token: token).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }
@@ -165,16 +165,16 @@ open class TokensAPI {
      - parameter network: (query)  
      - parameter walletAddress: (query)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func tokensListBalances(network: Network, walletAddress: String, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: [ListTokenBalancesResponseItem]?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func tokensListBalances(network: Network, walletAddress: String, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<[ListTokenBalancesResponseItem], ErrorResponse>) -> Void)) -> RequestTask {
         return tokensListBalancesWithRequestBuilder(network: network, walletAddress: walletAddress).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }
@@ -217,16 +217,16 @@ open class TokensAPI {
      
      - parameter tokensMintRequest: (body)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func tokensMint(tokensMintRequest: TokensMintRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func tokensMint(tokensMintRequest: TokensMintRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<TransactionSubmissionResponse, ErrorResponse>) -> Void)) -> RequestTask {
         return tokensMintWithRequestBuilder(tokensMintRequest: tokensMintRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }
@@ -264,16 +264,16 @@ open class TokensAPI {
      
      - parameter tokensTransferRequest: (body)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func tokensTransfer(tokensTransferRequest: TokensTransferRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func tokensTransfer(tokensTransferRequest: TokensTransferRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<TransactionSubmissionResponse, ErrorResponse>) -> Void)) -> RequestTask {
         return tokensTransferWithRequestBuilder(tokensTransferRequest: tokensTransferRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }

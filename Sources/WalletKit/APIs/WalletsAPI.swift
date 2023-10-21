@@ -17,16 +17,16 @@ open class WalletsAPI {
      
      - parameter changeUserPinRequest: (body)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func walletsChangeUserPin(changeUserPinRequest: ChangeUserPinRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: ChangeUserPinResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func walletsChangeUserPin(changeUserPinRequest: ChangeUserPinRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<ChangeUserPinResponse, ErrorResponse>) -> Void)) -> RequestTask {
         return walletsChangeUserPinWithRequestBuilder(changeUserPinRequest: changeUserPinRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }
@@ -64,16 +64,16 @@ open class WalletsAPI {
      
      - parameter createWalletRequest: (body)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func walletsCreate(createWalletRequest: CreateWalletRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: CreateWalletResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func walletsCreate(createWalletRequest: CreateWalletRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<CreateWalletResponse, ErrorResponse>) -> Void)) -> RequestTask {
         return walletsCreateWithRequestBuilder(createWalletRequest: createWalletRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }
@@ -111,16 +111,16 @@ open class WalletsAPI {
      
      - parameter exportWalletRequest: (body)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func walletsExport(exportWalletRequest: ExportWalletRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: ExportWalletResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func walletsExport(exportWalletRequest: ExportWalletRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<ExportWalletResponse, ErrorResponse>) -> Void)) -> RequestTask {
         return walletsExportWithRequestBuilder(exportWalletRequest: exportWalletRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }
@@ -159,16 +159,16 @@ open class WalletsAPI {
      - parameter network: (query)  
      - parameter address: (query)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func walletsGetByAddress(network: Network, address: String, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: Wallet?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func walletsGetByAddress(network: Network, address: String, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<Wallet, ErrorResponse>) -> Void)) -> RequestTask {
         return walletsGetByAddressWithRequestBuilder(network: network, address: address).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }
@@ -212,16 +212,16 @@ open class WalletsAPI {
      - parameter network: (query)  
      - parameter id: (query)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func walletsGetById(network: Network, id: String, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: Wallet?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func walletsGetById(network: Network, id: String, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<Wallet, ErrorResponse>) -> Void)) -> RequestTask {
         return walletsGetByIdWithRequestBuilder(network: network, id: id).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }
@@ -264,16 +264,16 @@ open class WalletsAPI {
      
      - parameter network: (query)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func walletsGetByNetwork(network: Network, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: Wallet?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func walletsGetByNetwork(network: Network, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<Wallet, ErrorResponse>) -> Void)) -> RequestTask {
         return walletsGetByNetworkWithRequestBuilder(network: network).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }
@@ -315,16 +315,16 @@ open class WalletsAPI {
      - parameter network: (query)  
      - parameter ownerID: (query)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func walletsGetByOwnerId(network: Network, ownerID: String, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: Wallet?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func walletsGetByOwnerId(network: Network, ownerID: String, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<Wallet, ErrorResponse>) -> Void)) -> RequestTask {
         return walletsGetByOwnerIdWithRequestBuilder(network: network, ownerID: ownerID).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }
@@ -369,16 +369,16 @@ open class WalletsAPI {
      - parameter page: (query)  (optional)
      - parameter pageSize: (query)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func walletsList(network: Network? = nil, page: Int? = nil, pageSize: String? = nil, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: [ListWalletsResponseItem]?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func walletsList(network: Network? = nil, page: Int? = nil, pageSize: String? = nil, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<[ListWalletsResponseItem], ErrorResponse>) -> Void)) -> RequestTask {
         return walletsListWithRequestBuilder(network: network, page: page, pageSize: pageSize).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }

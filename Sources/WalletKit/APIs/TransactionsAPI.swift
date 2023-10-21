@@ -18,16 +18,16 @@ open class TransactionsAPI {
      - parameter network: (query)  
      - parameter transactionHash: (query)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func transactionsGetStatus(network: Network, transactionHash: String, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: GetTransactionStatusByHashResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func transactionsGetStatus(network: Network, transactionHash: String, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<GetTransactionStatusByHashResponse, ErrorResponse>) -> Void)) -> RequestTask {
         return transactionsGetStatusWithRequestBuilder(network: network, transactionHash: transactionHash).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }
@@ -70,16 +70,16 @@ open class TransactionsAPI {
      
      - parameter transactionsSignAndSendRequest: (body)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func transactionsSignAndSend(transactionsSignAndSendRequest: TransactionsSignAndSendRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func transactionsSignAndSend(transactionsSignAndSendRequest: TransactionsSignAndSendRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<TransactionSubmissionResponse, ErrorResponse>) -> Void)) -> RequestTask {
         return transactionsSignAndSendWithRequestBuilder(transactionsSignAndSendRequest: transactionsSignAndSendRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }
@@ -117,16 +117,16 @@ open class TransactionsAPI {
      
      - parameter id: (query) transaction id returned in POST requests that result in a transaction. e.g. Transfer Token (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func transactionsStatusById(id: String? = nil, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: GetTransactionStatusByIdResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func transactionsStatusById(id: String? = nil, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<GetTransactionStatusByIdResponse, ErrorResponse>) -> Void)) -> RequestTask {
         return transactionsStatusByIdWithRequestBuilder(id: id).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }

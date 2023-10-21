@@ -17,16 +17,16 @@ open class GasAPI {
      
      - parameter gasBuyRequest: (body)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func gasBuy(gasBuyRequest: GasBuyRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: BuyGasResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func gasBuy(gasBuyRequest: GasBuyRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<BuyGasResponse, ErrorResponse>) -> Void)) -> RequestTask {
         return gasBuyWithRequestBuilder(gasBuyRequest: gasBuyRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }

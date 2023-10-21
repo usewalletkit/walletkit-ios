@@ -1,7 +1,6 @@
 .gitignore
 .swiftformat
 Cartfile
-Package.swift
 README.md
 Sources/WalletKit/APIHelper.swift
 Sources/WalletKit/APIs.swift

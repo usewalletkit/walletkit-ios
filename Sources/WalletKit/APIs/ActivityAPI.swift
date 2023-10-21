@@ -20,16 +20,16 @@ open class ActivityAPI {
      - parameter page: (query)  (optional)
      - parameter pageSize: (query)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func activityList(network: Network, walletAddress: String, page: Int? = nil, pageSize: Int? = nil, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: [ListWalletActivityResponseItem]?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func activityList(network: Network, walletAddress: String, page: Int? = nil, pageSize: Int? = nil, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<[ListWalletActivityResponseItem], ErrorResponse>) -> Void)) -> RequestTask {
         return activityListWithRequestBuilder(network: network, walletAddress: walletAddress, page: page, pageSize: pageSize).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
-                completion(response.body, nil)
+                completion(.success(response.body))
             case let .failure(error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }
