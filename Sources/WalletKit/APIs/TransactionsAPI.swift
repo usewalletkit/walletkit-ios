@@ -21,7 +21,7 @@ open class TransactionsAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func transactionsGetStatus(network: Network, transactionHash: String, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: GetTransactionStatusByHashResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func transactionsGetStatus(network: Network, transactionHash: String, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: GetTransactionStatusByHashResponse?, _ error: Error?) -> Void)) -> RequestTask {
         return transactionsGetStatusWithRequestBuilder(network: network, transactionHash: transactionHash).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -45,7 +45,7 @@ open class TransactionsAPI {
      */
     open class func transactionsGetStatusWithRequestBuilder(network: Network, transactionHash: String) -> RequestBuilder<GetTransactionStatusByHashResponse> {
         let localVariablePath = "/transactions/status-by-hash"
-        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -60,7 +60,7 @@ open class TransactionsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<GetTransactionStatusByHashResponse>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<GetTransactionStatusByHashResponse>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
@@ -73,7 +73,7 @@ open class TransactionsAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func transactionsSignAndSend(transactionsSignAndSendRequest: TransactionsSignAndSendRequest, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func transactionsSignAndSend(transactionsSignAndSendRequest: TransactionsSignAndSendRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)) -> RequestTask {
         return transactionsSignAndSendWithRequestBuilder(transactionsSignAndSendRequest: transactionsSignAndSendRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -96,7 +96,7 @@ open class TransactionsAPI {
      */
     open class func transactionsSignAndSendWithRequestBuilder(transactionsSignAndSendRequest: TransactionsSignAndSendRequest) -> RequestBuilder<TransactionSubmissionResponse> {
         let localVariablePath = "/transactions/sign-and-send"
-        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: transactionsSignAndSendRequest)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -107,7 +107,7 @@ open class TransactionsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<TransactionSubmissionResponse>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<TransactionSubmissionResponse>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
@@ -120,7 +120,7 @@ open class TransactionsAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func transactionsStatusById(id: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: GetTransactionStatusByIdResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func transactionsStatusById(id: String? = nil, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: GetTransactionStatusByIdResponse?, _ error: Error?) -> Void)) -> RequestTask {
         return transactionsStatusByIdWithRequestBuilder(id: id).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -143,7 +143,7 @@ open class TransactionsAPI {
      */
     open class func transactionsStatusByIdWithRequestBuilder(id: String? = nil) -> RequestBuilder<GetTransactionStatusByIdResponse> {
         let localVariablePath = "/transactions/status-by-id"
-        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -157,7 +157,7 @@ open class TransactionsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<GetTransactionStatusByIdResponse>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<GetTransactionStatusByIdResponse>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }

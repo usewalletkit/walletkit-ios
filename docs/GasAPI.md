@@ -19,7 +19,7 @@ Tops up gas to the destination wallet address (default to project wallet if not 
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let gasBuyRequest = gas_buy_request(network: Network(), amount: "amount_example", destinationAddress: "destinationAddress_example") // GasBuyRequest | 
 

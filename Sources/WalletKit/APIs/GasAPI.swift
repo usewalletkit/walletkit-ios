@@ -20,7 +20,7 @@ open class GasAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func gasBuy(gasBuyRequest: GasBuyRequest, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: BuyGasResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func gasBuy(gasBuyRequest: GasBuyRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: BuyGasResponse?, _ error: Error?) -> Void)) -> RequestTask {
         return gasBuyWithRequestBuilder(gasBuyRequest: gasBuyRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -43,7 +43,7 @@ open class GasAPI {
      */
     open class func gasBuyWithRequestBuilder(gasBuyRequest: GasBuyRequest) -> RequestBuilder<BuyGasResponse> {
         let localVariablePath = "/gas/buy"
-        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: gasBuyRequest)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -54,7 +54,7 @@ open class GasAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<BuyGasResponse>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<BuyGasResponse>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }

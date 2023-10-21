@@ -20,7 +20,7 @@ open class NftsAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func nftsCreate(nftsCreateRequest: NftsCreateRequest, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func nftsCreate(nftsCreateRequest: NftsCreateRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)) -> RequestTask {
         return nftsCreateWithRequestBuilder(nftsCreateRequest: nftsCreateRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -43,7 +43,7 @@ open class NftsAPI {
      */
     open class func nftsCreateWithRequestBuilder(nftsCreateRequest: NftsCreateRequest) -> RequestBuilder<TransactionSubmissionResponse> {
         let localVariablePath = "/nfts/collections"
-        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: nftsCreateRequest)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -54,7 +54,7 @@ open class NftsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<TransactionSubmissionResponse>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<TransactionSubmissionResponse>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
@@ -68,7 +68,7 @@ open class NftsAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func nftsGetNftCollection(network: Network? = nil, collectionAddress: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: GetNftCollectionResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func nftsGetNftCollection(network: Network? = nil, collectionAddress: String? = nil, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: GetNftCollectionResponse?, _ error: Error?) -> Void)) -> RequestTask {
         return nftsGetNftCollectionWithRequestBuilder(network: network, collectionAddress: collectionAddress).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -92,7 +92,7 @@ open class NftsAPI {
      */
     open class func nftsGetNftCollectionWithRequestBuilder(network: Network? = nil, collectionAddress: String? = nil) -> RequestBuilder<GetNftCollectionResponse> {
         let localVariablePath = "/nfts/collection-by-address"
-        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -107,7 +107,7 @@ open class NftsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<GetNftCollectionResponse>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<GetNftCollectionResponse>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
@@ -123,7 +123,7 @@ open class NftsAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func nftsListNftCollections(network: Network, walletAddress: String, page: Int? = nil, pageSize: Int? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: [ListNftCollectionsResponseItem]?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func nftsListNftCollections(network: Network, walletAddress: String, page: Int? = nil, pageSize: Int? = nil, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: [ListNftCollectionsResponseItem]?, _ error: Error?) -> Void)) -> RequestTask {
         return nftsListNftCollectionsWithRequestBuilder(network: network, walletAddress: walletAddress, page: page, pageSize: pageSize).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -149,7 +149,7 @@ open class NftsAPI {
      */
     open class func nftsListNftCollectionsWithRequestBuilder(network: Network, walletAddress: String, page: Int? = nil, pageSize: Int? = nil) -> RequestBuilder<[ListNftCollectionsResponseItem]> {
         let localVariablePath = "/nfts/collections"
-        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -166,7 +166,7 @@ open class NftsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<[ListNftCollectionsResponseItem]>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<[ListNftCollectionsResponseItem]>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
@@ -183,7 +183,7 @@ open class NftsAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func nftsListNfts(network: Network, walletAddress: String? = nil, contractAddress: String? = nil, page: Int? = nil, pageSize: Int? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: [ListNftsResponseItem]?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func nftsListNfts(network: Network, walletAddress: String? = nil, contractAddress: String? = nil, page: Int? = nil, pageSize: Int? = nil, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: [ListNftsResponseItem]?, _ error: Error?) -> Void)) -> RequestTask {
         return nftsListNftsWithRequestBuilder(network: network, walletAddress: walletAddress, contractAddress: contractAddress, page: page, pageSize: pageSize).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -210,7 +210,7 @@ open class NftsAPI {
      */
     open class func nftsListNftsWithRequestBuilder(network: Network, walletAddress: String? = nil, contractAddress: String? = nil, page: Int? = nil, pageSize: Int? = nil) -> RequestBuilder<[ListNftsResponseItem]> {
         let localVariablePath = "/nfts"
-        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -228,7 +228,7 @@ open class NftsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<[ListNftsResponseItem]>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<[ListNftsResponseItem]>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
@@ -241,7 +241,7 @@ open class NftsAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func nftsMintNft(nftsMintNftRequest: NftsMintNftRequest, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func nftsMintNft(nftsMintNftRequest: NftsMintNftRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)) -> RequestTask {
         return nftsMintNftWithRequestBuilder(nftsMintNftRequest: nftsMintNftRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -264,7 +264,7 @@ open class NftsAPI {
      */
     open class func nftsMintNftWithRequestBuilder(nftsMintNftRequest: NftsMintNftRequest) -> RequestBuilder<TransactionSubmissionResponse> {
         let localVariablePath = "/nfts/mint"
-        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: nftsMintNftRequest)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -275,7 +275,7 @@ open class NftsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<TransactionSubmissionResponse>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<TransactionSubmissionResponse>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
@@ -287,7 +287,7 @@ open class NftsAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func nftsNftImageUpload(apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: NftImageUploadResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func nftsNftImageUpload(apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: NftImageUploadResponse?, _ error: Error?) -> Void)) -> RequestTask {
         return nftsNftImageUploadWithRequestBuilder().execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -309,7 +309,7 @@ open class NftsAPI {
      */
     open class func nftsNftImageUploadWithRequestBuilder() -> RequestBuilder<NftImageUploadResponse> {
         let localVariablePath = "/nfts/upload"
-        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -320,7 +320,7 @@ open class NftsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<NftImageUploadResponse>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<NftImageUploadResponse>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
@@ -333,7 +333,7 @@ open class NftsAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func nftsTransferNft(nftsTransferNftRequest: NftsTransferNftRequest, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func nftsTransferNft(nftsTransferNftRequest: NftsTransferNftRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)) -> RequestTask {
         return nftsTransferNftWithRequestBuilder(nftsTransferNftRequest: nftsTransferNftRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -356,7 +356,7 @@ open class NftsAPI {
      */
     open class func nftsTransferNftWithRequestBuilder(nftsTransferNftRequest: NftsTransferNftRequest) -> RequestBuilder<TransactionSubmissionResponse> {
         let localVariablePath = "/nfts/transfer"
-        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: nftsTransferNftRequest)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -367,7 +367,7 @@ open class NftsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<TransactionSubmissionResponse>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<TransactionSubmissionResponse>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }

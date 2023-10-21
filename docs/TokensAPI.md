@@ -24,7 +24,7 @@ Batch transfers from the `from` wallet to the list of  `recipients` with the pro
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let tokensBatchTransferRequest = tokens_batch_transfer_request(network: Network(), from: "from_example", token: "token_example", transfers: [BatchTransferTokenRequestTransfersItem(recipient: "recipient_example", amount: "amount_example")], developerSecret: "developerSecret_example", userPin: "userPin_example") // TokensBatchTransferRequest | 
 
@@ -74,7 +74,7 @@ Creates an on-chain token with provided metadata.
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let tokensCreateRequest = tokens_create_request(network: Network(), name: "name_example", symbol: "symbol_example", decimals: "decimals_example", displayDecimals: "displayDecimals_example", logoUrl: "logoUrl_example", initialSupply: "initialSupply_example", developerSecret: "developerSecret_example", userPin: "userPin_example") // TokensCreateRequest | 
 
@@ -124,7 +124,7 @@ Gets the metadata for a token.
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let network = Network() // Network | 
 let token = "token_example" // String | token contract address or symbol in case of the gas token
@@ -176,7 +176,7 @@ Retrieves a list of token balances associated with a specific wallet address on 
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let network = Network() // Network | 
 let walletAddress = "walletAddress_example" // String | 
@@ -228,7 +228,7 @@ Mints specified amount of token to the recipient.
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let tokensMintRequest = tokens_mint_request(network: Network(), contractAddress: "contractAddress_example", recipient: "recipient_example", amount: "amount_example", developerSecret: "developerSecret_example", userPin: "userPin_example") // TokensMintRequest | 
 
@@ -278,7 +278,7 @@ Transfers the specified amount of tokens from `from` to `recipient`. The from ad
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let tokensTransferRequest = tokens_transfer_request(network: Network(), from: "from_example", token: "token_example", recipient: "recipient_example", amount: "amount_example", developerSecret: "developerSecret_example", userPin: "userPin_example") // TokensTransferRequest | 
 

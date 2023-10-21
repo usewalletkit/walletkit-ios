@@ -1,10 +1,10 @@
-name: OpenAPIClient
+name: WalletKit
 targets:
-  OpenAPIClient:
+  WalletKit:
     type: framework
     platform: iOS
     deploymentTarget: "11.0"
-    sources: [OpenAPIClient]
+    sources: [Sources]
     info:
       path: ./Info.plist
       version: 

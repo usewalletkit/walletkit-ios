@@ -21,7 +21,7 @@ Retrieves the status of a transaction by its hash.
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let network = Network() // Network | 
 let transactionHash = "transactionHash_example" // String | 
@@ -73,7 +73,7 @@ This endpoint allows arbitrary smart contract function calls. It can be used to 
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let transactionsSignAndSendRequest = transactions_sign_and_send_request(network: Network(), signerWalletAddress: "signerWalletAddress_example", unsignedTransaction: SignAndSendRequestUnsignedTransaction(to: "to_example", value: "value_example", input: "input_example"), developerSecret: "developerSecret_example", userPin: "userPin_example") // TransactionsSignAndSendRequest | 
 
@@ -123,7 +123,7 @@ Retrieves the status of a transaction by its id returned from the APIs that chan
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let id = "id_example" // String | transaction id returned in POST requests that result in a transaction. e.g. Transfer Token (optional)
 

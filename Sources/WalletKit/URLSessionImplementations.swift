@@ -25,7 +25,7 @@ class URLSessionRequestBuilderFactory: RequestBuilderFactory {
     }
 }
 
-public typealias OpenAPIClientAPIChallengeHandler = ((URLSession, URLSessionTask, URLAuthenticationChallenge) -> (URLSession.AuthChallengeDisposition, URLCredential?))
+public typealias WalletKitAPIChallengeHandler = ((URLSession, URLSessionTask, URLAuthenticationChallenge) -> (URLSession.AuthChallengeDisposition, URLCredential?))
 
 // Store the URLSession's delegate to retain its reference
 private let sessionDelegate = SessionDelegate()
@@ -34,7 +34,7 @@ private let sessionDelegate = SessionDelegate()
 private let defaultURLSession = URLSession(configuration: .default, delegate: sessionDelegate, delegateQueue: nil)
 
 // Store current taskDidReceiveChallenge for every URLSessionTask
-private var challengeHandlerStore = SynchronizedDictionary<Int, OpenAPIClientAPIChallengeHandler>()
+private var challengeHandlerStore = SynchronizedDictionary<Int, WalletKitAPIChallengeHandler>()
 
 // Store current URLCredential for every URLSessionTask
 private var credentialStore = SynchronizedDictionary<Int, URLCredential>()
@@ -44,7 +44,7 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T> {
     /**
      May be assigned if you want to control the authentication challenges.
      */
-    public var taskDidReceiveChallenge: OpenAPIClientAPIChallengeHandler?
+    public var taskDidReceiveChallenge: WalletKitAPIChallengeHandler?
 
     required public init(method: String, URLString: String, parameters: [String: Any]?, headers: [String: String] = [:], requiresAuthentication: Bool) {
         super.init(method: method, URLString: URLString, parameters: parameters, headers: headers, requiresAuthentication: requiresAuthentication)
@@ -93,7 +93,7 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T> {
     }
 
     @discardableResult
-    override open func execute(_ apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, _ completion: @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void) -> RequestTask {
+    override open func execute(_ apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, _ completion: @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void) -> RequestTask {
         let urlSession = createURLSession()
 
         guard let xMethod = HTTPMethod(rawValue: method) else {
@@ -188,7 +188,7 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T> {
 
     open func buildHeaders() -> [String: String] {
         var httpHeaders: [String: String] = [:]
-        for (key, value) in OpenAPIClientAPI.customHeaders {
+        for (key, value) in WalletKitAPI.customHeaders {
             httpHeaders[key] = value
         }
         for (key, value) in headers {
@@ -295,7 +295,7 @@ open class URLSessionDecodableRequestBuilder<T: Decodable>: URLSessionRequestBui
                 if let headerFileName = getFileName(fromContentDisposition: httpResponse.allHeaderFields["Content-Disposition"] as? String) {
                     requestPath = requestPath.appending("/\(headerFileName)")
                 } else {
-                    requestPath = requestPath.appending("/tmp.OpenAPIClient.\(UUID().uuidString)")
+                    requestPath = requestPath.appending("/tmp.WalletKit.\(UUID().uuidString)")
                 }
 
                 let filePath = cachesDirectory.appendingPathComponent(requestPath)

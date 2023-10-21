@@ -19,7 +19,7 @@ open class UsersAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func usersLoginAnonymously(apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: Session?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func usersLoginAnonymously(apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: Session?, _ error: Error?) -> Void)) -> RequestTask {
         return usersLoginAnonymouslyWithRequestBuilder().execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -38,7 +38,7 @@ open class UsersAPI {
      */
     open class func usersLoginAnonymouslyWithRequestBuilder() -> RequestBuilder<Session> {
         let localVariablePath = "/users/login-anonymously"
-        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -49,7 +49,7 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Session>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Session>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
     }
@@ -62,7 +62,7 @@ open class UsersAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func usersLoginWithEmail(usersLoginWithEmailRequest: UsersLoginWithEmailRequest, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: LoginWithEmailResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func usersLoginWithEmail(usersLoginWithEmailRequest: UsersLoginWithEmailRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: LoginWithEmailResponse?, _ error: Error?) -> Void)) -> RequestTask {
         return usersLoginWithEmailWithRequestBuilder(usersLoginWithEmailRequest: usersLoginWithEmailRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -82,7 +82,7 @@ open class UsersAPI {
      */
     open class func usersLoginWithEmailWithRequestBuilder(usersLoginWithEmailRequest: UsersLoginWithEmailRequest) -> RequestBuilder<LoginWithEmailResponse> {
         let localVariablePath = "/users/login-with-email"
-        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: usersLoginWithEmailRequest)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -93,7 +93,7 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<LoginWithEmailResponse>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<LoginWithEmailResponse>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
     }
@@ -106,7 +106,7 @@ open class UsersAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func usersRefreshToken(usersRefreshTokenRequest: UsersRefreshTokenRequest, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: Session?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func usersRefreshToken(usersRefreshTokenRequest: UsersRefreshTokenRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: Session?, _ error: Error?) -> Void)) -> RequestTask {
         return usersRefreshTokenWithRequestBuilder(usersRefreshTokenRequest: usersRefreshTokenRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -126,7 +126,7 @@ open class UsersAPI {
      */
     open class func usersRefreshTokenWithRequestBuilder(usersRefreshTokenRequest: UsersRefreshTokenRequest) -> RequestBuilder<Session> {
         let localVariablePath = "/users/refresh-token"
-        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: usersRefreshTokenRequest)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -137,7 +137,7 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Session>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Session>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
     }
@@ -150,7 +150,7 @@ open class UsersAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func usersVerifyLogin(usersVerifyLoginRequest: UsersVerifyLoginRequest, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: Session?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func usersVerifyLogin(usersVerifyLoginRequest: UsersVerifyLoginRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: Session?, _ error: Error?) -> Void)) -> RequestTask {
         return usersVerifyLoginWithRequestBuilder(usersVerifyLoginRequest: usersVerifyLoginRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -170,7 +170,7 @@ open class UsersAPI {
      */
     open class func usersVerifyLoginWithRequestBuilder(usersVerifyLoginRequest: UsersVerifyLoginRequest) -> RequestBuilder<Session> {
         let localVariablePath = "/users/verify-login"
-        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: usersVerifyLoginRequest)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -181,7 +181,7 @@ open class UsersAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Session>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Session>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
     }

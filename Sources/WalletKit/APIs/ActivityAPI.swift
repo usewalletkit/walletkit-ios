@@ -23,7 +23,7 @@ open class ActivityAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func activityList(network: Network, walletAddress: String, page: Int? = nil, pageSize: Int? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: [ListWalletActivityResponseItem]?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func activityList(network: Network, walletAddress: String, page: Int? = nil, pageSize: Int? = nil, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: [ListWalletActivityResponseItem]?, _ error: Error?) -> Void)) -> RequestTask {
         return activityListWithRequestBuilder(network: network, walletAddress: walletAddress, page: page, pageSize: pageSize).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -49,7 +49,7 @@ open class ActivityAPI {
      */
     open class func activityListWithRequestBuilder(network: Network, walletAddress: String, page: Int? = nil, pageSize: Int? = nil) -> RequestBuilder<[ListWalletActivityResponseItem]> {
         let localVariablePath = "/activity"
-        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -66,7 +66,7 @@ open class ActivityAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<[ListWalletActivityResponseItem]>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<[ListWalletActivityResponseItem]>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }

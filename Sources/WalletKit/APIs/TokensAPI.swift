@@ -20,7 +20,7 @@ open class TokensAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func tokensBatchTransfer(tokensBatchTransferRequest: TokensBatchTransferRequest, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func tokensBatchTransfer(tokensBatchTransferRequest: TokensBatchTransferRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)) -> RequestTask {
         return tokensBatchTransferWithRequestBuilder(tokensBatchTransferRequest: tokensBatchTransferRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -43,7 +43,7 @@ open class TokensAPI {
      */
     open class func tokensBatchTransferWithRequestBuilder(tokensBatchTransferRequest: TokensBatchTransferRequest) -> RequestBuilder<TransactionSubmissionResponse> {
         let localVariablePath = "/tokens/batch-transfer"
-        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: tokensBatchTransferRequest)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -54,7 +54,7 @@ open class TokensAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<TransactionSubmissionResponse>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<TransactionSubmissionResponse>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
@@ -67,7 +67,7 @@ open class TokensAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func tokensCreate(tokensCreateRequest: TokensCreateRequest, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func tokensCreate(tokensCreateRequest: TokensCreateRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)) -> RequestTask {
         return tokensCreateWithRequestBuilder(tokensCreateRequest: tokensCreateRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -90,7 +90,7 @@ open class TokensAPI {
      */
     open class func tokensCreateWithRequestBuilder(tokensCreateRequest: TokensCreateRequest) -> RequestBuilder<TransactionSubmissionResponse> {
         let localVariablePath = "/tokens"
-        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: tokensCreateRequest)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -101,7 +101,7 @@ open class TokensAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<TransactionSubmissionResponse>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<TransactionSubmissionResponse>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
@@ -115,7 +115,7 @@ open class TokensAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func tokensGet(network: Network, token: String, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: GetTokenResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func tokensGet(network: Network, token: String, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: GetTokenResponse?, _ error: Error?) -> Void)) -> RequestTask {
         return tokensGetWithRequestBuilder(network: network, token: token).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -139,7 +139,7 @@ open class TokensAPI {
      */
     open class func tokensGetWithRequestBuilder(network: Network, token: String) -> RequestBuilder<GetTokenResponse> {
         let localVariablePath = "/tokens/tokens"
-        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -154,7 +154,7 @@ open class TokensAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<GetTokenResponse>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<GetTokenResponse>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
@@ -168,7 +168,7 @@ open class TokensAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func tokensListBalances(network: Network, walletAddress: String, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: [ListTokenBalancesResponseItem]?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func tokensListBalances(network: Network, walletAddress: String, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: [ListTokenBalancesResponseItem]?, _ error: Error?) -> Void)) -> RequestTask {
         return tokensListBalancesWithRequestBuilder(network: network, walletAddress: walletAddress).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -192,7 +192,7 @@ open class TokensAPI {
      */
     open class func tokensListBalancesWithRequestBuilder(network: Network, walletAddress: String) -> RequestBuilder<[ListTokenBalancesResponseItem]> {
         let localVariablePath = "/tokens/balances"
-        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -207,7 +207,7 @@ open class TokensAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<[ListTokenBalancesResponseItem]>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<[ListTokenBalancesResponseItem]>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
@@ -220,7 +220,7 @@ open class TokensAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func tokensMint(tokensMintRequest: TokensMintRequest, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func tokensMint(tokensMintRequest: TokensMintRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)) -> RequestTask {
         return tokensMintWithRequestBuilder(tokensMintRequest: tokensMintRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -243,7 +243,7 @@ open class TokensAPI {
      */
     open class func tokensMintWithRequestBuilder(tokensMintRequest: TokensMintRequest) -> RequestBuilder<TransactionSubmissionResponse> {
         let localVariablePath = "/tokens/mint"
-        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: tokensMintRequest)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -254,7 +254,7 @@ open class TokensAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<TransactionSubmissionResponse>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<TransactionSubmissionResponse>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
@@ -267,7 +267,7 @@ open class TokensAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func tokensTransfer(tokensTransferRequest: TokensTransferRequest, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func tokensTransfer(tokensTransferRequest: TokensTransferRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)) -> RequestTask {
         return tokensTransferWithRequestBuilder(tokensTransferRequest: tokensTransferRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -290,7 +290,7 @@ open class TokensAPI {
      */
     open class func tokensTransferWithRequestBuilder(tokensTransferRequest: TokensTransferRequest) -> RequestBuilder<TransactionSubmissionResponse> {
         let localVariablePath = "/tokens/transfer"
-        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: tokensTransferRequest)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -301,7 +301,7 @@ open class TokensAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<TransactionSubmissionResponse>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<TransactionSubmissionResponse>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }

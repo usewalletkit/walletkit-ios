@@ -25,7 +25,7 @@ Creates an NFT Collection with provided metadata. An NFT collection refers to a 
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let nftsCreateRequest = nfts_create_request(network: Network(), name: "name_example", symbol: "symbol_example", imageUrl: "imageUrl_example", baseUri: "baseUri_example", developerSecret: "developerSecret_example", userPin: "userPin_example") // NftsCreateRequest | 
 
@@ -75,7 +75,7 @@ Get NFT collection by collection address
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let network = Network() // Network |  (optional)
 let collectionAddress = "collectionAddress_example" // String | address of the NFT contract (optional)
@@ -127,7 +127,7 @@ List NFT collections owned by wallet
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let network = Network() // Network | 
 let walletAddress = "walletAddress_example" // String | 
@@ -183,7 +183,7 @@ List NFTs by wallet or by collection address
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let network = Network() // Network | 
 let walletAddress = "walletAddress_example" // String | query by wallet address. If provided, contract_address should not be set. (optional)
@@ -241,7 +241,7 @@ Mints a NFT from a collection
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let nftsMintNftRequest = nfts_mint_nft_request(network: Network(), contractAddress: "contractAddress_example", recipient: "recipient_example", metadata: MintNftRequestMetadata(name: "name_example", description: "description_example", image: "image_example"), uri: "uri_example", developerSecret: "developerSecret_example", userPin: "userPin_example") // NftsMintNftRequest | 
 
@@ -291,7 +291,7 @@ Upload NFT image to IPFS
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 
 // Upload NFT image
@@ -337,7 +337,7 @@ Transfers NFT from `from` to `recipient`. The from address must be wallet create
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let nftsTransferNftRequest = nfts_transfer_nft_request(network: Network(), from: "from_example", contractAddress: "contractAddress_example", recipient: "recipient_example", tokenId: "tokenId_example", developerSecret: "developerSecret_example", userPin: "userPin_example") // NftsTransferNftRequest | 
 

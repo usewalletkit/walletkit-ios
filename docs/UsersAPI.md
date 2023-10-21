@@ -22,7 +22,7 @@ Create an anonymous user session
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 
 // Login Anonymously
@@ -68,7 +68,7 @@ Log a user in with their email.
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let usersLoginWithEmailRequest = users_login_with_email_request(email: "email_example") // UsersLoginWithEmailRequest | 
 
@@ -118,7 +118,7 @@ Refresh an access token
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let usersRefreshTokenRequest = users_refresh_token_request(sessionId: "sessionId_example", refreshToken: "refreshToken_example") // UsersRefreshTokenRequest | 
 
@@ -168,7 +168,7 @@ Verify a user's login code.
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let usersVerifyLoginRequest = users_verify_login_request(userId: "userId_example", verificationCode: "verificationCode_example") // UsersVerifyLoginRequest | 
 

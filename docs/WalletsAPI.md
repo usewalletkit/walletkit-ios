@@ -26,7 +26,7 @@ Change pin for user controlled wallets
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let changeUserPinRequest = ChangeUserPinRequest(network: Network(), address: "address_example", oldUserPin: "oldUserPin_example", newUserPin: "newUserPin_example") // ChangeUserPinRequest | 
 
@@ -76,7 +76,7 @@ Creates a wallet with provided metadata.
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let createWalletRequest = CreateWalletRequest(network: Network(), name: "name_example", ownerId: "ownerId_example", controlMode: WalletControlMode(), developerSecret: "developerSecret_example", userPin: "userPin_example") // CreateWalletRequest | 
 
@@ -126,7 +126,7 @@ Export wallet mnemonic phrase
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let exportWalletRequest = ExportWalletRequest(network: Network(), address: "address_example", userPin: "userPin_example") // ExportWalletRequest | 
 
@@ -176,7 +176,7 @@ Get a wallet by network and address
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let network = Network() // Network | 
 let address = "address_example" // String | 
@@ -228,7 +228,7 @@ Get a wallet by id
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let network = Network() // Network | 
 let id = "id_example" // String | 
@@ -280,7 +280,7 @@ Get a wallet for a user by network
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let network = Network() // Network | 
 
@@ -330,7 +330,7 @@ Get a wallet by network and owner id
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let network = Network() // Network | 
 let ownerID = "ownerID_example" // String | 
@@ -382,7 +382,7 @@ Lists wallets created in the project. Supports filter by network.
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import OpenAPIClient
+import WalletKit
 
 let network = Network() // Network |  (optional)
 let page = 987 // Int |  (optional)
