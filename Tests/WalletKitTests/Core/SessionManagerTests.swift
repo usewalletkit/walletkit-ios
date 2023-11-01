@@ -27,7 +27,7 @@ final class SessionManagerTests: XCTestCase {
     func testStoreSession() throws {
         XCTAssertNil(sessionManager.retrieveSession())
 
-        let session = Session.fixture
+        let session = Session.fixture()
         sessionManager.storeSession(session)
         XCTAssertNotNil(sessionManager.retrieveSession())
     }
@@ -35,25 +35,83 @@ final class SessionManagerTests: XCTestCase {
     func testRetrieveSession() throws {
         XCTAssertNil(sessionManager.retrieveSession())
 
-        let session = Session.fixture
+        let session = Session.fixture()
         sessionManager.storeSession(session)
         let retrievedSession = sessionManager.retrieveSession()
-        XCTAssertEqual(retrievedSession, Session.fixture)
+        XCTAssertEqual(retrievedSession, session)
+    }
+
+    func testShouldRefreshSession() throws {
+        let base: TimeInterval = Session.expirationThreshold
+
+        var session = Session.fixture(
+            accessTokenExpiresAt: Date(timeIntervalSinceNow: base + 5),
+            refreshTokenExpiresAt: Date(timeIntervalSinceNow: base + 5)
+        )
+        XCTAssertFalse(sessionManager.shouldRefreshSession(session))
+
+        session = Session.fixture(
+            accessTokenExpiresAt: Date(timeIntervalSinceNow: base),
+            refreshTokenExpiresAt: Date(timeIntervalSinceNow: base)
+        )
+        XCTAssertTrue(sessionManager.shouldRefreshSession(session))
+
+        session = Session.fixture(
+            accessTokenExpiresAt: Date(timeIntervalSinceNow: base - 5),
+            refreshTokenExpiresAt: Date(timeIntervalSinceNow: base - 5)
+        )
+        XCTAssertTrue(sessionManager.shouldRefreshSession(session))
+
+        session = Session.fixture(
+            accessTokenExpiresAt: Date(timeIntervalSinceNow: base + 5),
+            refreshTokenExpiresAt: Date(timeIntervalSinceNow: base - 5)
+        )
+        XCTAssertTrue(sessionManager.shouldRefreshSession(session))
+
+        session = Session.fixture(
+            accessTokenExpiresAt: Date(timeIntervalSinceNow: base - 5),
+            refreshTokenExpiresAt: Date(timeIntervalSinceNow: base + 5)
+        )
+        XCTAssertTrue(sessionManager.shouldRefreshSession(session))
+    }
+
+    func testDateIsExpiringSoon() throws {
+        let base: TimeInterval = Session.expirationThreshold
+
+        var date = Date(timeIntervalSinceNow: base + 5)
+        XCTAssertFalse(date.isExpiringSoon)
+
+        date = Date(timeIntervalSinceNow: base)
+        XCTAssertTrue(date.isExpiringSoon)
+
+        date = Date(timeIntervalSinceNow: base - 5)
+        XCTAssertTrue(date.isExpiringSoon)
     }
 }
 
 private extension Session {
 
-    static let fixture: Session = .init(
-        id: "TEST_SESSION_ID",
-        createdAt: Date(),
-        projectId: "TEST_PROJECT_ID",
-        userId: "TEST_USER_ID",
-        accessToken: "TEST_ACCESS_TOKEN",
-        accessTokenExpiresAt: Date(),
-        refreshToken: "TEST_REFRESH_TOKEN",
-        refreshTokenExpiresAt: Date()
-    )
+    static func fixture(
+        id: String = "TEST_SESSION_ID",
+        createdAt: Date = Date(),
+        projectId: String = "TEST_PROJECT_ID",
+        userId: String = "TEST_USER_ID",
+        accessToken: String = "TEST_ACCESS_TOKEN",
+        accessTokenExpiresAt: Date = Date(),
+        refreshToken: String = "TEST_REFRESH_TOKEN",
+        refreshTokenExpiresAt: Date = Date()
+    ) -> Session {
+        return .init(
+            id: id, 
+            createdAt: createdAt, 
+            projectId: projectId, 
+            userId: userId, 
+            accessToken: accessToken, 
+            accessTokenExpiresAt: accessTokenExpiresAt, 
+            refreshToken: refreshToken, 
+            refreshTokenExpiresAt: refreshTokenExpiresAt
+        )
+    }
 }
 
 private final class MockKeychainManager: KeychainManaging {

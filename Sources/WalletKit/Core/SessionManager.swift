@@ -12,6 +12,8 @@ protocol SessionManaging {
     func storeSession(_ session: Session)
 
     func retrieveSession() -> Session?
+
+    func shouldRefreshSession(_ session: Session) -> Bool
 }
 
 final class SessionManager: SessionManaging {
@@ -43,6 +45,12 @@ final class SessionManager: SessionManaging {
         let session = try? JSONDecoder().decode(Session.self, from: sessionData)
         return session
     }
+
+    func shouldRefreshSession(_ session: Session) -> Bool {
+        let isAccessTokenExpiringSoon = session.accessTokenExpiresAt.isExpiringSoon
+        let isRefreshTokenExpiringSoon = session.refreshTokenExpiresAt.isExpiringSoon
+        return isAccessTokenExpiringSoon || isRefreshTokenExpiringSoon
+    }
 }
 
 extension SessionManager {
@@ -50,5 +58,18 @@ extension SessionManager {
     private struct Constants {
         static let serviceName: String = "com.usewalletkit.credentials"
         static let sessionKey: String = "com.usewalletkit.credentials.session"
+    }
+}
+
+extension Session {
+
+    /// How many seconds left will a date be considered as expiring soon.
+    static let expirationThreshold: TimeInterval = 60 * 5
+}
+
+extension Date {
+
+    var isExpiringSoon: Bool {
+        return timeIntervalSinceNow <= Session.expirationThreshold
     }
 }
