@@ -8,29 +8,38 @@
 import SwiftUI
 import WalletKit
 
-struct ContentView: View {
+struct HomeView: View {
 
     @State private var userSession: Session? = WalletKit.users.currentSession
     @State private var walletList: [ListWalletsResponseItem] = []
 
     @State private var displayingError: Error?
 
+    @State private var presentingSheet: Sheet?
+
+    private enum Sheet: Identifiable {
+        case createWallet
+
+        var id: Int {
+            hashValue
+        }
+    }
+
     var body: some View {
         NavigationView {
             Form {
                 Section {
-                    if userSession != nil, walletList.isEmpty {
+                    if userSession != nil {
+                        ForEach(walletList, id: \.id) { wallet in
+                            Text("Wallet: \(wallet.name ?? "") / \(wallet.network.rawValue.capitalized) / \(wallet.address)")
+                        }
                         Button {
-                            print("Create wallet")
+                            presentingSheet = .createWallet
                         } label: {
                             HStack {
                                 Image(systemName: "plus.square")
                                 Text("Create a Wallet")
                             }
-                        }
-                    } else {
-                        ForEach(walletList, id: \.id) { wallet in
-                            Text("Wallet: \(wallet.address)")
                         }
                     }
                 }
@@ -72,6 +81,19 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("WalletKit")
+            .sheet(item: $presentingSheet) { sheet in
+                switch sheet {
+                case .createWallet:
+                    CreateWalletView(userID: userSession?.userId ?? "") { result in
+                        switch result {
+                        case .success:
+                            listWallets()
+                        case .failure(let error):
+                            displayingError = error
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -98,8 +120,8 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        HomeView()
     }
 }

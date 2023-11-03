@@ -15,7 +15,7 @@ struct WalletKitDemoApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView()
         }
     }
 }
