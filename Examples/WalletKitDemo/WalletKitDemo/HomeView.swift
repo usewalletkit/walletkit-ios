@@ -28,6 +28,8 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             Form {
+                IntroSection()
+
                 Section {
                     if userSession != nil {
                         ForEach(walletList, id: \.id) { wallet in
@@ -38,6 +40,7 @@ struct HomeView: View {
                         } label: {
                             HStack {
                                 Image(systemName: "plus.square")
+                                    .frame(width: 20)
                                 Text("Create a Wallet")
                             }
                         }
@@ -120,7 +123,23 @@ struct HomeView: View {
     }
 }
 
+struct IntroSection: View {
+
+    var body: some View {
+        Section {
+            HStack(alignment: .top) {
+                Image(systemName: "star.bubble.fill")
+                    .foregroundColor(.yellow)
+                    .frame(width: 20)
+                Text("This is a demo app for WalletKit, in which you can explore how to sign in / out a user and create / display wallets.")
+                    .foregroundColor(.secondary)
+            }
+        }
+    }
+}
+
 struct HomeView_Previews: PreviewProvider {
+
     static var previews: some View {
         HomeView()
     }
