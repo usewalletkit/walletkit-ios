@@ -11,6 +11,7 @@
 		2AF094EB2AF3717100016318 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF094EA2AF3717100016318 /* ContentView.swift */; };
 		2AF094ED2AF3717200016318 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AF094EC2AF3717200016318 /* Assets.xcassets */; };
 		2AF094F02AF3717200016318 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AF094EF2AF3717200016318 /* Preview Assets.xcassets */; };
+		2AF094FC2AF49C8900016318 /* WalletKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2AF094FB2AF49C8900016318 /* WalletKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AF094FC2AF49C8900016318 /* WalletKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +85,9 @@
 			dependencies = (
 			);
 			name = WalletKitDemo;
+			packageProductDependencies = (
+				2AF094FB2AF49C8900016318 /* WalletKit */,
+			);
 			productName = WalletKitDemo;
 			productReference = 2AF094E52AF3717100016318 /* WalletKitDemo.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +116,9 @@
 				Base,
 			);
 			mainGroup = 2AF094DC2AF3717000016318;
+			packageReferences = (
+				2AF094FA2AF49C8900016318 /* XCRemoteSwiftPackageReference "walletkit-ios" */,
+			);
 			productRefGroup = 2AF094E62AF3717100016318 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -337,6 +345,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2AF094FA2AF49C8900016318 /* XCRemoteSwiftPackageReference "walletkit-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/usewalletkit/walletkit-ios";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2AF094FB2AF49C8900016318 /* WalletKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2AF094FA2AF49C8900016318 /* XCRemoteSwiftPackageReference "walletkit-ios" */;
+			productName = WalletKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2AF094DD2AF3717000016318 /* Project object */;
 }
