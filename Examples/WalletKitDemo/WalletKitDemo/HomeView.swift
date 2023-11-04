@@ -50,12 +50,12 @@ struct HomeView: View {
                     if let userSession {
                         Text("User ID: \(userSession.userId)")
                         Button(role: .destructive) {
-                            print("Sign out")
+                            signOut()
                         } label: {
                             HStack {
                                 Image(systemName: "rectangle.portrait.and.arrow.forward")
                                     .frame(width: 20)
-                                Text("Log Out")
+                                Text("Sign Out")
                             }
                         }
                     } else {
@@ -109,6 +109,12 @@ struct HomeView: View {
                 displayingError = error
             }
         }
+    }
+
+    private func signOut() {
+        WalletKit.users.usersLogout()
+        userSession = nil
+        walletList = []
     }
 
     private func listWallets() {
