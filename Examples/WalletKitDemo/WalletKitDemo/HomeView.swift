@@ -10,7 +10,7 @@ import WalletKit
 
 struct HomeView: View {
 
-    @State private var userSession: Session? = WalletKit.users.currentSession
+    @State private var userSession: Session? = nil
     @State private var walletList: [ListWalletsResponseItem] = []
 
     @State private var displayingError: Error?
@@ -19,6 +19,7 @@ struct HomeView: View {
 
     private enum Sheet: Identifiable {
         case createWallet
+        case signInWithEmail
 
         var id: Int {
             hashValue
@@ -65,26 +66,24 @@ struct HomeView: View {
                             HStack {
                                 Image(systemName: "person.and.background.dotted")
                                     .frame(width: 20)
-                                Text("Sign in anonymously")
+                                Text("Sign In Anonymously")
                             }
                         }
                         Button {
-                            print("Sign in with email")
+                            presentingSheet = .signInWithEmail
                         } label: {
                             HStack {
                                 Image(systemName: "person.crop.square.filled.and.at.rectangle")
                                     .frame(width: 20)
-                                Text("Sign in with email")
+                                Text("Sign In with Email")
                             }
                         }
                     }
                 }
-                .onAppear {
-                    listWallets()
-                }
+                .onAppear(perform: loadData)
             }
             .navigationTitle("WalletKit")
-            .sheet(item: $presentingSheet) { sheet in
+            .sheet(item: $presentingSheet, onDismiss: loadData) { sheet in
                 switch sheet {
                 case .createWallet:
                     CreateWalletView(userID: userSession?.userId ?? "") { result in
@@ -95,8 +94,17 @@ struct HomeView: View {
                             displayingError = error
                         }
                     }
+                case .signInWithEmail:
+                    SignInWithEmailView()
                 }
             }
+        }
+    }
+
+    private func loadData() {
+        userSession = WalletKit.users.currentSession
+        if userSession != nil {
+            listWallets()
         }
     }
 
