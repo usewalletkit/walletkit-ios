@@ -87,6 +87,17 @@ final class SessionManagerTests: XCTestCase {
         date = Date(timeIntervalSinceNow: base - 5)
         XCTAssertTrue(date.isExpiringSoon)
     }
+
+    func testRemoveSession() throws {
+        XCTAssertNil(sessionManager.retrieveSession())
+
+        let session = Session.fixture()
+        sessionManager.storeSession(session)
+        XCTAssertNotNil(sessionManager.retrieveSession())
+
+        sessionManager.removeSession()
+        XCTAssertNil(sessionManager.retrieveSession())
+    }
 }
 
 private extension Session {
@@ -124,5 +135,9 @@ private final class MockKeychainManager: KeychainManaging {
 
     func retrieveData(for key: String) -> Data? {
         return store[key]
+    }
+
+    func removeData(for key: String) {
+        store.removeValue(forKey: key)
     }
 }

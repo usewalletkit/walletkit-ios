@@ -14,6 +14,8 @@ protocol SessionManaging {
     func retrieveSession() -> Session?
 
     func shouldRefreshSession(_ session: Session) -> Bool
+
+    func removeSession()
 }
 
 final class SessionManager: SessionManaging {
@@ -50,6 +52,10 @@ final class SessionManager: SessionManaging {
         let isAccessTokenExpiringSoon = session.accessTokenExpiresAt.isExpiringSoon
         let isRefreshTokenExpiringSoon = session.refreshTokenExpiresAt.isExpiringSoon
         return isAccessTokenExpiringSoon || isRefreshTokenExpiringSoon
+    }
+
+    func removeSession() {
+        keychainManager.removeData(for: sessionKey)
     }
 }
 
