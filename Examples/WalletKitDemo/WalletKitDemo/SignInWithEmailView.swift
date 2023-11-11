@@ -23,14 +23,7 @@ struct SignInWithEmailView: View {
         NavigationView {
             Form {
                 if isRequesting {
-                    Section {
-                        HStack(alignment: .top) {
-                            ProgressView()
-                                .frame(width: 20)
-                            Text("Loading...")
-                                .foregroundColor(.secondary)
-                        }
-                    }
+                    LoadingSection()
                 }
 
                 if let displayingError {

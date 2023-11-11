@@ -16,6 +16,7 @@
 		2AF094FE2AF4C65A00016318 /* CreateWalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF094FD2AF4C65A00016318 /* CreateWalletView.swift */; };
 		2AF095002AF6223600016318 /* SignInWithEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF094FF2AF6223600016318 /* SignInWithEmailView.swift */; };
 		2AF095132AFFBF2C00016318 /* ErrorSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF095122AFFBF2C00016318 /* ErrorSection.swift */; };
+		2AF095172AFFC12000016318 /* LoadingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF095162AFFC12000016318 /* LoadingSection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		2AF094FD2AF4C65A00016318 /* CreateWalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWalletView.swift; sourceTree = "<group>"; };
 		2AF094FF2AF6223600016318 /* SignInWithEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithEmailView.swift; sourceTree = "<group>"; };
 		2AF095122AFFBF2C00016318 /* ErrorSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorSection.swift; sourceTree = "<group>"; };
+		2AF095162AFFC12000016318 /* LoadingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingSection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				2AF095122AFFBF2C00016318 /* ErrorSection.swift */,
+				2AF095162AFFC12000016318 /* LoadingSection.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 				2AF094FE2AF4C65A00016318 /* CreateWalletView.swift in Sources */,
 				2AF094EB2AF3717100016318 /* HomeView.swift in Sources */,
 				2AF095132AFFBF2C00016318 /* ErrorSection.swift in Sources */,
+				2AF095172AFFC12000016318 /* LoadingSection.swift in Sources */,
 				2AF095002AF6223600016318 /* SignInWithEmailView.swift in Sources */,
 				2AF094E92AF3717100016318 /* WalletKitDemoApp.swift in Sources */,
 			);

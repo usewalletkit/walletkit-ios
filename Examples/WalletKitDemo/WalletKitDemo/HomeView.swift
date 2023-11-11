@@ -10,6 +10,7 @@ import WalletKit
 
 struct HomeView: View {
 
+    @State private var isRequesting: Bool = false
     @State private var userSession: Session? = nil
     @State private var walletList: [ListWalletsResponseItem] = []
     @State private var presentingSheet: Sheet?
@@ -27,6 +28,10 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             Form {
+                if isRequesting {
+                    LoadingSection()
+                }
+
                 if let displayingError {
                     ErrorSection(message: displayingError)
                 }
@@ -111,7 +116,9 @@ struct HomeView: View {
     }
 
     private func signInAnonymously() {
+        isRequesting = true
         WalletKit.users.usersLoginAnonymously { result in
+            isRequesting = false
             switch result {
             case .success(let session):
                 userSession = session
