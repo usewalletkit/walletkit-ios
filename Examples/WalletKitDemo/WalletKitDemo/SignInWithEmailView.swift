@@ -34,15 +34,7 @@ struct SignInWithEmailView: View {
                 }
 
                 if let displayingError {
-                    Section {
-                        HStack(alignment: .top) {
-                            Image(systemName: "exclamationmark.bubble.fill")
-                                .foregroundColor(.red)
-                                .frame(width: 20)
-                            Text("Error: \(displayingError). Please try again.")
-                                .foregroundColor(.red)
-                        }
-                    }
+                    ErrorSection(message: displayingError)
                 }
 
                 if isVerifying {

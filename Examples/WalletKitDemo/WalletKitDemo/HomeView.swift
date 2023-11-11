@@ -12,10 +12,8 @@ struct HomeView: View {
 
     @State private var userSession: Session? = nil
     @State private var walletList: [ListWalletsResponseItem] = []
-
-    @State private var displayingError: Error?
-
     @State private var presentingSheet: Sheet?
+    @State private var displayingError: String?
 
     private enum Sheet: Identifiable {
         case createWallet
@@ -29,6 +27,10 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             Form {
+                if let displayingError {
+                    ErrorSection(message: displayingError)
+                }
+
                 IntroSection()
 
                 Section {
@@ -91,7 +93,7 @@ struct HomeView: View {
                         case .success:
                             listWallets()
                         case .failure(let error):
-                            displayingError = error
+                            displayingError = error.localizedDescription
                         }
                     }
                 case .signInWithEmail:
@@ -114,7 +116,7 @@ struct HomeView: View {
             case .success(let session):
                 userSession = session
             case .failure(let error):
-                displayingError = error
+                displayingError = error.localizedDescription
             }
         }
     }
@@ -131,7 +133,7 @@ struct HomeView: View {
             case .success(let list):
                 walletList = list
             case .failure(let error):
-                displayingError = error
+                displayingError = error.localizedDescription
             }
         }
     }

@@ -15,6 +15,7 @@
 		2AF094FC2AF49C8900016318 /* WalletKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2AF094FB2AF49C8900016318 /* WalletKit */; };
 		2AF094FE2AF4C65A00016318 /* CreateWalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF094FD2AF4C65A00016318 /* CreateWalletView.swift */; };
 		2AF095002AF6223600016318 /* SignInWithEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF094FF2AF6223600016318 /* SignInWithEmailView.swift */; };
+		2AF095132AFFBF2C00016318 /* ErrorSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF095122AFFBF2C00016318 /* ErrorSection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		2AF094F82AF4946600016318 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2AF094FD2AF4C65A00016318 /* CreateWalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWalletView.swift; sourceTree = "<group>"; };
 		2AF094FF2AF6223600016318 /* SignInWithEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithEmailView.swift; sourceTree = "<group>"; };
+		2AF095122AFFBF2C00016318 /* ErrorSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorSection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				2AF094EA2AF3717100016318 /* HomeView.swift */,
 				2AF094FD2AF4C65A00016318 /* CreateWalletView.swift */,
 				2AF094FF2AF6223600016318 /* SignInWithEmailView.swift */,
+				2AF095112AFFBF1D00016318 /* Components */,
 				2AF094EC2AF3717200016318 /* Assets.xcassets */,
 				2AF094EE2AF3717200016318 /* Preview Content */,
 			);
@@ -76,6 +79,14 @@
 				2AF094EF2AF3717200016318 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2AF095112AFFBF1D00016318 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2AF095122AFFBF2C00016318 /* ErrorSection.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,6 +168,7 @@
 				2AF094F92AF4946600016318 /* AppDelegate.swift in Sources */,
 				2AF094FE2AF4C65A00016318 /* CreateWalletView.swift in Sources */,
 				2AF094EB2AF3717100016318 /* HomeView.swift in Sources */,
+				2AF095132AFFBF2C00016318 /* ErrorSection.swift in Sources */,
 				2AF095002AF6223600016318 /* SignInWithEmailView.swift in Sources */,
 				2AF094E92AF3717100016318 /* WalletKitDemoApp.swift in Sources */,
 			);
