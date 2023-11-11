@@ -30,6 +30,7 @@
 		2AF094FF2AF6223600016318 /* SignInWithEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithEmailView.swift; sourceTree = "<group>"; };
 		2AF095122AFFBF2C00016318 /* ErrorSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorSection.swift; sourceTree = "<group>"; };
 		2AF095162AFFC12000016318 /* LoadingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingSection.swift; sourceTree = "<group>"; };
+		2AF0951A2AFFD74000016318 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +69,7 @@
 				2AF095112AFFBF1D00016318 /* Components */,
 				2AF094EC2AF3717200016318 /* Assets.xcassets */,
 				2AF094EE2AF3717200016318 /* Preview Content */,
+				2AF0951A2AFFD74000016318 /* README.md */,
 			);
 			path = WalletKitDemo;
 			sourceTree = "<group>";
