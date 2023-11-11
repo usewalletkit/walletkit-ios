@@ -38,68 +38,35 @@ struct HomeView: View {
 
                 IntroSection()
 
-                Section {
-                    if userSession != nil {
-                        ForEach(walletList, id: \.id) { wallet in
-                            Text("Wallet: \(wallet.name ?? "") / \(wallet.network.rawValue.capitalized) / \(wallet.address)")
-                        }
-                        Button {
+                if let userSession {
+                    SignedInView(
+                        userSession: userSession,
+                        walletList: walletList,
+                        handleCreateWallet: {
                             presentingSheet = .createWallet
-                        } label: {
-                            HStack {
-                                Image(systemName: "plus.square")
-                                    .frame(width: 20)
-                                Text("Create a Wallet")
-                            }
-                        }
-                    }
-                }
-                Section {
-                    if let userSession {
-                        Text("User ID: \(userSession.userId)")
-                        Button(role: .destructive) {
+                        },
+                        handleSignOut: {
                             signOut()
-                        } label: {
-                            HStack {
-                                Image(systemName: "rectangle.portrait.and.arrow.forward")
-                                    .frame(width: 20)
-                                Text("Sign Out")
-                            }
                         }
-                    } else {
-                        Button {
+                    )
+                    .onAppear(perform: loadData)
+                } else {
+                    SignedOutView(
+                        handleSignInAnonymously: {
                             signInAnonymously()
-                        } label: {
-                            HStack {
-                                Image(systemName: "person.and.background.dotted")
-                                    .frame(width: 20)
-                                Text("Sign In Anonymously")
-                            }
-                        }
-                        Button {
+                        },
+                        handleSignInWithEmail: {
                             presentingSheet = .signInWithEmail
-                        } label: {
-                            HStack {
-                                Image(systemName: "person.crop.square.filled.and.at.rectangle")
-                                    .frame(width: 20)
-                                Text("Sign In with Email")
-                            }
                         }
-                    }
+                    )
                 }
-                .onAppear(perform: loadData)
             }
             .navigationTitle("WalletKit")
             .sheet(item: $presentingSheet, onDismiss: loadData) { sheet in
                 switch sheet {
                 case .createWallet:
                     CreateWalletView(userID: userSession?.userId ?? "") { result in
-                        switch result {
-                        case .success:
-                            listWallets()
-                        case .failure(let error):
-                            displayingError = error.localizedDescription
-                        }
+                        handleCreateWallet(result: result)
                     }
                 case .signInWithEmail:
                     SignInWithEmailView()
@@ -107,6 +74,11 @@ struct HomeView: View {
             }
         }
     }
+}
+
+// MARK: - Private Methods
+
+extension HomeView {
 
     private func loadData() {
         userSession = WalletKit.users.currentSession
@@ -144,7 +116,18 @@ struct HomeView: View {
             }
         }
     }
+
+    private func handleCreateWallet(result: Result<CreateWalletResponse, ErrorResponse>) {
+        switch result {
+        case .success:
+            listWallets()
+        case .failure(let error):
+            displayingError = error.localizedDescription
+        }
+    }
 }
+
+// MARK: - Views
 
 struct IntroSection: View {
 
@@ -160,6 +143,75 @@ struct IntroSection: View {
         }
     }
 }
+
+struct SignedInView: View {
+
+    var userSession: Session
+    var walletList: [ListWalletsResponseItem]
+    var handleCreateWallet: () -> Void
+    var handleSignOut: () -> Void
+
+    var body: some View {
+        Section {
+            ForEach(walletList, id: \.id) { wallet in
+                Text("Wallet: \(wallet.name ?? "") / \(wallet.network.rawValue.capitalized) / \(wallet.address)")
+            }
+            Button {
+                handleCreateWallet()
+            } label: {
+                HStack {
+                    Image(systemName: "plus.square")
+                        .frame(width: 20)
+                    Text("Create a Wallet")
+                }
+            }
+        }
+
+        Section {
+            Text("User ID: \(userSession.userId)")
+            Button(role: .destructive) {
+                handleSignOut()
+            } label: {
+                HStack {
+                    Image(systemName: "rectangle.portrait.and.arrow.forward")
+                        .frame(width: 20)
+                    Text("Sign Out")
+                }
+            }
+        }
+    }
+}
+
+struct SignedOutView: View {
+
+    var handleSignInAnonymously: () -> Void
+    var handleSignInWithEmail: () -> Void
+
+    var body: some View {
+        Section {
+            Button {
+                handleSignInAnonymously()
+            } label: {
+                HStack {
+                    Image(systemName: "person.and.background.dotted")
+                        .frame(width: 20)
+                    Text("Sign In Anonymously")
+                }
+            }
+            Button {
+                handleSignInWithEmail()
+            } label: {
+                HStack {
+                    Image(systemName: "person.crop.square.filled.and.at.rectangle")
+                        .frame(width: 20)
+                    Text("Sign In with Email")
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Previews
 
 struct HomeView_Previews: PreviewProvider {
 
