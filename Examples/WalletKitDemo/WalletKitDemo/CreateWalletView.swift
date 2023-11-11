@@ -70,6 +70,11 @@ struct CreateWalletView: View {
             }
         }
     }
+}
+
+// MARK: - Private Methods
+
+extension CreateWalletView {
 
     private func createWallet() {
         let request = CreateWalletRequest(
@@ -84,8 +89,9 @@ struct CreateWalletView: View {
             dismiss()
         }
     }
-
 }
+
+// MARK: - Previews
 
 struct CreateWalletView_Previews: PreviewProvider {
 

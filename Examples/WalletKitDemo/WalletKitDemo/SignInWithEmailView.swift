@@ -31,56 +31,17 @@ struct SignInWithEmailView: View {
                 }
 
                 if isVerifying {
-                    Section {
-                        HStack(alignment: .top) {
-                            Image(systemName: "info.bubble.fill")
-                                .foregroundColor(.green)
-                                .frame(width: 20)
-                            Text("An email with a verification code was just sent to your email. Please input the code to finish sign-in.")
-                                .foregroundColor(.secondary)
-                        }
-                    }
-                }
-
-                Section {
-                    if isVerifying {
-                        LabeledContent("Verification Code:") {
-                            TextField("4-digit code", text: $code)
-                                .multilineTextAlignment(.trailing)
-                                .keyboardType(.numberPad)
-                        }
-                    } else {
-                        LabeledContent("Email:") {
-                            TextField("Your email address", text: $email)
-                                .multilineTextAlignment(.trailing)
-                                .keyboardType(.emailAddress)
-                        }
-                    }
-                }
-
-                if isVerifying {
-                    Button {
-                        verifyOneTimeCode()
-                    } label: {
-                        HStack {
-                            Spacer()
-                            Text("Sign In")
-                                .bold()
-                            Spacer()
-                        }
-                    }
+                    VerificationCodeView(
+                        code: $code,
+                        handleVerifyCode: verifyCode
+                    )
                 } else {
-                    Button {
-                        requestOneTimeCode()
-                    } label: {
-                        HStack {
-                            Spacer()
-                            Text("Continue")
-                                .bold()
-                            Spacer()
-                        }
-                    }
+                    EmailView(
+                        email: $email,
+                        handleRequestCode: requestCode
+                    )
                 }
+
             }
             .navigationTitle("Sign In")
             .toolbar {
@@ -95,8 +56,13 @@ struct SignInWithEmailView: View {
             }
         }
     }
+}
 
-    private func requestOneTimeCode() {
+// MARK: - Private Methods
+
+extension SignInWithEmailView {
+
+    private func requestCode() {
         displayingError = nil
         isRequesting = true
         let request = UsersLoginWithEmailRequest(email: email)
@@ -113,7 +79,7 @@ struct SignInWithEmailView: View {
         }
     }
 
-    private func verifyOneTimeCode() {
+    private func verifyCode() {
         guard let userID else {
             isVerifying = false
             displayingError = "Something went wrong."
@@ -135,6 +101,71 @@ struct SignInWithEmailView: View {
         }
     }
 }
+
+// MARK: - Views
+
+struct EmailView: View {
+
+    @Binding var email: String
+    var handleRequestCode: () -> Void
+
+    var body: some View {
+        Section {
+            LabeledContent("Email:") {
+                TextField("Your email address", text: $email)
+                    .multilineTextAlignment(.trailing)
+                    .keyboardType(.emailAddress)
+            }
+        }
+        Button {
+            handleRequestCode()
+        } label: {
+            HStack {
+                Spacer()
+                Text("Continue")
+                    .bold()
+                Spacer()
+            }
+        }
+    }
+}
+
+struct VerificationCodeView: View {
+
+    @Binding var code: String
+    var handleVerifyCode: () -> Void
+
+    var body: some View {
+        Section {
+            HStack(alignment: .top) {
+                Image(systemName: "info.bubble.fill")
+                    .foregroundColor(.green)
+                    .frame(width: 20)
+                Text("An email with a verification code was just sent to your email. Please input the code to finish sign-in.")
+                    .foregroundColor(.secondary)
+            }
+        }
+        Section {
+            LabeledContent("Verification Code:") {
+                TextField("4-digit code", text: $code)
+                    .multilineTextAlignment(.trailing)
+                    .keyboardType(.numberPad)
+            }
+        }
+        Button {
+            handleVerifyCode()
+        } label: {
+            HStack {
+                Spacer()
+                Text("Sign In")
+                    .bold()
+                Spacer()
+            }
+        }
+    }
+}
+
+// MARK: - Previews
 
 struct SignInWithEmailView_Previews: PreviewProvider {
 
