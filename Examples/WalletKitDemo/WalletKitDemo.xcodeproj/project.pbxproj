@@ -63,11 +63,8 @@
 		2AF094E72AF3717100016318 /* WalletKitDemo */ = {
 			isa = PBXGroup;
 			children = (
-				2AF094F82AF4946600016318 /* AppDelegate.swift */,
-				2AF094E82AF3717100016318 /* WalletKitDemoApp.swift */,
-				2AF094EA2AF3717100016318 /* HomeView.swift */,
-				2AF094FD2AF4C65A00016318 /* CreateWalletView.swift */,
-				2AF094FF2AF6223600016318 /* SignInWithEmailView.swift */,
+				2AF095192AFFD69F00016318 /* App */,
+				2AF095182AFFD69400016318 /* Views */,
 				2AF095112AFFBF1D00016318 /* Components */,
 				2AF094EC2AF3717200016318 /* Assets.xcassets */,
 				2AF094EE2AF3717200016318 /* Preview Content */,
@@ -90,6 +87,25 @@
 				2AF095162AFFC12000016318 /* LoadingSection.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		2AF095182AFFD69400016318 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2AF094EA2AF3717100016318 /* HomeView.swift */,
+				2AF094FD2AF4C65A00016318 /* CreateWalletView.swift */,
+				2AF094FF2AF6223600016318 /* SignInWithEmailView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2AF095192AFFD69F00016318 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				2AF094F82AF4946600016318 /* AppDelegate.swift */,
+				2AF094E82AF3717100016318 /* WalletKitDemoApp.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
