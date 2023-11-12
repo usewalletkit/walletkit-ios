@@ -1,0 +1,32 @@
+{
+  "pins" : [
+    {
+      "identity" : "anycodable",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Flight-School/AnyCodable",
+      "state" : {
+        "revision" : "862808b2070cd908cb04f9aafe7de83d35f81b05",
+        "version" : "0.6.7"
+      }
+    },
+    {
+      "identity" : "keychainaccess",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kishikawakatsumi/KeychainAccess",
+      "state" : {
+        "revision" : "84e546727d66f1adc5439debad16270d0fdd04e7",
+        "version" : "4.2.2"
+      }
+    },
+    {
+      "identity" : "walletkit-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/usewalletkit/walletkit-ios",
+      "state" : {
+        "branch" : "main",
+        "revision" : "a6c5d671043db45aa4f4b30b023d0d5af43e7908"
+      }
+    }
+  ],
+  "version" : 2
+}
