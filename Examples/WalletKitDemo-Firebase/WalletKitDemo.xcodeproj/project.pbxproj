@@ -14,10 +14,10 @@
 		2AF094F92AF4946600016318 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF094F82AF4946600016318 /* AppDelegate.swift */; };
 		2AF094FC2AF49C8900016318 /* WalletKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2AF094FB2AF49C8900016318 /* WalletKit */; };
 		2AF094FE2AF4C65A00016318 /* CreateWalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF094FD2AF4C65A00016318 /* CreateWalletView.swift */; };
-		2AF095002AF6223600016318 /* SignInWithEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF094FF2AF6223600016318 /* SignInWithEmailView.swift */; };
 		2AF095132AFFBF2C00016318 /* ErrorSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF095122AFFBF2C00016318 /* ErrorSection.swift */; };
 		2AF095172AFFC12000016318 /* LoadingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF095162AFFC12000016318 /* LoadingSection.swift */; };
 		2AF0951D2B00741900016318 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2AF0951C2B00741900016318 /* FirebaseAuth */; };
+		2AF095252B00761A00016318 /* FirebaseTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF095242B00761A00016318 /* FirebaseTokenProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,10 +28,10 @@
 		2AF094EF2AF3717200016318 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2AF094F82AF4946600016318 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2AF094FD2AF4C65A00016318 /* CreateWalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWalletView.swift; sourceTree = "<group>"; };
-		2AF094FF2AF6223600016318 /* SignInWithEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithEmailView.swift; sourceTree = "<group>"; };
 		2AF095122AFFBF2C00016318 /* ErrorSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorSection.swift; sourceTree = "<group>"; };
 		2AF095162AFFC12000016318 /* LoadingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingSection.swift; sourceTree = "<group>"; };
 		2AF0951A2AFFD74000016318 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		2AF095242B00761A00016318 /* FirebaseTokenProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseTokenProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +98,6 @@
 			children = (
 				2AF094EA2AF3717100016318 /* HomeView.swift */,
 				2AF094FD2AF4C65A00016318 /* CreateWalletView.swift */,
-				2AF094FF2AF6223600016318 /* SignInWithEmailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -107,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				2AF094F82AF4946600016318 /* AppDelegate.swift */,
+				2AF095242B00761A00016318 /* FirebaseTokenProvider.swift */,
 				2AF094E82AF3717100016318 /* WalletKitDemoApp.swift */,
 			);
 			path = App;
@@ -195,7 +195,7 @@
 				2AF094EB2AF3717100016318 /* HomeView.swift in Sources */,
 				2AF095132AFFBF2C00016318 /* ErrorSection.swift in Sources */,
 				2AF095172AFFC12000016318 /* LoadingSection.swift in Sources */,
-				2AF095002AF6223600016318 /* SignInWithEmailView.swift in Sources */,
+				2AF095252B00761A00016318 /* FirebaseTokenProvider.swift in Sources */,
 				2AF094E92AF3717100016318 /* WalletKitDemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

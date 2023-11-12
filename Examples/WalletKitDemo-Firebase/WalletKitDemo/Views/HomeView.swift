@@ -7,18 +7,19 @@
 
 import SwiftUI
 import WalletKit
+import FirebaseCore
+import FirebaseAuth
 
 struct HomeView: View {
 
     @State private var isRequesting: Bool = false
-    @State private var userSession: Session? = nil
+    @State private var userSession: User? = nil
     @State private var walletList: [ListWalletsResponseItem] = []
     @State private var presentingSheet: Sheet?
     @State private var displayingError: String?
 
     private enum Sheet: Identifiable {
         case createWallet
-        case signInWithEmail
 
         var id: Int {
             hashValue
@@ -54,9 +55,6 @@ struct HomeView: View {
                     SignedOutView(
                         handleSignInAnonymously: {
                             signInAnonymously()
-                        },
-                        handleSignInWithEmail: {
-                            presentingSheet = .signInWithEmail
                         }
                     )
                 }
@@ -65,11 +63,9 @@ struct HomeView: View {
             .sheet(item: $presentingSheet, onDismiss: loadData) { sheet in
                 switch sheet {
                 case .createWallet:
-                    CreateWalletView(userID: userSession?.userId ?? "") { result in
+                    CreateWalletView(userID: userSession?.uid ?? "") { result in
                         handleCreateWallet(result: result)
                     }
-                case .signInWithEmail:
-                    SignInWithEmailView()
                 }
             }
         }
@@ -81,7 +77,7 @@ struct HomeView: View {
 extension HomeView {
 
     private func loadData() {
-        userSession = WalletKit.users.currentSession
+        userSession = Auth.auth().currentUser
         if userSession != nil {
             listWallets()
         }
@@ -89,19 +85,21 @@ extension HomeView {
 
     private func signInAnonymously() {
         isRequesting = true
-        WalletKit.users.usersLoginAnonymously { result in
+        Auth.auth().signInAnonymously { result, error in
             isRequesting = false
-            switch result {
-            case .success(let session):
-                userSession = session
-            case .failure(let error):
+
+            if let error {
                 displayingError = error.localizedDescription
+                return
             }
+
+            userSession = result?.user
         }
+
     }
 
     private func signOut() {
-        WalletKit.users.usersLogout()
+        try? Auth.auth().signOut()
         userSession = nil
         walletList = []
     }
@@ -137,7 +135,7 @@ struct IntroSection: View {
                 Image(systemName: "star.bubble.fill")
                     .foregroundColor(.yellow)
                     .frame(width: 20)
-                Text("This is a demo app for WalletKit, in which you can explore how to sign in / out a user and create / display wallets.")
+                Text("This is a demo app for WalletKit, in which you can explore how to sign in / out a user via Firebase and create / display wallets.")
                     .foregroundColor(.secondary)
             }
         }
@@ -146,7 +144,7 @@ struct IntroSection: View {
 
 struct SignedInView: View {
 
-    var userSession: Session
+    var userSession: User
     var walletList: [ListWalletsResponseItem]
     var handleCreateWallet: () -> Void
     var handleSignOut: () -> Void
@@ -168,7 +166,7 @@ struct SignedInView: View {
         }
 
         Section {
-            Text("User ID: \(userSession.userId)")
+            Text("User ID: \(userSession.uid)")
             Button(role: .destructive) {
                 handleSignOut()
             } label: {
@@ -185,7 +183,6 @@ struct SignedInView: View {
 struct SignedOutView: View {
 
     var handleSignInAnonymously: () -> Void
-    var handleSignInWithEmail: () -> Void
 
     var body: some View {
         Section {
@@ -196,15 +193,6 @@ struct SignedOutView: View {
                     Image(systemName: "person.and.background.dotted")
                         .frame(width: 20)
                     Text("Sign In Anonymously")
-                }
-            }
-            Button {
-                handleSignInWithEmail()
-            } label: {
-                HStack {
-                    Image(systemName: "person.crop.square.filled.and.at.rectangle")
-                        .frame(width: 20)
-                    Text("Sign In with Email")
                 }
             }
         }

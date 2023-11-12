@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct WalletKitDemoApp: App {
 
-    // Register app delegate for WalletKit setup.
+    // Register app delegate for WalletKit and Firebase setup.
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     var body: some Scene {

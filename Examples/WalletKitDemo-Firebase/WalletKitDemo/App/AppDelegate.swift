@@ -7,16 +7,21 @@
 
 import UIKit
 import WalletKit
+import FirebaseCore
 
 class AppDelegate: NSObject, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        // Configure Firebase.
+        FirebaseApp.configure()
+
         // Configure WalletKit.
         let projectID = "WALLET_KIT_PROJECT_ID"
         WalletKit.configure(
             projectID: projectID,
             environment: .testnet,
-            tokenSource: .walletkit
+            tokenSource: .firebase,
+            tokenProvider: FirebaseTokenProvider()
         )
 
         return true
