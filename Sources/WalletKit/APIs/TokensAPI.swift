@@ -34,7 +34,7 @@ open class TokensAPI {
     /**
      Batch Transfer Token
      - POST /tokens/batch-transfer
-     - Batch transfers from the `from` wallet to the list of  `recipients` with the provided amount. The `from` address can only be the ones  created in the project. Transfers within a batch are processed atomically  in a single transaction, resulting in significantly lower average costs  compared to individual transfers 
+     - Batch transfers from the `from` wallet to the list of `recipients` with the provided amount. The `from` address can only be the ones created in the project. Transfers within a batch are processed atomically in a single transaction, resulting in significantly lower average costs compared to individual transfers 
      - Bearer Token:
        - type: http
        - name: BearerAuth

@@ -40,11 +40,17 @@ Class | Method | HTTP request | Description
 *TokensAPI* | [**tokensListBalances**](docs/TokensAPI.md#tokenslistbalances) | **GET** /tokens/balances | List Token Balances
 *TokensAPI* | [**tokensMint**](docs/TokensAPI.md#tokensmint) | **POST** /tokens/mint | Mint Token
 *TokensAPI* | [**tokensTransfer**](docs/TokensAPI.md#tokenstransfer) | **POST** /tokens/transfer | Transfer Token
+*TransactionsAPI* | [**transactionsBatchSignAndSend**](docs/TransactionsAPI.md#transactionsbatchsignandsend) | **POST** /transactions/batch-sign-and-send | Batch Sign and Send
 *TransactionsAPI* | [**transactionsGetStatus**](docs/TransactionsAPI.md#transactionsgetstatus) | **GET** /transactions/status-by-hash | Transaction Status By Hash
 *TransactionsAPI* | [**transactionsSignAndSend**](docs/TransactionsAPI.md#transactionssignandsend) | **POST** /transactions/sign-and-send | Sign and Send
+*TransactionsAPI* | [**transactionsSignMessage**](docs/TransactionsAPI.md#transactionssignmessage) | **POST** /transactions/sign-message | Sign Message
 *TransactionsAPI* | [**transactionsStatusById**](docs/TransactionsAPI.md#transactionsstatusbyid) | **GET** /transactions/status-by-id | Transaction Status by ID
+*UsersAPI* | [**usersCreateSessionChallenge**](docs/UsersAPI.md#userscreatesessionchallenge) | **POST** /users/create-session-challenge | Create Session Challenge
+*UsersAPI* | [**usersGetSessionChallenge**](docs/UsersAPI.md#usersgetsessionchallenge) | **GET** /users/session-challenge | Get Session Challenge
 *UsersAPI* | [**usersLoginAnonymously**](docs/UsersAPI.md#usersloginanonymously) | **POST** /users/login-anonymously | Login Anonymously
 *UsersAPI* | [**usersLoginWithEmail**](docs/UsersAPI.md#usersloginwithemail) | **POST** /users/login-with-email | Login with Email
+*UsersAPI* | [**usersLoginWithWallet**](docs/UsersAPI.md#usersloginwithwallet) | **POST** /users/login-with-wallet | Login with Wallet
+*UsersAPI* | [**usersLogout**](docs/UsersAPI.md#userslogout) | **POST** /users/logout | Logout
 *UsersAPI* | [**usersRefreshToken**](docs/UsersAPI.md#usersrefreshtoken) | **POST** /users/refresh-token | Refresh Token
 *UsersAPI* | [**usersVerifyLogin**](docs/UsersAPI.md#usersverifylogin) | **POST** /users/verify-login | Verify Login
 *WalletsAPI* | [**walletsChangeUserPin**](docs/WalletsAPI.md#walletschangeuserpin) | **POST** /wallets/change-user-pin | Change User Pin
@@ -82,22 +88,29 @@ Class | Method | HTTP request | Description
  - [ListWalletsResponseItem](docs/ListWalletsResponseItem.md)
  - [LoginAnonymouslyResponse](docs/LoginAnonymouslyResponse.md)
  - [LoginWithEmailResponse](docs/LoginWithEmailResponse.md)
+ - [LoginWithWalletResponse](docs/LoginWithWalletResponse.md)
  - [MintNftRequestMetadata](docs/MintNftRequestMetadata.md)
+ - [ModelErrorResponse](docs/ModelErrorResponse.md)
  - [Network](docs/Network.md)
  - [NftImageUploadResponse](docs/NftImageUploadResponse.md)
  - [NftsCreateRequest](docs/NftsCreateRequest.md)
  - [NftsMintNftRequest](docs/NftsMintNftRequest.md)
  - [NftsTransferNftRequest](docs/NftsTransferNftRequest.md)
  - [Session](docs/Session.md)
+ - [SessionChallenge](docs/SessionChallenge.md)
  - [SignAndSendRequestUnsignedTransaction](docs/SignAndSendRequestUnsignedTransaction.md)
+ - [SignMessageResponse](docs/SignMessageResponse.md)
  - [TokenSource](docs/TokenSource.md)
  - [TokensBatchTransferRequest](docs/TokensBatchTransferRequest.md)
  - [TokensCreateRequest](docs/TokensCreateRequest.md)
  - [TokensMintRequest](docs/TokensMintRequest.md)
  - [TokensTransferRequest](docs/TokensTransferRequest.md)
  - [TransactionSubmissionResponse](docs/TransactionSubmissionResponse.md)
+ - [TransactionsBatchSignAndSendRequest](docs/TransactionsBatchSignAndSendRequest.md)
  - [TransactionsSignAndSendRequest](docs/TransactionsSignAndSendRequest.md)
+ - [TransactionsSignMessageRequest](docs/TransactionsSignMessageRequest.md)
  - [UsersLoginWithEmailRequest](docs/UsersLoginWithEmailRequest.md)
+ - [UsersLoginWithWalletRequest](docs/UsersLoginWithWalletRequest.md)
  - [UsersRefreshTokenRequest](docs/UsersRefreshTokenRequest.md)
  - [UsersVerifyLoginRequest](docs/UsersVerifyLoginRequest.md)
  - [Wallet](docs/Wallet.md)

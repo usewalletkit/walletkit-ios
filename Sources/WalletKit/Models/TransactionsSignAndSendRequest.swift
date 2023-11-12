@@ -18,7 +18,7 @@ public struct TransactionsSignAndSendRequest: Codable, JSONEncodable, Hashable {
     public var unsignedTransaction: SignAndSendRequestUnsignedTransaction
     /** On testnet, the developer_secret is always \"testnet-secret\". On mainnet, the developer_secret is set by the developer during account activation. */
     public var developerSecret: String?
-    /** A 6-digit numeric pin that is only known to the user, set during  wallet creation. This pin is required to sign transactions from  this wallet. */
+    /** A 6-digit numeric pin that is only known to the user, set during wallet creation. This pin is required to sign transactions from this wallet. */
     public var userPin: String?
 
     public init(network: Network, signerWalletAddress: String, unsignedTransaction: SignAndSendRequestUnsignedTransaction, developerSecret: String? = nil, userPin: String? = nil) {

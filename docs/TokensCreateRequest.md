@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **logoUrl** | **String** | url of the token logo. | [optional] 
 **initialSupply** | **String** | The amount of tokens to be minted to the token creator. | 
 **developerSecret** | **String** | On testnet, the developer_secret is always \&quot;testnet-secret\&quot;. On mainnet, the developer_secret is set by the developer during account activation. | [optional] 
-**userPin** | **String** | A 6-digit numeric pin that is only known to the user, set during  wallet creation. This pin is required to sign transactions from  this wallet. | [optional] 
+**userPin** | **String** | A 6-digit numeric pin that is only known to the user, set during wallet creation. This pin is required to sign transactions from this wallet. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

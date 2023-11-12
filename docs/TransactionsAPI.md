@@ -4,10 +4,62 @@ All URIs are relative to *https://testnet.usewalletkit.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**transactionsBatchSignAndSend**](TransactionsAPI.md#transactionsbatchsignandsend) | **POST** /transactions/batch-sign-and-send | Batch Sign and Send
 [**transactionsGetStatus**](TransactionsAPI.md#transactionsgetstatus) | **GET** /transactions/status-by-hash | Transaction Status By Hash
 [**transactionsSignAndSend**](TransactionsAPI.md#transactionssignandsend) | **POST** /transactions/sign-and-send | Sign and Send
+[**transactionsSignMessage**](TransactionsAPI.md#transactionssignmessage) | **POST** /transactions/sign-message | Sign Message
 [**transactionsStatusById**](TransactionsAPI.md#transactionsstatusbyid) | **GET** /transactions/status-by-id | Transaction Status by ID
 
+
+# **transactionsBatchSignAndSend**
+```swift
+    open class func transactionsBatchSignAndSend(transactionsBatchSignAndSendRequest: TransactionsBatchSignAndSendRequest, completion: @escaping (_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)
+```
+
+Batch Sign and Send
+
+This endpoint makes arbitrary smart contract function calls in batch.
+
+### Example
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import WalletKit
+
+let transactionsBatchSignAndSendRequest = transactions_batch_sign_and_send_request(network: Network(), signerWalletAddress: "signerWalletAddress_example", unsignedTransactions: [SignAndSendRequestUnsignedTransaction(to: "to_example", value: "value_example", input: "input_example")], developerSecret: "developerSecret_example", userPin: "userPin_example") // TransactionsBatchSignAndSendRequest | 
+
+// Batch Sign and Send
+TransactionsAPI.transactionsBatchSignAndSend(transactionsBatchSignAndSendRequest: transactionsBatchSignAndSendRequest) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **transactionsBatchSignAndSendRequest** | [**TransactionsBatchSignAndSendRequest**](TransactionsBatchSignAndSendRequest.md) |  | 
+
+### Return type
+
+[**TransactionSubmissionResponse**](TransactionSubmissionResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **transactionsGetStatus**
 ```swift
@@ -99,6 +151,56 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**TransactionSubmissionResponse**](TransactionSubmissionResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **transactionsSignMessage**
+```swift
+    open class func transactionsSignMessage(transactionsSignMessageRequest: TransactionsSignMessageRequest, completion: @escaping (_ data: SignMessageResponse?, _ error: Error?) -> Void)
+```
+
+Sign Message
+
+This endpoint calculates a network-specific signature (e.g. in EIP-191 format EVM networks) for the provided message.
+
+### Example
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import WalletKit
+
+let transactionsSignMessageRequest = transactions_sign_message_request(network: Network(), signerWalletAddress: "signerWalletAddress_example", message: "message_example", developerSecret: "developerSecret_example", userPin: "userPin_example") // TransactionsSignMessageRequest | 
+
+// Sign Message
+TransactionsAPI.transactionsSignMessage(transactionsSignMessageRequest: transactionsSignMessageRequest) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **transactionsSignMessageRequest** | [**TransactionsSignMessageRequest**](TransactionsSignMessageRequest.md) |  | 
+
+### Return type
+
+[**SignMessageResponse**](SignMessageResponse.md)
 
 ### Authorization
 

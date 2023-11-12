@@ -12,25 +12,37 @@ import AnyCodable
 
 public struct UsersVerifyLoginRequest: Codable, JSONEncodable, Hashable {
 
-    public var userId: String
-    public var verificationCode: String
+    public var userId: String?
+    public var verificationCode: String?
+    public var siweMessage: String?
+    public var signature: String?
+    public var sessionChallengeCode: String?
 
-    public init(userId: String, verificationCode: String) {
+    public init(userId: String? = nil, verificationCode: String? = nil, siweMessage: String? = nil, signature: String? = nil, sessionChallengeCode: String? = nil) {
         self.userId = userId
         self.verificationCode = verificationCode
+        self.siweMessage = siweMessage
+        self.signature = signature
+        self.sessionChallengeCode = sessionChallengeCode
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case userId = "user_id"
         case verificationCode = "verification_code"
+        case siweMessage = "siwe_message"
+        case signature
+        case sessionChallengeCode = "session_challenge_code"
     }
 
     // Encodable protocol methods
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(userId, forKey: .userId)
-        try container.encode(verificationCode, forKey: .verificationCode)
+        try container.encodeIfPresent(userId, forKey: .userId)
+        try container.encodeIfPresent(verificationCode, forKey: .verificationCode)
+        try container.encodeIfPresent(siweMessage, forKey: .siweMessage)
+        try container.encodeIfPresent(signature, forKey: .signature)
+        try container.encodeIfPresent(sessionChallengeCode, forKey: .sessionChallengeCode)
     }
 }
 

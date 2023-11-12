@@ -13,6 +13,53 @@ import AnyCodable
 open class TransactionsAPI {
 
     /**
+     Batch Sign and Send
+     
+     - parameter transactionsBatchSignAndSendRequest: (body)  
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the result
+     */
+    @discardableResult
+    open class func transactionsBatchSignAndSend(transactionsBatchSignAndSendRequest: TransactionsBatchSignAndSendRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<TransactionSubmissionResponse, ErrorResponse>) -> Void)) -> RequestTask {
+        return transactionsBatchSignAndSendWithRequestBuilder(transactionsBatchSignAndSendRequest: transactionsBatchSignAndSendRequest).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(.success(response.body))
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    /**
+     Batch Sign and Send
+     - POST /transactions/batch-sign-and-send
+     - This endpoint makes arbitrary smart contract function calls in batch.
+     - Bearer Token:
+       - type: http
+       - name: BearerAuth
+     - parameter transactionsBatchSignAndSendRequest: (body)  
+     - returns: RequestBuilder<TransactionSubmissionResponse> 
+     */
+    open class func transactionsBatchSignAndSendWithRequestBuilder(transactionsBatchSignAndSendRequest: TransactionsBatchSignAndSendRequest) -> RequestBuilder<TransactionSubmissionResponse> {
+        let localVariablePath = "/transactions/batch-sign-and-send"
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: transactionsBatchSignAndSendRequest)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<TransactionSubmissionResponse>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
+    }
+
+    /**
      Transaction Status By Hash
      
      - parameter network: (query)  
@@ -108,6 +155,53 @@ open class TransactionsAPI {
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
         let localVariableRequestBuilder: RequestBuilder<TransactionSubmissionResponse>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
+    }
+
+    /**
+     Sign Message
+     
+     - parameter transactionsSignMessageRequest: (body)  
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the result
+     */
+    @discardableResult
+    open class func transactionsSignMessage(transactionsSignMessageRequest: TransactionsSignMessageRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<SignMessageResponse, ErrorResponse>) -> Void)) -> RequestTask {
+        return transactionsSignMessageWithRequestBuilder(transactionsSignMessageRequest: transactionsSignMessageRequest).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(.success(response.body))
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    /**
+     Sign Message
+     - POST /transactions/sign-message
+     - This endpoint calculates a network-specific signature (e.g. in EIP-191 format EVM networks) for the provided message.
+     - Bearer Token:
+       - type: http
+       - name: BearerAuth
+     - parameter transactionsSignMessageRequest: (body)  
+     - returns: RequestBuilder<SignMessageResponse> 
+     */
+    open class func transactionsSignMessageWithRequestBuilder(transactionsSignMessageRequest: TransactionsSignMessageRequest) -> RequestBuilder<SignMessageResponse> {
+        let localVariablePath = "/transactions/sign-message"
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: transactionsSignMessageRequest)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<SignMessageResponse>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }

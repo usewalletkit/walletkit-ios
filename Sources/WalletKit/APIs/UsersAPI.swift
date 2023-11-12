@@ -13,6 +13,95 @@ import AnyCodable
 open class UsersAPI {
 
     /**
+     Create Session Challenge
+     
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the result
+     */
+    @discardableResult
+    open class func usersCreateSessionChallenge(apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<SessionChallenge, ErrorResponse>) -> Void)) -> RequestTask {
+        return usersCreateSessionChallengeWithRequestBuilder().execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(.success(response.body))
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    /**
+     Create Session Challenge
+     - POST /users/create-session-challenge
+     - Create a session challenge for a user
+     - returns: RequestBuilder<SessionChallenge> 
+     */
+    open class func usersCreateSessionChallengeWithRequestBuilder() -> RequestBuilder<SessionChallenge> {
+        let localVariablePath = "/users/create-session-challenge"
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<SessionChallenge>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
+    }
+
+    /**
+     Get Session Challenge
+     
+     - parameter code: (query)  
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the result
+     */
+    @discardableResult
+    open class func usersGetSessionChallenge(code: String, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<SessionChallenge, ErrorResponse>) -> Void)) -> RequestTask {
+        return usersGetSessionChallengeWithRequestBuilder(code: code).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(.success(response.body))
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    /**
+     Get Session Challenge
+     - GET /users/session-challenge
+     - Get a session challenge by code
+     - parameter code: (query)  
+     - returns: RequestBuilder<SessionChallenge> 
+     */
+    open class func usersGetSessionChallengeWithRequestBuilder(code: String) -> RequestBuilder<SessionChallenge> {
+        let localVariablePath = "/users/session-challenge"
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "code": (wrappedValue: code.encodeToJSON(), isExplode: true),
+        ])
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<SessionChallenge>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
+    }
+
+    /**
      Login Anonymously
      
      - parameter apiResponseQueue: The queue on which api response is dispatched.
@@ -99,6 +188,92 @@ open class UsersAPI {
     }
 
     /**
+     Login with Wallet
+     
+     - parameter usersLoginWithWalletRequest: (body)  
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the result
+     */
+    @discardableResult
+    open class func usersLoginWithWallet(usersLoginWithWalletRequest: UsersLoginWithWalletRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<LoginWithWalletResponse, ErrorResponse>) -> Void)) -> RequestTask {
+        return usersLoginWithWalletWithRequestBuilder(usersLoginWithWalletRequest: usersLoginWithWalletRequest).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(.success(response.body))
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    /**
+     Login with Wallet
+     - POST /users/login-with-wallet
+     - Log a user in with their wallet using Sign in with Ethereum.
+     - parameter usersLoginWithWalletRequest: (body)  
+     - returns: RequestBuilder<LoginWithWalletResponse> 
+     */
+    open class func usersLoginWithWalletWithRequestBuilder(usersLoginWithWalletRequest: UsersLoginWithWalletRequest) -> RequestBuilder<LoginWithWalletResponse> {
+        let localVariablePath = "/users/login-with-wallet"
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: usersLoginWithWalletRequest)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<LoginWithWalletResponse>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
+    }
+
+    /**
+     Logout
+     
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the result
+     */
+    @discardableResult
+    open class func usersLogout(apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<Void, ErrorResponse>) -> Void)) -> RequestTask {
+        return usersLogoutWithRequestBuilder().execute(apiResponseQueue) { result in
+            switch result {
+            case .success:
+                completion(.success(()))
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    /**
+     Logout
+     - POST /users/logout
+     - Log a user out and clear session cookies (only available in SDKs)
+     - returns: RequestBuilder<Void> 
+     */
+    open class func usersLogoutWithRequestBuilder() -> RequestBuilder<Void> {
+        let localVariablePath = "/users/logout"
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = WalletKitAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
+    }
+
+    /**
      Refresh Token
      
      - parameter usersRefreshTokenRequest: (body)  
@@ -164,7 +339,7 @@ open class UsersAPI {
     /**
      Verify Login
      - POST /users/verify-login
-     - Verify a user's login code.
+     - Verify a user's login challenge and create a session.
      - parameter usersVerifyLoginRequest: (body)  
      - returns: RequestBuilder<Session> 
      */

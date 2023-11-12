@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 Batch Transfer Token
 
-Batch transfers from the `from` wallet to the list of  `recipients` with the provided amount. The `from` address can only be the ones  created in the project. Transfers within a batch are processed atomically  in a single transaction, resulting in significantly lower average costs  compared to individual transfers 
+Batch transfers from the `from` wallet to the list of `recipients` with the provided amount. The `from` address can only be the ones created in the project. Transfers within a batch are processed atomically in a single transaction, resulting in significantly lower average costs compared to individual transfers 
 
 ### Example
 ```swift
