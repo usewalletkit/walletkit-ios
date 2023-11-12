@@ -43,6 +43,28 @@ paths:
                   $ref: '#/components/schemas/ListWalletActivityResponseItem'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: List Wallet Activity
       security: &ref_0
         - BearerAuth: []
@@ -64,6 +86,28 @@ paths:
                 $ref: '#/components/schemas/BuyGasResponse'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Buy Gas
       security: *ref_0
       requestBody:
@@ -111,6 +155,28 @@ paths:
                 $ref: '#/components/schemas/TransactionSubmissionResponse'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Create NFT Collection
       security: *ref_0
       requestBody:
@@ -191,6 +257,28 @@ paths:
                   $ref: '#/components/schemas/ListNftCollectionsResponseItem'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: List NFT Collections
       security: *ref_0
   /nfts/mint:
@@ -209,6 +297,28 @@ paths:
                 $ref: '#/components/schemas/TransactionSubmissionResponse'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Mint NFT
       security: *ref_0
       requestBody:
@@ -268,6 +378,28 @@ paths:
                 $ref: '#/components/schemas/TransactionSubmissionResponse'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Transfer NFT
       security: *ref_0
       requestBody:
@@ -357,6 +489,28 @@ paths:
                   $ref: '#/components/schemas/ListNftsResponseItem'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: List NFTs
       security: *ref_0
   /nfts/collection-by-address:
@@ -388,6 +542,28 @@ paths:
                 $ref: '#/components/schemas/GetNftCollectionResponse'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Get NFT Collection
       security: *ref_0
   /nfts/upload:
@@ -406,6 +582,28 @@ paths:
                 $ref: '#/components/schemas/NftImageUploadResponse'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Upload NFT image
       security: *ref_0
   /tokens/tokens:
@@ -435,6 +633,28 @@ paths:
                 $ref: '#/components/schemas/GetTokenResponse'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Get Token
       security: *ref_0
   /tokens:
@@ -453,6 +673,28 @@ paths:
                 $ref: '#/components/schemas/TransactionSubmissionResponse'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Create Token
       security: *ref_0
       requestBody:
@@ -515,6 +757,28 @@ paths:
                 $ref: '#/components/schemas/TransactionSubmissionResponse'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Transfer Token
       security: *ref_0
       requestBody:
@@ -568,6 +832,28 @@ paths:
                 $ref: '#/components/schemas/TransactionSubmissionResponse'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Mint Token
       security: *ref_0
       requestBody:
@@ -626,20 +912,42 @@ paths:
                   $ref: '#/components/schemas/ListTokenBalancesResponseItem'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: List Token Balances
       security: *ref_0
   /tokens/batch-transfer:
     post:
       description: >
-        Batch transfers from the `from` wallet to the list of 
+        Batch transfers from the `from` wallet to the list of
 
         `recipients` with the provided amount. The `from` address can only be
-        the ones 
+        the ones
 
         created in the project. Transfers within a batch are processed
-        atomically 
+        atomically
 
-        in a single transaction, resulting in significantly lower average costs 
+        in a single transaction, resulting in significantly lower average costs
 
         compared to individual transfers
       operationId: tokens_batch-transfer
@@ -655,6 +963,28 @@ paths:
                 $ref: '#/components/schemas/TransactionSubmissionResponse'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Batch Transfer Token
       security: *ref_0
       requestBody:
@@ -717,6 +1047,28 @@ paths:
                 $ref: '#/components/schemas/GetTransactionStatusByHashResponse'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Transaction Status By Hash
       security: *ref_0
   /transactions/sign-and-send:
@@ -738,6 +1090,28 @@ paths:
                 $ref: '#/components/schemas/TransactionSubmissionResponse'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Sign and Send
       security: *ref_0
       requestBody:
@@ -765,6 +1139,140 @@ paths:
                 - network
                 - signer_wallet_address
                 - unsigned_transaction
+  /transactions/batch-sign-and-send:
+    post:
+      description: This endpoint makes arbitrary smart contract function calls in batch.
+      operationId: transactions_batch-sign-and-send
+      tags:
+        - Transactions
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionSubmissionResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Batch Sign and Send
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                network:
+                  $ref: '#/components/schemas/Network'
+                signer_wallet_address:
+                  type: string
+                  description: address can only be the ones created in the project.
+                unsigned_transactions:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SignAndSendRequestUnsignedTransaction'
+                  description: list of transaction input to be signed.
+                developer_secret:
+                  $ref: '#/components/schemas/DeveloperSecret'
+                  nullable: true
+                user_pin:
+                  $ref: '#/components/schemas/UserPin'
+                  nullable: true
+              required:
+                - network
+                - signer_wallet_address
+                - unsigned_transactions
+  /transactions/sign-message:
+    post:
+      description: >-
+        This endpoint calculates a network-specific signature (e.g. in EIP-191
+        format EVM networks) for the provided message.
+      operationId: transactions_sign-message
+      tags:
+        - Transactions
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignMessageResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Sign Message
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                network:
+                  $ref: '#/components/schemas/Network'
+                signer_wallet_address:
+                  type: string
+                  description: address can only be the ones created in the project.
+                message:
+                  type: string
+                  description: message to be signed.
+                developer_secret:
+                  $ref: '#/components/schemas/DeveloperSecret'
+                  nullable: true
+                user_pin:
+                  $ref: '#/components/schemas/UserPin'
+                  nullable: true
+              required:
+                - network
+                - signer_wallet_address
+                - message
   /transactions/status-by-id:
     get:
       description: >-
@@ -792,8 +1300,113 @@ paths:
                 $ref: '#/components/schemas/GetTransactionStatusByIdResponse'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Transaction Status by ID
       security: *ref_0
+  /users/create-session-challenge:
+    post:
+      description: Create a session challenge for a user
+      operationId: users_create-session-challenge
+      tags:
+        - Users
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionChallenge'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Create Session Challenge
+  /users/session-challenge:
+    get:
+      description: Get a session challenge by code
+      operationId: users_get-session-challenge
+      tags:
+        - Users
+      parameters:
+        - name: code
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionChallenge'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Get Session Challenge
   /users/login-anonymously:
     post:
       description: Create an anonymous user session
@@ -810,7 +1423,79 @@ paths:
                 $ref: '#/components/schemas/Session'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Login Anonymously
+  /users/login-with-wallet:
+    post:
+      description: Log a user in with their wallet using Sign in with Ethereum.
+      operationId: users_login-with-wallet
+      tags:
+        - Users
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginWithWalletResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Login with Wallet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sign_in_wallet:
+                  type: string
+              required:
+                - sign_in_wallet
   /users/login-with-email:
     post:
       description: Log a user in with their email.
@@ -827,6 +1512,28 @@ paths:
                 $ref: '#/components/schemas/LoginWithEmailResponse'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Login with Email
       requestBody:
         required: true
@@ -841,7 +1548,7 @@ paths:
                 - email
   /users/verify-login:
     post:
-      description: Verify a user's login code.
+      description: Verify a user's login challenge and create a session.
       operationId: users_verify-login
       tags:
         - Users
@@ -855,6 +1562,28 @@ paths:
                 $ref: '#/components/schemas/Session'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Verify Login
       requestBody:
         required: true
@@ -865,11 +1594,19 @@ paths:
               properties:
                 user_id:
                   type: string
+                  nullable: true
                 verification_code:
                   type: string
-              required:
-                - user_id
-                - verification_code
+                  nullable: true
+                siwe_message:
+                  type: string
+                  nullable: true
+                signature:
+                  type: string
+                  nullable: true
+                session_challenge_code:
+                  type: string
+                  nullable: true
   /users/refresh-token:
     post:
       description: Refresh an access token
@@ -886,6 +1623,28 @@ paths:
                 $ref: '#/components/schemas/Session'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Refresh Token
       requestBody:
         required: true
@@ -901,6 +1660,41 @@ paths:
               required:
                 - session_id
                 - refresh_token
+  /users/logout:
+    post:
+      description: Log a user out and clear session cookies (only available in SDKs)
+      operationId: users_logout
+      tags:
+        - Users
+      parameters: []
+      responses:
+        '204':
+          description: ''
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Logout
   /wallets/get-by-network:
     get:
       description: Get a wallet for a user by network
@@ -934,6 +1728,28 @@ paths:
                     address: '0x976Cf57B7EE1D84E73BE9115457889d49a8A1335'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Get User Wallet by Network
       security: *ref_0
   /wallets/get-by-id:
@@ -977,6 +1793,28 @@ paths:
                     address: '0x976Cf57B7EE1D84E73BE9115457889d49a8A1335'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Get Wallet by ID
       security: *ref_0
   /wallets/get-by-address:
@@ -1005,6 +1843,28 @@ paths:
                 $ref: '#/components/schemas/Wallet'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Get Wallet by Address
       security: *ref_0
   /wallets/get-by-owner-id:
@@ -1033,6 +1893,28 @@ paths:
                 $ref: '#/components/schemas/Wallet'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Get Wallet by Owner ID
       security: *ref_0
   /wallets:
@@ -1060,6 +1942,28 @@ paths:
                     address: '0x976Cf57B7EE1D84E73BE9115457889d49a8A1335'
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Create Wallet
       security: *ref_0
       requestBody:
@@ -1109,6 +2013,30 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ListWalletsResponseItem'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: List Wallets
       security: *ref_0
   /wallets/change-user-pin:
@@ -1131,6 +2059,28 @@ paths:
                     success: true
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Change User Pin
       security: *ref_0
       requestBody:
@@ -1168,6 +2118,28 @@ paths:
                       crumble sweet treat
         '400':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Export Wallet
       security: *ref_0
       requestBody:
@@ -1278,8 +2250,8 @@ components:
       type: string
       nullable: true
       description: >-
-        A 6-digit numeric pin that is only known to the user, set during  wallet
-        creation. This pin is required to sign transactions from  this wallet.
+        A 6-digit numeric pin that is only known to the user, set during wallet
+        creation. This pin is required to sign transactions from this wallet.
     TransactionSubmissionResponse:
       title: TransactionSubmissionResponse
       type: object
@@ -1294,6 +2266,17 @@ components:
         - transaction_id
         - network
         - status
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      properties:
+        code:
+          type: string
+          nullable: true
+        error:
+          type: string
+      required:
+        - error
     BuyGasResponse:
       title: BuyGasResponse
       type: object
@@ -1548,6 +2531,31 @@ components:
             contract function. (ABI-encoded function with arguments)
       required:
         - to
+    SignMessageResponse:
+      title: SignMessageResponse
+      type: object
+      properties:
+        signature:
+          type: string
+      required:
+        - signature
+    SessionChallenge:
+      title: SessionChallenge
+      type: object
+      properties:
+        id:
+          type: string
+        code:
+          type: string
+        expired:
+          type: boolean
+        completed:
+          type: boolean
+      required:
+        - id
+        - code
+        - expired
+        - completed
     Session:
       title: Session
       type: object
@@ -1588,6 +2596,17 @@ components:
           type: string
       required:
         - user_id
+    LoginWithWalletResponse:
+      title: LoginWithWalletResponse
+      type: object
+      properties:
+        user_id:
+          type: string
+        nonce:
+          type: string
+      required:
+        - user_id
+        - nonce
     LoginWithEmailResponse:
       title: LoginWithEmailResponse
       type: object
