@@ -89,9 +89,13 @@ extension HomeView {
 
     private func signOut() {
         Task {
-            try? await SupabaseClient.default.auth.signOut()
-            userSession = nil
-            walletList = []
+            do {
+                try await SupabaseClient.default.auth.signOut()
+                userSession = nil
+                walletList = []
+            } catch {
+                displayingError = error.localizedDescription
+            }
         }
     }
 

@@ -101,9 +101,15 @@ extension HomeView {
     }
 
     private func signOut() {
-        WalletKit.users.usersLogout()
-        userSession = nil
-        walletList = []
+        WalletKit.users.usersLogout { result in
+            switch result {
+            case .success:
+                userSession = nil
+                walletList = []
+            case .failure(let error):
+                displayingError = error.localizedDescription
+            }
+        }
     }
 
     private func listWallets() {

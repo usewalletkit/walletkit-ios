@@ -99,9 +99,13 @@ extension HomeView {
     }
 
     private func signOut() {
-        try? Auth.auth().signOut()
-        userSession = nil
-        walletList = []
+        do {
+            try Auth.auth().signOut()
+            userSession = nil
+            walletList = []
+        } catch {
+            displayingError = error.localizedDescription
+        }
     }
 
     private func listWallets() {
