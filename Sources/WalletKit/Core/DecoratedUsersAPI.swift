@@ -25,13 +25,18 @@ public class DecoratedUsersAPI: UsersAPI {
         return sessionManager.retrieveSession()
     }
 
-    /// Logs out the current user session.
-    ///
-    /// Only available when `tokenSource` is configured as the default `.walletkit`.
-    /// For other `tokenSource`, developers should log out the session from the corresponding auth provider.
-    public class func usersLogout() {
-        let sessionManager = SessionManager()
-        sessionManager.removeSession()
+    @discardableResult
+    public override class func usersLogout(apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((Result<Void, ErrorResponse>) -> Void)) -> RequestTask {
+        let modifiedCompletion: ((Result<Void, ErrorResponse>) -> Void) = { result in
+            switch result {
+            case .success:
+                SessionManager().removeSession()
+            case .failure:
+                break
+            }
+            completion(result)
+        }
+        return super.usersLogout(apiResponseQueue: apiResponseQueue, completion: modifiedCompletion)
     }
 
     @discardableResult
