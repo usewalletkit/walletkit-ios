@@ -7,11 +7,12 @@
 
 import SwiftUI
 import WalletKit
+import Supabase
 
 struct HomeView: View {
 
     @State private var isRequesting: Bool = false
-    @State private var userSession: Session? = nil
+    @State private var userSession: Supabase.Session? = nil
     @State private var walletList: [ListWalletsResponseItem] = []
     @State private var presentingSheet: Sheet?
     @State private var displayingError: String?
@@ -51,9 +52,6 @@ struct HomeView: View {
                     )
                 } else {
                     SignedOutView(
-                        handleSignInAnonymously: {
-                            signInAnonymously()
-                        },
                         handleSignInWithEmail: {
                             presentingSheet = .signInWithEmail
                         }
@@ -65,11 +63,11 @@ struct HomeView: View {
             .sheet(item: $presentingSheet, onDismiss: loadData) { sheet in
                 switch sheet {
                 case .createWallet:
-                    CreateWalletView(userID: userSession?.userId ?? "") { result in
+                    CreateWalletView(userID: userSession?.user.id.uuidString ?? "") { result in
                         handleCreateWallet(result: result)
                     }
                 case .signInWithEmail:
-                    SignInWithEmailView()
+                    SignInWithEmailView(userSession: $userSession)
                 }
             }
         }
@@ -81,29 +79,20 @@ struct HomeView: View {
 extension HomeView {
 
     private func loadData() {
-        userSession = WalletKit.users.currentSession
-        if userSession != nil {
-            listWallets()
-        }
-    }
-
-    private func signInAnonymously() {
-        isRequesting = true
-        WalletKit.users.usersLoginAnonymously { result in
-            isRequesting = false
-            switch result {
-            case .success(let session):
-                userSession = session
-            case .failure(let error):
-                displayingError = error.localizedDescription
+        Task {
+            userSession = try? await SupabaseClient.default.auth.session
+            if userSession != nil {
+                listWallets()
             }
         }
     }
 
     private func signOut() {
-        WalletKit.users.usersLogout()
-        userSession = nil
-        walletList = []
+        Task {
+            try? await SupabaseClient.default.auth.signOut()
+            userSession = nil
+            walletList = []
+        }
     }
 
     private func listWallets() {
@@ -137,7 +126,7 @@ struct IntroSection: View {
                 Image(systemName: "star.bubble.fill")
                     .foregroundColor(.yellow)
                     .frame(width: 20)
-                Text("This is a demo app for WalletKit, in which you can explore how to sign in / out a user and create / display wallets.")
+                Text("This is a demo app for WalletKit, in which you can explore how to sign in / out a user via Supabase and create / display wallets.")
                     .foregroundColor(.secondary)
             }
         }
@@ -146,7 +135,7 @@ struct IntroSection: View {
 
 struct SignedInView: View {
 
-    var userSession: Session
+    var userSession: Supabase.Session
     var walletList: [ListWalletsResponseItem]
     var handleCreateWallet: () -> Void
     var handleSignOut: () -> Void
@@ -168,7 +157,7 @@ struct SignedInView: View {
         }
 
         Section {
-            Text("User ID: \(userSession.userId)")
+            Text("User ID: \(userSession.user.id.uuidString)")
             Button(role: .destructive) {
                 handleSignOut()
             } label: {
@@ -184,20 +173,10 @@ struct SignedInView: View {
 
 struct SignedOutView: View {
 
-    var handleSignInAnonymously: () -> Void
     var handleSignInWithEmail: () -> Void
 
     var body: some View {
         Section {
-            Button {
-                handleSignInAnonymously()
-            } label: {
-                HStack {
-                    Image(systemName: "person.and.background.dotted")
-                        .frame(width: 20)
-                    Text("Sign In Anonymously")
-                }
-            }
             Button {
                 handleSignInWithEmail()
             } label: {

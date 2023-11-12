@@ -6,18 +6,18 @@
 //
 
 import SwiftUI
-import WalletKit
+import Supabase
 
 struct SignInWithEmailView: View {
 
     @Environment(\.dismiss) private var dismiss
 
     @State private var isRequesting: Bool = false
-    @State private var isVerifying: Bool = false
     @State private var email: String = ""
-    @State private var code: String = ""
-    @State private var userID: String?
+    @State private var password: String = ""
     @State private var displayingError: String?
+
+    @Binding var userSession: Session?
 
     var body: some View {
         NavigationView {
@@ -30,18 +30,27 @@ struct SignInWithEmailView: View {
                     ErrorSection(message: displayingError)
                 }
 
-                if isVerifying {
-                    VerificationCodeView(
-                        code: $code,
-                        handleVerifyCode: verifyCode
-                    )
-                } else {
-                    EmailView(
-                        email: $email,
-                        handleRequestCode: requestCode
-                    )
+                Section {
+                    LabeledContent("Email:") {
+                        TextField("Your email address", text: $email)
+                            .multilineTextAlignment(.trailing)
+                            .keyboardType(.emailAddress)
+                    }
+                    LabeledContent("Password:") {
+                        SecureField("Your password", text: $password)
+                            .multilineTextAlignment(.trailing)
+                    }
                 }
-
+                Button {
+                    signIn()
+                } label: {
+                    HStack {
+                        Spacer()
+                        Text("Sign In")
+                            .bold()
+                        Spacer()
+                    }
+                }
             }
             .navigationTitle("Sign In")
             .toolbar {
@@ -62,41 +71,16 @@ struct SignInWithEmailView: View {
 
 extension SignInWithEmailView {
 
-    private func requestCode() {
-        displayingError = nil
+    private func signIn() {
         isRequesting = true
-        let request = UsersLoginWithEmailRequest(email: email)
-        WalletKit.users.usersLoginWithEmail(usersLoginWithEmailRequest: request) { result in
-            isRequesting = false
-            switch result {
-            case .success(let response):
-                isVerifying = true
-                userID = response.userId
-            case .failure(let error):
-                isVerifying = false
-                displayingError = error.localizedDescription
-            }
-        }
-    }
-
-    private func verifyCode() {
-        guard let userID else {
-            isVerifying = false
-            displayingError = "Something went wrong."
-            return
-        }
-
-        isRequesting = true
-        let request = UsersVerifyLoginRequest(userId: userID, verificationCode: code)
-        WalletKit.users.usersVerifyLogin(usersVerifyLoginRequest: request) { result in
-            isRequesting = false
-            switch result {
-            case .success:
+        Task {
+            do {
+                userSession = try await SupabaseClient.default.auth.signIn(email: email, password: password)
+                isRequesting = false
                 dismiss()
-            case .failure(let error):
-                isVerifying = false
+            } catch {
+                isRequesting = false
                 displayingError = error.localizedDescription
-                code = ""
             }
         }
     }
@@ -130,46 +114,11 @@ struct EmailView: View {
     }
 }
 
-struct VerificationCodeView: View {
-
-    @Binding var code: String
-    var handleVerifyCode: () -> Void
-
-    var body: some View {
-        Section {
-            HStack(alignment: .top) {
-                Image(systemName: "info.bubble.fill")
-                    .foregroundColor(.green)
-                    .frame(width: 20)
-                Text("An email with a verification code was just sent to your email. Please input the code to finish sign-in.")
-                    .foregroundColor(.secondary)
-            }
-        }
-        Section {
-            LabeledContent("Verification Code:") {
-                TextField("4-digit code", text: $code)
-                    .multilineTextAlignment(.trailing)
-                    .keyboardType(.numberPad)
-            }
-        }
-        Button {
-            handleVerifyCode()
-        } label: {
-            HStack {
-                Spacer()
-                Text("Sign In")
-                    .bold()
-                Spacer()
-            }
-        }
-    }
-}
-
 // MARK: - Previews
 
 struct SignInWithEmailView_Previews: PreviewProvider {
 
     static var previews: some View {
-        SignInWithEmailView()
+        SignInWithEmailView(userSession: .constant(nil))
     }
 }

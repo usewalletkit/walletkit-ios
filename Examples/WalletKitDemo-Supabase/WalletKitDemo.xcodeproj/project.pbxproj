@@ -17,6 +17,8 @@
 		2AF095002AF6223600016318 /* SignInWithEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF094FF2AF6223600016318 /* SignInWithEmailView.swift */; };
 		2AF095132AFFBF2C00016318 /* ErrorSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF095122AFFBF2C00016318 /* ErrorSection.swift */; };
 		2AF095172AFFC12000016318 /* LoadingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF095162AFFC12000016318 /* LoadingSection.swift */; };
+		2AF095282B007D9F00016318 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 2AF095272B007D9F00016318 /* Supabase */; };
+		2AF0952A2B007EA500016318 /* SupabaseTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF095292B007EA500016318 /* SupabaseTokenProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,7 @@
 		2AF095122AFFBF2C00016318 /* ErrorSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorSection.swift; sourceTree = "<group>"; };
 		2AF095162AFFC12000016318 /* LoadingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingSection.swift; sourceTree = "<group>"; };
 		2AF0951A2AFFD74000016318 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		2AF095292B007EA500016318 /* SupabaseTokenProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupabaseTokenProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AF095282B007D9F00016318 /* Supabase in Frameworks */,
 				2AF094FC2AF49C8900016318 /* WalletKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -105,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				2AF094F82AF4946600016318 /* AppDelegate.swift */,
+				2AF095292B007EA500016318 /* SupabaseTokenProvider.swift */,
 				2AF094E82AF3717100016318 /* WalletKitDemoApp.swift */,
 			);
 			path = App;
@@ -128,6 +133,7 @@
 			name = WalletKitDemo;
 			packageProductDependencies = (
 				2AF094FB2AF49C8900016318 /* WalletKit */,
+				2AF095272B007D9F00016318 /* Supabase */,
 			);
 			productName = WalletKitDemo;
 			productReference = 2AF094E52AF3717100016318 /* WalletKitDemo.app */;
@@ -159,6 +165,7 @@
 			mainGroup = 2AF094DC2AF3717000016318;
 			packageReferences = (
 				2AF094FA2AF49C8900016318 /* XCRemoteSwiftPackageReference "walletkit-ios" */,
+				2AF095262B007D9F00016318 /* XCRemoteSwiftPackageReference "supabase-swift" */,
 			);
 			productRefGroup = 2AF094E62AF3717100016318 /* Products */;
 			projectDirPath = "";
@@ -192,6 +199,7 @@
 				2AF095132AFFBF2C00016318 /* ErrorSection.swift in Sources */,
 				2AF095172AFFC12000016318 /* LoadingSection.swift in Sources */,
 				2AF095002AF6223600016318 /* SignInWithEmailView.swift in Sources */,
+				2AF0952A2B007EA500016318 /* SupabaseTokenProvider.swift in Sources */,
 				2AF094E92AF3717100016318 /* WalletKitDemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -401,6 +409,14 @@
 				kind = branch;
 			};
 		};
+		2AF095262B007D9F00016318 /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase-community/supabase-swift";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.3.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -408,6 +424,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2AF094FA2AF49C8900016318 /* XCRemoteSwiftPackageReference "walletkit-ios" */;
 			productName = WalletKit;
+		};
+		2AF095272B007D9F00016318 /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2AF095262B007D9F00016318 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

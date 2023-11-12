@@ -7,6 +7,7 @@
 
 import UIKit
 import WalletKit
+import Supabase
 
 class AppDelegate: NSObject, UIApplicationDelegate {
 
@@ -16,9 +17,23 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         WalletKit.configure(
             projectID: projectID,
             environment: .testnet,
-            tokenSource: .walletkit
+            tokenSource: .supabase,
+            tokenProvider: SupabaseTokenProvider(client: .default)
         )
 
         return true
+    }
+}
+
+extension SupabaseClient {
+
+    static var `default`: SupabaseClient {
+        let supabaseURL: URL = URL(string: "SUPABASE_URL")!
+        let supabaseKey: String = "SUPABASE_API_KEY"
+
+        return SupabaseClient(
+            supabaseURL: supabaseURL,
+            supabaseKey: supabaseKey
+        )
     }
 }
