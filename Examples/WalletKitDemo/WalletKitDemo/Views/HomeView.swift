@@ -49,7 +49,6 @@ struct HomeView: View {
                             signOut()
                         }
                     )
-                    .onAppear(perform: loadData)
                 } else {
                     SignedOutView(
                         handleSignInAnonymously: {
@@ -62,6 +61,7 @@ struct HomeView: View {
                 }
             }
             .navigationTitle("WalletKit")
+            .onAppear(perform: loadData)
             .sheet(item: $presentingSheet, onDismiss: loadData) { sheet in
                 switch sheet {
                 case .createWallet:

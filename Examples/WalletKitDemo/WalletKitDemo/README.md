@@ -4,4 +4,5 @@ This is a demo app for WalletKit, in which you can explore how to sign in / out 
 
 ## Getting Started
 
-Before running in Xcode, replace `projectID` in `AppDelegate.swift` with your project ID from WalletKit Dashboard -> API Keys.
+1. Replace `projectID` in `AppDelegate.swift` with your WalletKit Project ID from the WalletKit Dashboard -> API Keys.
+2. Build and run the demo project in Xcode.
