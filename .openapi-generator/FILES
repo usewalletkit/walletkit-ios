@@ -1,6 +1,5 @@
 .gitignore
 .swiftformat
-README.md
 Sources/WalletKit/APIHelper.swift
 Sources/WalletKit/APIs.swift
 Sources/WalletKit/APIs/ActivityAPI.swift

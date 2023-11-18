@@ -24,6 +24,7 @@
 
 # Provided by project contributors
 Package.swift
+README.md
 WalletKit.podspec
 
 # Unneeded generated files
