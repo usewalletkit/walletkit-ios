@@ -24,6 +24,7 @@
 
 # Provided by project contributors
 Package.swift
+WalletKit.podspec
 
 # Unneeded generated files
 Cartfile

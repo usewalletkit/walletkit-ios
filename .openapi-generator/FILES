@@ -70,7 +70,6 @@ Sources/WalletKit/OpenISO8601DateFormatter.swift
 Sources/WalletKit/SynchronizedDictionary.swift
 Sources/WalletKit/URLSessionImplementations.swift
 Sources/WalletKit/Validation.swift
-WalletKit.podspec
 docs/ActivityAPI.md
 docs/BatchTransferTokenRequestTransfersItem.md
 docs/BuyGasResponse.md
