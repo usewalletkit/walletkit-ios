@@ -1,6 +1,5 @@
 .gitignore
 .swiftformat
-Cartfile
 README.md
 Sources/WalletKit/APIHelper.swift
 Sources/WalletKit/APIs.swift
@@ -129,5 +128,3 @@ docs/UsersVerifyLoginRequest.md
 docs/Wallet.md
 docs/WalletControlMode.md
 docs/WalletsAPI.md
-git_push.sh
-project.yml
