@@ -17,8 +17,7 @@ final class DecoratedUsersAPITests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        WalletKitAPI.requestBuilderFactory = URLSessionRequestBuilderFactory()
-        WalletKitAPI.sessionManager = SessionManager()
+        WalletKitAPI.resetConfiguration()
         try super.tearDownWithError()
     }
 

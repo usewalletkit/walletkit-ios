@@ -10,6 +10,16 @@ import XCTest
 
 final class WalletKitTests: XCTestCase {
 
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        WalletKitAPI.resetConfiguration()
+    }
+
+    override func tearDownWithError() throws {
+        try super.tearDownWithError()
+        WalletKitAPI.resetConfiguration()
+    }
+
     func testConfigureBeforeConfiguration() throws {
         XCTAssertEqual(WalletKitAPI.customHeaders.count, 0)
         XCTAssertEqual(WalletKitAPI.basePath, WalletKitEnvironment.testnet.basePath)
