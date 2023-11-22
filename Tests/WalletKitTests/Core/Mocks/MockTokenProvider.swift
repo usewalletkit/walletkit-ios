@@ -10,5 +10,7 @@ import WalletKit
 
 final class MockTokenProvider: TokenProviding {
 
-    func getAccessToken(completion: @escaping ((String?) -> Void)) {}
+    func getAccessToken(completion: @escaping ((String?) -> Void)) {
+        completion("MOCK_ACCESS_TOKEN")
+    }
 }
