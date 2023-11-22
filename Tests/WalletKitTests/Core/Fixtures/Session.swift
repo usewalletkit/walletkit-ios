@@ -32,3 +32,10 @@ extension Session {
         )
     }
 }
+
+extension Session: MockDataResponse {
+
+    static var mockDataResponse: Session {
+        return Session.fixture()
+    }
+}
