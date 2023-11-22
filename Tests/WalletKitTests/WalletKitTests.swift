@@ -76,7 +76,7 @@ final class WalletKitTests: XCTestCase {
             projectID: projectID,
             environment: .mainnet,
             tokenSource: .supabase,
-            tokenProvider: CustomTokenProvider()
+            tokenProvider: MockTokenProvider()
         )
 
         XCTAssertEqual(WalletKitAPI.customHeaders.count, 1)
@@ -87,12 +87,6 @@ final class WalletKitTests: XCTestCase {
         XCTAssertEqual(WalletKitAPI.basePath, WalletKitEnvironment.mainnet.basePath)
         XCTAssertTrue(WalletKitAPI.requestBuilderFactory is WalletKitURLSessionRequestBuilderFactory)
         XCTAssertEqual(WalletKitAPI.tokenSource, .supabase)
-        XCTAssertTrue(WalletKitAPI.tokenProvider is CustomTokenProvider)
-    }
-}
-
-private final class CustomTokenProvider: TokenProviding {
-
-    func getAccessToken(completion: @escaping ((String?) -> Void)) {
+        XCTAssertTrue(WalletKitAPI.tokenProvider is MockTokenProvider)
     }
 }
