@@ -1,4 +1,4 @@
-#  WalletKitDemo
+# WalletKitDemo
 
 This is a demo app for WalletKit, in which you can explore how to sign in / out a user and create / display wallets.
 
