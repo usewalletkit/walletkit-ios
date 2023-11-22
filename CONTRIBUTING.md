@@ -17,4 +17,4 @@ To distribute a new version of the SDK with new changes, follow the steps below:
 4. Create a tag with `git tag x.y.z` and run `git push origin x.y.z` to push to remote.
 5. (CocoaPods) Run `pod spec lint` to validate the podspec.
 6. (CocoaPods) Run `pod trunk push` to publish the new version to CocoaPods Trunk. Make sure you are logged in with `pod trunk register` if it's your first time publishing.
-7. (CocoaPods) Verify that the new version is published by checking the CocoaPods website or using the `pod search` command.
+7. (CocoaPods) Verify that the new version is published by checking the CocoaPods website or using the `pod search --simple --ios WalletKit` command.
