@@ -10,7 +10,7 @@ import Foundation
 final class WalletKitTokenProvider: TokenProviding {
 
     func getAccessToken(completion: @escaping ((String?) -> Void)) {
-        let sessionManager = SessionManager()
+        let sessionManager = WalletKitAPI.sessionManager
         guard let session = sessionManager.retrieveSession() else {
             completion(nil)
             return

@@ -21,8 +21,7 @@ public class DecoratedUsersAPI: UsersAPI {
             return nil
         }
 
-        let sessionManager = SessionManager()
-        return sessionManager.retrieveSession()
+        return WalletKitAPI.sessionManager.retrieveSession()
     }
 
     @discardableResult
@@ -30,7 +29,7 @@ public class DecoratedUsersAPI: UsersAPI {
         let modifiedCompletion: ((Result<Void, ErrorResponse>) -> Void) = { result in
             switch result {
             case .success:
-                SessionManager().removeSession()
+                WalletKitAPI.sessionManager.removeSession()
             case .failure:
                 break
             }
@@ -44,7 +43,7 @@ public class DecoratedUsersAPI: UsersAPI {
         let modifiedCompletion: ((Result<Session, ErrorResponse>) -> Void) = { result in
             switch result {
             case .success(let session):
-                SessionManager().storeSession(session)
+                WalletKitAPI.sessionManager.storeSession(session)
             case .failure:
                 break
             }
@@ -58,7 +57,7 @@ public class DecoratedUsersAPI: UsersAPI {
         let modifiedCompletion: ((Result<Session, ErrorResponse>) -> Void) = { result in
             switch result {
             case .success(let session):
-                SessionManager().storeSession(session)
+                WalletKitAPI.sessionManager.storeSession(session)
             case .failure:
                 break
             }

@@ -9,6 +9,7 @@ import Foundation
 
 extension WalletKitAPI {
 
-    public static var tokenSource: TokenSource = .walletkit
-    public static var tokenProvider: TokenProviding = WalletKitTokenProvider()
+    static var tokenSource: TokenSource = .walletkit
+    static var tokenProvider: TokenProviding = WalletKitTokenProvider()
+    static var sessionManager: SessionManager = SessionManager()
 }
