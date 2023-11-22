@@ -30,7 +30,7 @@ final class MockDecodableRequestBuilder<T: Decodable>: URLSessionDecodableReques
         if let body = (T.self as? MockDataResponse.Type)?.mockDataResponse as? T {
             completion(.success(Response<T>.init(response: .init(), body: body, bodyData: nil)))
         } else {
-            completion(.failure(ErrorResponse.error(401, nil, nil, TokenError.accessTokenMissing)))
+            completion(.failure(ErrorResponse.error(42, nil, nil, MockError.somethingWentWrong)))
         }
 
         return requestTask
