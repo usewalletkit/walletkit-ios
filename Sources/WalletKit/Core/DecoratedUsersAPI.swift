@@ -27,12 +27,7 @@ public class DecoratedUsersAPI: UsersAPI {
     @discardableResult
     public override class func usersLogout(apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((Result<Void, ErrorResponse>) -> Void)) -> RequestTask {
         let modifiedCompletion: ((Result<Void, ErrorResponse>) -> Void) = { result in
-            switch result {
-            case .success:
-                WalletKitAPI.sessionManager.removeSession()
-            case .failure:
-                break
-            }
+            WalletKitAPI.sessionManager.removeSession()
             completion(result)
         }
         return super.usersLogout(apiResponseQueue: apiResponseQueue, completion: modifiedCompletion)
