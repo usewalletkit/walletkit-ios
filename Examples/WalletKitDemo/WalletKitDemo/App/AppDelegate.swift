@@ -15,8 +15,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         let projectID = "WALLET_KIT_PROJECT_ID"
         WalletKit.configure(
             projectID: projectID,
-            environment: .testnet,
-            tokenSource: .walletkit
+            environment: .testnet
         )
 
         return true

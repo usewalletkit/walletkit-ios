@@ -20,7 +20,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         WalletKit.configure(
             projectID: projectID,
             environment: .testnet,
-            tokenSource: .firebase,
             tokenProvider: FirebaseTokenProvider()
         )
 

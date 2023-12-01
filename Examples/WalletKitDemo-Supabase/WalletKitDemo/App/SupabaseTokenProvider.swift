@@ -9,7 +9,7 @@ import Foundation
 import WalletKit
 import Supabase
 
-public class SupabaseTokenProvider: TokenProviding {
+final class SupabaseTokenProvider: TokenProviding {
 
     private let client: SupabaseClient
 
@@ -17,7 +17,9 @@ public class SupabaseTokenProvider: TokenProviding {
         self.client = client
     }
 
-    public func getAccessToken(completion: @escaping ((String?) -> Void)) {
+    let tokenSource: TokenSource = .supabase
+
+    func getAccessToken(completion: @escaping ((String?) -> Void)) {
         Task {
             do {
                 let session = try await client.auth.session

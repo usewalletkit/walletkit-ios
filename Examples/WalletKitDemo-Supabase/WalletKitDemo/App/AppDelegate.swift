@@ -17,7 +17,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         WalletKit.configure(
             projectID: projectID,
             environment: .testnet,
-            tokenSource: .supabase,
             tokenProvider: SupabaseTokenProvider(client: .default)
         )
 
