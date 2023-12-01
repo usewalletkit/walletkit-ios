@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2AECB45E2B1A1CF90012E063 /* SignInWithEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AECB45D2B1A1CF90012E063 /* SignInWithEmailView.swift */; };
 		2AF094E92AF3717100016318 /* WalletKitDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF094E82AF3717100016318 /* WalletKitDemoApp.swift */; };
 		2AF094EB2AF3717100016318 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF094EA2AF3717100016318 /* HomeView.swift */; };
 		2AF094ED2AF3717200016318 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AF094EC2AF3717200016318 /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2AECB45D2B1A1CF90012E063 /* SignInWithEmailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInWithEmailView.swift; sourceTree = "<group>"; };
 		2AF094E52AF3717100016318 /* WalletKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalletKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AF094E82AF3717100016318 /* WalletKitDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletKitDemoApp.swift; sourceTree = "<group>"; };
 		2AF094EA2AF3717100016318 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 			children = (
 				2AF094EA2AF3717100016318 /* HomeView.swift */,
 				2AF094FD2AF4C65A00016318 /* CreateWalletView.swift */,
+				2AECB45D2B1A1CF90012E063 /* SignInWithEmailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				2AF094F92AF4946600016318 /* AppDelegate.swift in Sources */,
 				2AF094FE2AF4C65A00016318 /* CreateWalletView.swift in Sources */,
 				2AF094EB2AF3717100016318 /* HomeView.swift in Sources */,
+				2AECB45E2B1A1CF90012E063 /* SignInWithEmailView.swift in Sources */,
 				2AF095132AFFBF2C00016318 /* ErrorSection.swift in Sources */,
 				2AF095172AFFC12000016318 /* LoadingSection.swift in Sources */,
 				2AF095252B00761A00016318 /* FirebaseTokenProvider.swift in Sources */,

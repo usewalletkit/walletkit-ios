@@ -20,6 +20,7 @@ struct HomeView: View {
 
     private enum Sheet: Identifiable {
         case createWallet
+        case signInWithEmail
 
         var id: Int {
             hashValue
@@ -54,6 +55,9 @@ struct HomeView: View {
                     SignedOutView(
                         handleSignInAnonymously: {
                             signInAnonymously()
+                        },
+                        handleSignInWithEmail: {
+                            presentingSheet = .signInWithEmail
                         }
                     )
                 }
@@ -66,6 +70,8 @@ struct HomeView: View {
                     CreateWalletView(userID: userSession?.uid ?? "") { result in
                         handleCreateWallet(result: result)
                     }
+                case .signInWithEmail:
+                    SignInWithEmailView(userSession: $userSession)
                 }
             }
         }
@@ -187,6 +193,7 @@ struct SignedInView: View {
 struct SignedOutView: View {
 
     var handleSignInAnonymously: () -> Void
+    var handleSignInWithEmail: () -> Void
 
     var body: some View {
         Section {
@@ -197,6 +204,15 @@ struct SignedOutView: View {
                     Image(systemName: "person.and.background.dotted")
                         .frame(width: 20)
                     Text("Sign In Anonymously")
+                }
+            }
+            Button {
+                handleSignInWithEmail()
+            } label: {
+                HStack {
+                    Image(systemName: "person.crop.square.filled.and.at.rectangle")
+                        .frame(width: 20)
+                    Text("Sign In with Email")
                 }
             }
         }
