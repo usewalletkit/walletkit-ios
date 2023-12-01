@@ -10,6 +10,8 @@ import WalletKit
 
 final class MockTokenProvider: TokenProviding {
 
+    let tokenSource: TokenSource = .supabase
+
     func getAccessToken(completion: @escaping ((String?) -> Void)) {
         completion("MOCK_ACCESS_TOKEN")
     }

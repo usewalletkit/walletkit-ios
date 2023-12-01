@@ -52,6 +52,6 @@ final class WalletKitURLSessionDecodableRequestBuilderTests: XCTestCase {
         let authHeader = try XCTUnwrap(headers.first(where: { $0.key == "Authorization" }))
         XCTAssertEqual(authHeader.value, "Bearer MOCK_ACCESS_TOKEN")
         let tokenSourceHeader = try XCTUnwrap(headers.first(where: { $0.key == "X-WalletKit-Token-Source" }))
-        XCTAssertEqual(tokenSourceHeader.value, WalletKitAPI.tokenSource.rawValue)
+        XCTAssertEqual(tokenSourceHeader.value, WalletKitAPI.tokenProvider.tokenSource.rawValue)
     }
 }

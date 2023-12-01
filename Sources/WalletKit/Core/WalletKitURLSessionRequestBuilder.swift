@@ -31,7 +31,7 @@ final class WalletKitURLSessionDecodableRequestBuilder<T: Decodable>: URLSession
                 }
                 self.addHeaders([
                     "Authorization": "Bearer \(accessToken)",
-                    "X-WalletKit-Token-Source": WalletKitAPI.tokenSource.rawValue,
+                    "X-WalletKit-Token-Source": WalletKitAPI.tokenProvider.tokenSource.rawValue,
                 ])
                 super.execute(apiResponseQueue, completion)
             }

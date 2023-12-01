@@ -11,12 +11,10 @@ public class WalletKit {
     ///
     /// - parameter projectID: Project ID of WalletKit.
     /// - parameter environment: Mainnet / testnet environment, defaults to `.testnet`.
-    /// - parameter tokenSource: The source of auth token, defaults to `.walletkit`.
-    /// - parameter tokenProvider: The provider of auth token, defaults to `nil` which will use the default interal WalletKit token provider for `.walletkit` token source. If developers specify other `tokenSource`, they should provide a corresponding token provider conforming to `TokenProviding` protocol.
+    /// - parameter tokenProvider: The provider of auth token, defaults to `nil` which will use the default interal WalletKit token provider with `.walletkit` token source. If developers specify other `tokenSource`, they should provide a corresponding token provider conforming to `TokenProviding` protocol.
     public static func configure(
         projectID: String,
         environment: WalletKitEnvironment = .testnet,
-        tokenSource: TokenSource = .walletkit,
         tokenProvider: TokenProviding? = nil
     ) {
         WalletKitAPI.customHeaders["X-WalletKit-Project-ID"] = projectID
@@ -24,7 +22,6 @@ public class WalletKit {
         WalletKitAPI.basePath = environment.basePath
         WalletKitAPI.requestBuilderFactory = WalletKitURLSessionRequestBuilderFactory()
 
-        WalletKitAPI.tokenSource = tokenSource
         WalletKitAPI.tokenProvider = tokenProvider ?? WalletKitTokenProvider()
     }
 

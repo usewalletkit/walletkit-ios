@@ -14,7 +14,6 @@ extension WalletKitAPI {
         WalletKitAPI.basePath = "https://testnet.usewalletkit.com"
         WalletKitAPI.customHeaders = [:]
         WalletKitAPI.requestBuilderFactory = URLSessionRequestBuilderFactory()
-        WalletKitAPI.tokenSource = .walletkit
         WalletKitAPI.tokenProvider = WalletKitTokenProvider()
         WalletKitAPI.sessionManager = SessionManager()
     }

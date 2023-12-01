@@ -17,7 +17,7 @@ public class DecoratedUsersAPI: UsersAPI {
     /// Only available when `tokenSource` is configured as the default `.walletkit`.
     /// For other `tokenSource`, developers should get the session from the corresponding auth provider.
     public static var currentSession: Session? {
-        guard WalletKitAPI.tokenSource == .walletkit else {
+        guard WalletKitAPI.tokenProvider.tokenSource == .walletkit else {
             return nil
         }
 

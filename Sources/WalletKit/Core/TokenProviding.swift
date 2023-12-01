@@ -15,6 +15,11 @@ public enum TokenError: Error {
 
 public protocol TokenProviding {
 
+    /// Returns the corresponding `TokenSource` for the access token.
+    ///
+    /// The value will be used to construct headers of requests in WalletKit.
+    var tokenSource: TokenSource { get }
+
     /// Returns the access token for WalletKit to use when constructing requests.
     ///
     /// The provider should handle token refresh if needed in this method and return the latest valid access token.

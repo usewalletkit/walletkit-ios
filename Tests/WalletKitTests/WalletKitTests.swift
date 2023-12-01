@@ -24,7 +24,6 @@ final class WalletKitTests: XCTestCase {
         XCTAssertEqual(WalletKitAPI.customHeaders.count, 0)
         XCTAssertEqual(WalletKitAPI.basePath, WalletKitEnvironment.testnet.basePath)
         XCTAssertTrue(WalletKitAPI.requestBuilderFactory is URLSessionRequestBuilderFactory)
-        XCTAssertEqual(WalletKitAPI.tokenSource, .walletkit)
         XCTAssertTrue(WalletKitAPI.tokenProvider is WalletKitTokenProvider)
     }
 
@@ -39,7 +38,6 @@ final class WalletKitTests: XCTestCase {
 
         XCTAssertEqual(WalletKitAPI.basePath, WalletKitEnvironment.testnet.basePath)
         XCTAssertTrue(WalletKitAPI.requestBuilderFactory is WalletKitURLSessionRequestBuilderFactory)
-        XCTAssertEqual(WalletKitAPI.tokenSource, .walletkit)
         XCTAssertTrue(WalletKitAPI.tokenProvider is WalletKitTokenProvider)
     }
 
@@ -57,7 +55,6 @@ final class WalletKitTests: XCTestCase {
 
         XCTAssertEqual(WalletKitAPI.basePath, WalletKitEnvironment.mainnet.basePath)
         XCTAssertTrue(WalletKitAPI.requestBuilderFactory is WalletKitURLSessionRequestBuilderFactory)
-        XCTAssertEqual(WalletKitAPI.tokenSource, .walletkit)
         XCTAssertTrue(WalletKitAPI.tokenProvider is WalletKitTokenProvider)
     }
 
@@ -65,8 +62,7 @@ final class WalletKitTests: XCTestCase {
         let projectID = "USE_WALLET_KIT"
         WalletKit.configure(
             projectID: projectID,
-            environment: .mainnet,
-            tokenSource: .walletkit
+            environment: .mainnet
         )
 
         XCTAssertEqual(WalletKitAPI.customHeaders.count, 1)
@@ -76,7 +72,6 @@ final class WalletKitTests: XCTestCase {
 
         XCTAssertEqual(WalletKitAPI.basePath, WalletKitEnvironment.mainnet.basePath)
         XCTAssertTrue(WalletKitAPI.requestBuilderFactory is WalletKitURLSessionRequestBuilderFactory)
-        XCTAssertEqual(WalletKitAPI.tokenSource, .walletkit)
         XCTAssertTrue(WalletKitAPI.tokenProvider is WalletKitTokenProvider)
     }
 
@@ -85,7 +80,6 @@ final class WalletKitTests: XCTestCase {
         WalletKit.configure(
             projectID: projectID,
             environment: .mainnet,
-            tokenSource: .supabase,
             tokenProvider: MockTokenProvider()
         )
 
@@ -96,7 +90,6 @@ final class WalletKitTests: XCTestCase {
 
         XCTAssertEqual(WalletKitAPI.basePath, WalletKitEnvironment.mainnet.basePath)
         XCTAssertTrue(WalletKitAPI.requestBuilderFactory is WalletKitURLSessionRequestBuilderFactory)
-        XCTAssertEqual(WalletKitAPI.tokenSource, .supabase)
         XCTAssertTrue(WalletKitAPI.tokenProvider is MockTokenProvider)
     }
 }

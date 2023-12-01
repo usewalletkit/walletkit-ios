@@ -9,12 +9,9 @@ import Foundation
 
 final class WalletKitTokenProvider: TokenProviding {
 
-    func getAccessToken(completion: @escaping ((String?) -> Void)) {
-        guard WalletKitAPI.tokenSource == .walletkit else {
-            completion(nil)
-            return
-        }
+    let tokenSource: TokenSource = .walletkit
 
+    func getAccessToken(completion: @escaping ((String?) -> Void)) {
         let sessionManager = WalletKitAPI.sessionManager
         guard let session = sessionManager.retrieveSession() else {
             completion(nil)

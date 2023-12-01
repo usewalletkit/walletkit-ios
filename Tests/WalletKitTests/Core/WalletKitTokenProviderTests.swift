@@ -14,7 +14,6 @@ final class WalletKitTokenProviderTests: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        WalletKitAPI.tokenSource = .walletkit
         WalletKitAPI.requestBuilderFactory = MockRequestBuilderFactory()
         WalletKitAPI.sessionManager = SessionManager(keychainManager: MockKeychainManager())
         tokenProvider = WalletKitTokenProvider()
@@ -25,34 +24,8 @@ final class WalletKitTokenProviderTests: XCTestCase {
         try super.tearDownWithError()
     }
 
-    func testGetAccessTokenMismatchedTokenSource() {
-        let sessionManager = WalletKitAPI.sessionManager
-        let base: TimeInterval = Session.expirationThreshold
-
-        let session = Session.fixture(
-            accessToken: "VALID_ACCESS_TOKEN",
-            accessTokenExpiresAt: Date(timeIntervalSinceNow: base + 5),
-            refreshTokenExpiresAt: Date(timeIntervalSinceNow: base + 5)
-        )
-        XCTAssertFalse(sessionManager.shouldRefreshSession(session))
-        sessionManager.storeSession(session)
-
-        tokenProvider.getAccessToken { token in
-            XCTAssertEqual(token, session.accessToken)
-            XCTAssertEqual(token, "VALID_ACCESS_TOKEN")
-        }
-
-        WalletKitAPI.tokenSource = .firebase
-
-        tokenProvider.getAccessToken { token in
-            XCTAssertNil(token)
-        }
-
-        WalletKitAPI.tokenSource = .walletkit
-
-        tokenProvider.getAccessToken { token in
-            XCTAssertEqual(token, "VALID_ACCESS_TOKEN")
-        }
+    func testTokenSource() {
+        XCTAssertEqual(tokenProvider.tokenSource, .walletkit)
     }
 
     func testGetAccessTokenNil() {
