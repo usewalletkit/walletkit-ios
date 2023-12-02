@@ -14,7 +14,7 @@ struct HomeView: View {
 
     @State private var isRequesting: Bool = false
     @State private var userSession: User? = nil
-    @State private var walletList: [ListWalletsResponseItem] = []
+    @State private var walletList: [Wallet] = []
     @State private var presentingSheet: Sheet?
     @State private var displayingError: String?
 
@@ -125,7 +125,7 @@ extension HomeView {
         }
     }
 
-    private func handleCreateWallet(result: Result<CreateWalletResponse, ErrorResponse>) {
+    private func handleCreateWallet(result: Result<Wallet, ErrorResponse>) {
         switch result {
         case .success:
             listWallets()
@@ -155,7 +155,7 @@ struct IntroSection: View {
 struct SignedInView: View {
 
     var userSession: User
-    var walletList: [ListWalletsResponseItem]
+    var walletList: [Wallet]
     var handleCreateWallet: () -> Void
     var handleSignOut: () -> Void
 

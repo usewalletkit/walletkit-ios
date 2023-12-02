@@ -17,11 +17,11 @@ struct CreateWalletView: View {
     @State private var pin: String = ""
 
     private let userID: String
-    private let handleCreateWallet: (Result<CreateWalletResponse, ErrorResponse>) -> Void
+    private let handleCreateWallet: (Result<Wallet, ErrorResponse>) -> Void
 
     init(
         userID: String,
-        handleCreateWallet: @escaping (Result<CreateWalletResponse, ErrorResponse>) -> Void
+        handleCreateWallet: @escaping (Result<Wallet, ErrorResponse>) -> Void
     ) {
         self.userID = userID
         self.handleCreateWallet = handleCreateWallet
