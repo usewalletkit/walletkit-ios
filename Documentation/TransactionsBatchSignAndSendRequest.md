@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **network** | [**Network**](Network.md) |  | 
 **signerWalletAddress** | **String** | address can only be the ones created in the project. | 
-**unsignedTransactions** | [SignAndSendRequestUnsignedTransaction] | list of transaction input to be signed. | 
+**unsignedTransactions** | [UnsignedTransaction] | list of transaction input to be signed. | 
 **developerSecret** | **String** | On testnet, the developer_secret is always \&quot;testnet-secret\&quot;. On mainnet, the developer_secret is set by the developer during account activation. | [optional] 
 **userPin** | **String** | A 6-digit numeric pin that is only known to the user, set during wallet creation. This pin is required to sign transactions from this wallet. | [optional] 
 

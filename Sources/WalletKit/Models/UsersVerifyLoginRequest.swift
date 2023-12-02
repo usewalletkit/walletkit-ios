@@ -17,13 +17,15 @@ public struct UsersVerifyLoginRequest: Codable, JSONEncodable, Hashable {
     public var siweMessage: String?
     public var signature: String?
     public var sessionChallengeCode: String?
+    public var passkeyCredentialAssertionResponse: AnyCodable?
 
-    public init(userId: String? = nil, verificationCode: String? = nil, siweMessage: String? = nil, signature: String? = nil, sessionChallengeCode: String? = nil) {
+    public init(userId: String? = nil, verificationCode: String? = nil, siweMessage: String? = nil, signature: String? = nil, sessionChallengeCode: String? = nil, passkeyCredentialAssertionResponse: AnyCodable? = nil) {
         self.userId = userId
         self.verificationCode = verificationCode
         self.siweMessage = siweMessage
         self.signature = signature
         self.sessionChallengeCode = sessionChallengeCode
+        self.passkeyCredentialAssertionResponse = passkeyCredentialAssertionResponse
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -32,6 +34,7 @@ public struct UsersVerifyLoginRequest: Codable, JSONEncodable, Hashable {
         case siweMessage = "siwe_message"
         case signature
         case sessionChallengeCode = "session_challenge_code"
+        case passkeyCredentialAssertionResponse = "passkey_credential_assertion_response"
     }
 
     // Encodable protocol methods
@@ -43,6 +46,7 @@ public struct UsersVerifyLoginRequest: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(siweMessage, forKey: .siweMessage)
         try container.encodeIfPresent(signature, forKey: .signature)
         try container.encodeIfPresent(sessionChallengeCode, forKey: .sessionChallengeCode)
+        try container.encodeIfPresent(passkeyCredentialAssertionResponse, forKey: .passkeyCredentialAssertionResponse)
     }
 }
 

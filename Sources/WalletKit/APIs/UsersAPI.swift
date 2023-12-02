@@ -13,6 +13,51 @@ import AnyCodable
 open class UsersAPI {
 
     /**
+     Begin Passkey Registration
+     
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the result
+     */
+    @discardableResult
+    open class func usersBeginPasskeyRegistration(apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<AnyCodable, ErrorResponse>) -> Void)) -> RequestTask {
+        return usersBeginPasskeyRegistrationWithRequestBuilder().execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(.success(response.body))
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    /**
+     Begin Passkey Registration
+     - POST /users/passkey/begin-registration
+     - Begin the passkey registration process
+     - Bearer Token:
+       - type: http
+       - name: BearerAuth
+     - returns: RequestBuilder<AnyCodable> 
+     */
+    open class func usersBeginPasskeyRegistrationWithRequestBuilder() -> RequestBuilder<AnyCodable> {
+        let localVariablePath = "/users/passkey/begin-registration"
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<AnyCodable>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
+    }
+
+    /**
      Create Session Challenge
      
      - parameter apiResponseQueue: The queue on which api response is dispatched.
@@ -52,6 +97,53 @@ open class UsersAPI {
         let localVariableRequestBuilder: RequestBuilder<SessionChallenge>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
+    }
+
+    /**
+     Finish Passkey Registration
+     
+     - parameter body: (body)  
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the result
+     */
+    @discardableResult
+    open class func usersFinishPasskeyRegistration(body: AnyCodable, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<Void, ErrorResponse>) -> Void)) -> RequestTask {
+        return usersFinishPasskeyRegistrationWithRequestBuilder(body: body).execute(apiResponseQueue) { result in
+            switch result {
+            case .success:
+                completion(.success(()))
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    /**
+     Finish Passkey Registration
+     - POST /users/passkey/finish-registration
+     - Finish the passkey registration process
+     - Bearer Token:
+       - type: http
+       - name: BearerAuth
+     - parameter body: (body)  
+     - returns: RequestBuilder<Void> 
+     */
+    open class func usersFinishPasskeyRegistrationWithRequestBuilder(body: AnyCodable) -> RequestBuilder<Void> {
+        let localVariablePath = "/users/passkey/finish-registration"
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = WalletKitAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
 
     /**
@@ -144,6 +236,48 @@ open class UsersAPI {
     }
 
     /**
+     Login with Discoverable Passkey
+     
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the result
+     */
+    @discardableResult
+    open class func usersLoginWithDiscoverablePasskey(apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<AnyCodable, ErrorResponse>) -> Void)) -> RequestTask {
+        return usersLoginWithDiscoverablePasskeyWithRequestBuilder().execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(.success(response.body))
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    /**
+     Login with Discoverable Passkey
+     - POST /users/login-with-discoverable-passkey
+     - Log a user in with a discoverable passkey
+     - returns: RequestBuilder<AnyCodable> 
+     */
+    open class func usersLoginWithDiscoverablePasskeyWithRequestBuilder() -> RequestBuilder<AnyCodable> {
+        let localVariablePath = "/users/login-with-discoverable-passkey"
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<AnyCodable>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
+    }
+
+    /**
      Login with Email
      
      - parameter usersLoginWithEmailRequest: (body)  
@@ -183,6 +317,94 @@ open class UsersAPI {
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
         let localVariableRequestBuilder: RequestBuilder<LoginWithEmailResponse>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
+    }
+
+    /**
+     Login with Magic Link
+     
+     - parameter usersLoginWithEmailRequest: (body)  
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the result
+     */
+    @discardableResult
+    open class func usersLoginWithMagicLink(usersLoginWithEmailRequest: UsersLoginWithEmailRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<SessionChallenge, ErrorResponse>) -> Void)) -> RequestTask {
+        return usersLoginWithMagicLinkWithRequestBuilder(usersLoginWithEmailRequest: usersLoginWithEmailRequest).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(.success(response.body))
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    /**
+     Login with Magic Link
+     - POST /users/login-with-magic-link
+     - Log a user in with their email and magic link
+     - parameter usersLoginWithEmailRequest: (body)  
+     - returns: RequestBuilder<SessionChallenge> 
+     */
+    open class func usersLoginWithMagicLinkWithRequestBuilder(usersLoginWithEmailRequest: UsersLoginWithEmailRequest) -> RequestBuilder<SessionChallenge> {
+        let localVariablePath = "/users/login-with-magic-link"
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: usersLoginWithEmailRequest)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<SessionChallenge>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
+    }
+
+    /**
+     Login with Passkey
+     
+     - parameter usersLoginWithPasskeyRequest: (body)  
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the result
+     */
+    @discardableResult
+    open class func usersLoginWithPasskey(usersLoginWithPasskeyRequest: UsersLoginWithPasskeyRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<AnyCodable, ErrorResponse>) -> Void)) -> RequestTask {
+        return usersLoginWithPasskeyWithRequestBuilder(usersLoginWithPasskeyRequest: usersLoginWithPasskeyRequest).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(.success(response.body))
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    /**
+     Login with Passkey
+     - POST /users/login-with-passkey
+     - Log a user in with a passkey
+     - parameter usersLoginWithPasskeyRequest: (body)  
+     - returns: RequestBuilder<AnyCodable> 
+     */
+    open class func usersLoginWithPasskeyWithRequestBuilder(usersLoginWithPasskeyRequest: UsersLoginWithPasskeyRequest) -> RequestBuilder<AnyCodable> {
+        let localVariablePath = "/users/login-with-passkey"
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: usersLoginWithPasskeyRequest)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<AnyCodable>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
     }

@@ -68,7 +68,7 @@ open class NftsAPI {
      - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func nftsGetNftCollection(network: Network? = nil, collectionAddress: String? = nil, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<GetNftCollectionResponse, ErrorResponse>) -> Void)) -> RequestTask {
+    open class func nftsGetNftCollection(network: Network? = nil, collectionAddress: String? = nil, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<NftCollection, ErrorResponse>) -> Void)) -> RequestTask {
         return nftsGetNftCollectionWithRequestBuilder(network: network, collectionAddress: collectionAddress).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -88,9 +88,9 @@ open class NftsAPI {
        - name: BearerAuth
      - parameter network: (query)  (optional)
      - parameter collectionAddress: (query) address of the NFT contract (optional)
-     - returns: RequestBuilder<GetNftCollectionResponse> 
+     - returns: RequestBuilder<NftCollection> 
      */
-    open class func nftsGetNftCollectionWithRequestBuilder(network: Network? = nil, collectionAddress: String? = nil) -> RequestBuilder<GetNftCollectionResponse> {
+    open class func nftsGetNftCollectionWithRequestBuilder(network: Network? = nil, collectionAddress: String? = nil) -> RequestBuilder<NftCollection> {
         let localVariablePath = "/nfts/collection-by-address"
         let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -107,7 +107,7 @@ open class NftsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<GetNftCollectionResponse>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<NftCollection>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
@@ -123,7 +123,7 @@ open class NftsAPI {
      - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func nftsListNftCollections(network: Network, walletAddress: String, page: Int? = nil, pageSize: Int? = nil, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<[ListNftCollectionsResponseItem], ErrorResponse>) -> Void)) -> RequestTask {
+    open class func nftsListNftCollections(network: Network, walletAddress: String, page: Int? = nil, pageSize: Int? = nil, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<[NftCollection], ErrorResponse>) -> Void)) -> RequestTask {
         return nftsListNftCollectionsWithRequestBuilder(network: network, walletAddress: walletAddress, page: page, pageSize: pageSize).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -145,9 +145,9 @@ open class NftsAPI {
      - parameter walletAddress: (query)  
      - parameter page: (query) page number starting from 1 (optional)
      - parameter pageSize: (query) size of each page (optional)
-     - returns: RequestBuilder<[ListNftCollectionsResponseItem]> 
+     - returns: RequestBuilder<[NftCollection]> 
      */
-    open class func nftsListNftCollectionsWithRequestBuilder(network: Network, walletAddress: String, page: Int? = nil, pageSize: Int? = nil) -> RequestBuilder<[ListNftCollectionsResponseItem]> {
+    open class func nftsListNftCollectionsWithRequestBuilder(network: Network, walletAddress: String, page: Int? = nil, pageSize: Int? = nil) -> RequestBuilder<[NftCollection]> {
         let localVariablePath = "/nfts/collections"
         let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -166,7 +166,7 @@ open class NftsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<[ListNftCollectionsResponseItem]>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<[NftCollection]>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
@@ -183,7 +183,7 @@ open class NftsAPI {
      - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func nftsListNfts(network: Network, walletAddress: String? = nil, contractAddress: String? = nil, page: Int? = nil, pageSize: Int? = nil, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<[ListNftsResponseItem], ErrorResponse>) -> Void)) -> RequestTask {
+    open class func nftsListNfts(network: Network, walletAddress: String? = nil, contractAddress: String? = nil, page: Int? = nil, pageSize: Int? = nil, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<[Nft], ErrorResponse>) -> Void)) -> RequestTask {
         return nftsListNftsWithRequestBuilder(network: network, walletAddress: walletAddress, contractAddress: contractAddress, page: page, pageSize: pageSize).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -206,9 +206,9 @@ open class NftsAPI {
      - parameter contractAddress: (query) query by collection address. If provided, wallet_address should not be set. (optional)
      - parameter page: (query) page number, starting from 1 (optional)
      - parameter pageSize: (query) size of each page (optional)
-     - returns: RequestBuilder<[ListNftsResponseItem]> 
+     - returns: RequestBuilder<[Nft]> 
      */
-    open class func nftsListNftsWithRequestBuilder(network: Network, walletAddress: String? = nil, contractAddress: String? = nil, page: Int? = nil, pageSize: Int? = nil) -> RequestBuilder<[ListNftsResponseItem]> {
+    open class func nftsListNftsWithRequestBuilder(network: Network, walletAddress: String? = nil, contractAddress: String? = nil, page: Int? = nil, pageSize: Int? = nil) -> RequestBuilder<[Nft]> {
         let localVariablePath = "/nfts"
         let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -228,7 +228,7 @@ open class NftsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<[ListNftsResponseItem]>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<[Nft]>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }

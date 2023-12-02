@@ -1,9 +1,9 @@
-# ListNftsResponseItem
+# Nft
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**metadata** | [**ListNftsResponseItemMetadata**](ListNftsResponseItemMetadata.md) |  | [optional] 
+**metadata** | [**NftMetadata**](NftMetadata.md) |  | [optional] 
 **ownerWalletAddress** | **String** |  | 
 **contractAddress** | **String** |  | 
 **tokenId** | **String** |  | 

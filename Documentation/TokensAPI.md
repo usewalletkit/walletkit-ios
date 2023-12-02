@@ -114,7 +114,7 @@ Name | Type | Description  | Notes
 
 # **tokensGet**
 ```swift
-    open class func tokensGet(network: Network, token: String, completion: @escaping (_ data: GetTokenResponse?, _ error: Error?) -> Void)
+    open class func tokensGet(network: Network, token: String, completion: @escaping (_ data: Token?, _ error: Error?) -> Void)
 ```
 
 Get Token
@@ -151,7 +151,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetTokenResponse**](GetTokenResponse.md)
+[**Token**](Token.md)
 
 ### Authorization
 

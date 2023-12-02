@@ -113,6 +113,53 @@ open class TransactionsAPI {
     }
 
     /**
+     Preview
+     
+     - parameter transactionsPreviewRequest: (body)  
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the result
+     */
+    @discardableResult
+    open class func transactionsPreview(transactionsPreviewRequest: TransactionsPreviewRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<PreviewResponse, ErrorResponse>) -> Void)) -> RequestTask {
+        return transactionsPreviewWithRequestBuilder(transactionsPreviewRequest: transactionsPreviewRequest).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(.success(response.body))
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    /**
+     Preview
+     - POST /transactions/preview
+     - This endpoint allows you to preview a transaction’s execution without sending it to the blockchain.
+     - Bearer Token:
+       - type: http
+       - name: BearerAuth
+     - parameter transactionsPreviewRequest: (body)  
+     - returns: RequestBuilder<PreviewResponse> 
+     */
+    open class func transactionsPreviewWithRequestBuilder(transactionsPreviewRequest: TransactionsPreviewRequest) -> RequestBuilder<PreviewResponse> {
+        let localVariablePath = "/transactions/preview"
+        let localVariableURLString = WalletKitAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: transactionsPreviewRequest)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<PreviewResponse>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
+    }
+
+    /**
      Sign and Send
      
      - parameter transactionsSignAndSendRequest: (body)  

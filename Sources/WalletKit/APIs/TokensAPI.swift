@@ -115,7 +115,7 @@ open class TokensAPI {
      - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func tokensGet(network: Network, token: String, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<GetTokenResponse, ErrorResponse>) -> Void)) -> RequestTask {
+    open class func tokensGet(network: Network, token: String, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<Token, ErrorResponse>) -> Void)) -> RequestTask {
         return tokensGetWithRequestBuilder(network: network, token: token).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -135,9 +135,9 @@ open class TokensAPI {
        - name: BearerAuth
      - parameter network: (query)  
      - parameter token: (query) token contract address or symbol in case of the gas token 
-     - returns: RequestBuilder<GetTokenResponse> 
+     - returns: RequestBuilder<Token> 
      */
-    open class func tokensGetWithRequestBuilder(network: Network, token: String) -> RequestBuilder<GetTokenResponse> {
+    open class func tokensGetWithRequestBuilder(network: Network, token: String) -> RequestBuilder<Token> {
         let localVariablePath = "/tokens/tokens"
         let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -154,7 +154,7 @@ open class TokensAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<GetTokenResponse>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Token>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }

@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 # **nftsGetNftCollection**
 ```swift
-    open class func nftsGetNftCollection(network: Network? = nil, collectionAddress: String? = nil, completion: @escaping (_ data: GetNftCollectionResponse?, _ error: Error?) -> Void)
+    open class func nftsGetNftCollection(network: Network? = nil, collectionAddress: String? = nil, completion: @escaping (_ data: NftCollection?, _ error: Error?) -> Void)
 ```
 
 Get NFT Collection
@@ -102,7 +102,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetNftCollectionResponse**](GetNftCollectionResponse.md)
+[**NftCollection**](NftCollection.md)
 
 ### Authorization
 
@@ -117,7 +117,7 @@ Name | Type | Description  | Notes
 
 # **nftsListNftCollections**
 ```swift
-    open class func nftsListNftCollections(network: Network, walletAddress: String, page: Int? = nil, pageSize: Int? = nil, completion: @escaping (_ data: [ListNftCollectionsResponseItem]?, _ error: Error?) -> Void)
+    open class func nftsListNftCollections(network: Network, walletAddress: String, page: Int? = nil, pageSize: Int? = nil, completion: @escaping (_ data: [NftCollection]?, _ error: Error?) -> Void)
 ```
 
 List NFT Collections
@@ -158,7 +158,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[ListNftCollectionsResponseItem]**](ListNftCollectionsResponseItem.md)
+[**[NftCollection]**](NftCollection.md)
 
 ### Authorization
 
@@ -173,7 +173,7 @@ Name | Type | Description  | Notes
 
 # **nftsListNfts**
 ```swift
-    open class func nftsListNfts(network: Network, walletAddress: String? = nil, contractAddress: String? = nil, page: Int? = nil, pageSize: Int? = nil, completion: @escaping (_ data: [ListNftsResponseItem]?, _ error: Error?) -> Void)
+    open class func nftsListNfts(network: Network, walletAddress: String? = nil, contractAddress: String? = nil, page: Int? = nil, pageSize: Int? = nil, completion: @escaping (_ data: [Nft]?, _ error: Error?) -> Void)
 ```
 
 List NFTs
@@ -216,7 +216,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[ListNftsResponseItem]**](ListNftsResponseItem.md)
+[**[Nft]**](Nft.md)
 
 ### Authorization
 

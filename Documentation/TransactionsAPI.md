@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**transactionsBatchSignAndSend**](TransactionsAPI.md#transactionsbatchsignandsend) | **POST** /transactions/batch-sign-and-send | Batch Sign and Send
 [**transactionsGetStatus**](TransactionsAPI.md#transactionsgetstatus) | **GET** /transactions/status-by-hash | Transaction Status By Hash
+[**transactionsPreview**](TransactionsAPI.md#transactionspreview) | **POST** /transactions/preview | Preview
 [**transactionsSignAndSend**](TransactionsAPI.md#transactionssignandsend) | **POST** /transactions/sign-and-send | Sign and Send
 [**transactionsSignMessage**](TransactionsAPI.md#transactionssignmessage) | **POST** /transactions/sign-message | Sign Message
 [**transactionsStatusById**](TransactionsAPI.md#transactionsstatusbyid) | **GET** /transactions/status-by-id | Transaction Status by ID
@@ -25,7 +26,7 @@ This endpoint makes arbitrary smart contract function calls in batch.
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import WalletKit
 
-let transactionsBatchSignAndSendRequest = transactions_batch_sign_and_send_request(network: Network(), signerWalletAddress: "signerWalletAddress_example", unsignedTransactions: [SignAndSendRequestUnsignedTransaction(to: "to_example", value: "value_example", input: "input_example")], developerSecret: "developerSecret_example", userPin: "userPin_example") // TransactionsBatchSignAndSendRequest | 
+let transactionsBatchSignAndSendRequest = transactions_batch_sign_and_send_request(network: Network(), signerWalletAddress: "signerWalletAddress_example", unsignedTransactions: [UnsignedTransaction(to: "to_example", value: "value_example", input: "input_example")], developerSecret: "developerSecret_example", userPin: "userPin_example") // TransactionsBatchSignAndSendRequest | 
 
 // Batch Sign and Send
 TransactionsAPI.transactionsBatchSignAndSend(transactionsBatchSignAndSendRequest: transactionsBatchSignAndSendRequest) { (response, error) in
@@ -113,6 +114,56 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **transactionsPreview**
+```swift
+    open class func transactionsPreview(transactionsPreviewRequest: TransactionsPreviewRequest, completion: @escaping (_ data: PreviewResponse?, _ error: Error?) -> Void)
+```
+
+Preview
+
+This endpoint allows you to preview a transaction’s execution without sending it to the blockchain.
+
+### Example
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import WalletKit
+
+let transactionsPreviewRequest = transactions_preview_request(network: Network(), from: "from_example", unsignedTransaction: UnsignedTransaction(to: "to_example", value: "value_example", input: "input_example")) // TransactionsPreviewRequest | 
+
+// Preview
+TransactionsAPI.transactionsPreview(transactionsPreviewRequest: transactionsPreviewRequest) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **transactionsPreviewRequest** | [**TransactionsPreviewRequest**](TransactionsPreviewRequest.md) |  | 
+
+### Return type
+
+[**PreviewResponse**](PreviewResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **transactionsSignAndSend**
 ```swift
     open class func transactionsSignAndSend(transactionsSignAndSendRequest: TransactionsSignAndSendRequest, completion: @escaping (_ data: TransactionSubmissionResponse?, _ error: Error?) -> Void)
@@ -127,7 +178,7 @@ This endpoint allows arbitrary smart contract function calls. It can be used to 
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import WalletKit
 
-let transactionsSignAndSendRequest = transactions_sign_and_send_request(network: Network(), signerWalletAddress: "signerWalletAddress_example", unsignedTransaction: SignAndSendRequestUnsignedTransaction(to: "to_example", value: "value_example", input: "input_example"), developerSecret: "developerSecret_example", userPin: "userPin_example") // TransactionsSignAndSendRequest | 
+let transactionsSignAndSendRequest = transactions_sign_and_send_request(network: Network(), signerWalletAddress: "signerWalletAddress_example", unsignedTransaction: UnsignedTransaction(to: "to_example", value: "value_example", input: "input_example"), developerSecret: "developerSecret_example", userPin: "userPin_example") // TransactionsSignAndSendRequest | 
 
 // Sign and Send
 TransactionsAPI.transactionsSignAndSend(transactionsSignAndSendRequest: transactionsSignAndSendRequest) { (response, error) in

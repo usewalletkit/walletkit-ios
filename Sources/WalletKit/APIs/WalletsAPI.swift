@@ -67,7 +67,7 @@ open class WalletsAPI {
      - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func walletsCreate(createWalletRequest: CreateWalletRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<CreateWalletResponse, ErrorResponse>) -> Void)) -> RequestTask {
+    open class func walletsCreate(createWalletRequest: CreateWalletRequest, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<Wallet, ErrorResponse>) -> Void)) -> RequestTask {
         return walletsCreateWithRequestBuilder(createWalletRequest: createWalletRequest).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -86,9 +86,9 @@ open class WalletsAPI {
        - type: http
        - name: BearerAuth
      - parameter createWalletRequest: (body)  
-     - returns: RequestBuilder<CreateWalletResponse> 
+     - returns: RequestBuilder<Wallet> 
      */
-    open class func walletsCreateWithRequestBuilder(createWalletRequest: CreateWalletRequest) -> RequestBuilder<CreateWalletResponse> {
+    open class func walletsCreateWithRequestBuilder(createWalletRequest: CreateWalletRequest) -> RequestBuilder<Wallet> {
         let localVariablePath = "/wallets"
         let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createWalletRequest)
@@ -101,7 +101,7 @@ open class WalletsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<CreateWalletResponse>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Wallet>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
@@ -372,7 +372,7 @@ open class WalletsAPI {
      - parameter completion: completion handler to receive the result
      */
     @discardableResult
-    open class func walletsList(network: Network? = nil, page: Int? = nil, pageSize: String? = nil, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<[ListWalletsResponseItem], ErrorResponse>) -> Void)) -> RequestTask {
+    open class func walletsList(network: Network? = nil, page: Int? = nil, pageSize: String? = nil, apiResponseQueue: DispatchQueue = WalletKitAPI.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<[Wallet], ErrorResponse>) -> Void)) -> RequestTask {
         return walletsListWithRequestBuilder(network: network, page: page, pageSize: pageSize).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -393,9 +393,9 @@ open class WalletsAPI {
      - parameter network: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter pageSize: (query)  (optional)
-     - returns: RequestBuilder<[ListWalletsResponseItem]> 
+     - returns: RequestBuilder<[Wallet]> 
      */
-    open class func walletsListWithRequestBuilder(network: Network? = nil, page: Int? = nil, pageSize: String? = nil) -> RequestBuilder<[ListWalletsResponseItem]> {
+    open class func walletsListWithRequestBuilder(network: Network? = nil, page: Int? = nil, pageSize: String? = nil) -> RequestBuilder<[Wallet]> {
         let localVariablePath = "/wallets"
         let localVariableURLString = WalletKitAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -413,7 +413,7 @@ open class WalletsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<[ListWalletsResponseItem]>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<[Wallet]>.Type = WalletKitAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }

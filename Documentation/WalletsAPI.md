@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 
 # **walletsCreate**
 ```swift
-    open class func walletsCreate(createWalletRequest: CreateWalletRequest, completion: @escaping (_ data: CreateWalletResponse?, _ error: Error?) -> Void)
+    open class func walletsCreate(createWalletRequest: CreateWalletRequest, completion: @escaping (_ data: Wallet?, _ error: Error?) -> Void)
 ```
 
 Create Wallet
@@ -101,7 +101,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateWalletResponse**](CreateWalletResponse.md)
+[**Wallet**](Wallet.md)
 
 ### Authorization
 
@@ -372,7 +372,7 @@ Name | Type | Description  | Notes
 
 # **walletsList**
 ```swift
-    open class func walletsList(network: Network? = nil, page: Int? = nil, pageSize: String? = nil, completion: @escaping (_ data: [ListWalletsResponseItem]?, _ error: Error?) -> Void)
+    open class func walletsList(network: Network? = nil, page: Int? = nil, pageSize: String? = nil, completion: @escaping (_ data: [Wallet]?, _ error: Error?) -> Void)
 ```
 
 List Wallets
@@ -411,7 +411,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[ListWalletsResponseItem]**](ListWalletsResponseItem.md)
+[**[Wallet]**](Wallet.md)
 
 ### Authorization
 

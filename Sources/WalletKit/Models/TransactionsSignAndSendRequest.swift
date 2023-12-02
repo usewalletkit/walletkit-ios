@@ -15,13 +15,13 @@ public struct TransactionsSignAndSendRequest: Codable, JSONEncodable, Hashable {
     public var network: Network
     /** address can only be the ones created in the project. */
     public var signerWalletAddress: String
-    public var unsignedTransaction: SignAndSendRequestUnsignedTransaction
+    public var unsignedTransaction: UnsignedTransaction
     /** On testnet, the developer_secret is always \"testnet-secret\". On mainnet, the developer_secret is set by the developer during account activation. */
     public var developerSecret: String?
     /** A 6-digit numeric pin that is only known to the user, set during wallet creation. This pin is required to sign transactions from this wallet. */
     public var userPin: String?
 
-    public init(network: Network, signerWalletAddress: String, unsignedTransaction: SignAndSendRequestUnsignedTransaction, developerSecret: String? = nil, userPin: String? = nil) {
+    public init(network: Network, signerWalletAddress: String, unsignedTransaction: UnsignedTransaction, developerSecret: String? = nil, userPin: String? = nil) {
         self.network = network
         self.signerWalletAddress = signerWalletAddress
         self.unsignedTransaction = unsignedTransaction
