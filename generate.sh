@@ -16,9 +16,16 @@ else
   exit 1
 fi
 
+# Download OpenAPI spec from GitHub
+OPENAPI_URL="https://raw.githubusercontent.com/usewalletkit/api/main/docs/openapi/openapi.yml"
+curl -o openapi.yml "$OPENAPI_URL"
+
 # Generate with OpenAPI spec
 "$OPENAPI_COMMAND" generate -g swift5 -i openapi.yml -c config.yml
 
 # Update documentation paths
 rm -r Documentation/
 mv docs/ Documentation/
+
+# Remove temporary OpenAPI spec file
+rm openapi.yml
