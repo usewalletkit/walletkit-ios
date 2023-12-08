@@ -1,5 +1,10 @@
 # WalletKit iOS SDK
 
+[![Swift](https://github.com/usewalletkit/walletkit-ios/actions/workflows/swift.yml/badge.svg?branch=main)](https://github.com/usewalletkit/walletkit-ios/actions/workflows/swift.yml)
+[![SPM](https://img.shields.io/github/tag/usewalletkit/walletkit-ios?include_prereleases=&sort=semver&color=blue&label=SPM)](https://github.com/usewalletkit/walletkit-ios/tags)
+[![CocoaPods](https://img.shields.io/cocoapods/v/WalletKit.svg?color=blue&label=CocoaPods)](https://cocoapods.org/pods/WalletKit)
+[![License](https://img.shields.io/badge/License-Apache_2.0-green.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+
 The best API to create gasless wallets for your users. Build mobile-first web3 apps with unmatched user experience.
 
 ## Overview
