@@ -18,16 +18,16 @@ public struct PreviewResponse: Codable, JSONEncodable, Hashable {
     public var contract: ContractMetadata?
     public var functionName: String?
     public var arguments: [String: String]
-    public var assetChanges: [AssetChange]
+    public var simulation: Simulation?
 
-    public init(network: Network, from: String, to: String, contract: ContractMetadata? = nil, functionName: String? = nil, arguments: [String: String], assetChanges: [AssetChange]) {
+    public init(network: Network, from: String, to: String, contract: ContractMetadata? = nil, functionName: String? = nil, arguments: [String: String], simulation: Simulation? = nil) {
         self.network = network
         self.from = from
         self.to = to
         self.contract = contract
         self.functionName = functionName
         self.arguments = arguments
-        self.assetChanges = assetChanges
+        self.simulation = simulation
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -37,7 +37,7 @@ public struct PreviewResponse: Codable, JSONEncodable, Hashable {
         case contract
         case functionName = "function_name"
         case arguments
-        case assetChanges = "asset_changes"
+        case simulation
     }
 
     // Encodable protocol methods
@@ -50,7 +50,7 @@ public struct PreviewResponse: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(contract, forKey: .contract)
         try container.encodeIfPresent(functionName, forKey: .functionName)
         try container.encode(arguments, forKey: .arguments)
-        try container.encode(assetChanges, forKey: .assetChanges)
+        try container.encodeIfPresent(simulation, forKey: .simulation)
     }
 }
 

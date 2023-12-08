@@ -49,6 +49,7 @@ Sources/WalletKit/Models/PreviewResponse.swift
 Sources/WalletKit/Models/Session.swift
 Sources/WalletKit/Models/SessionChallenge.swift
 Sources/WalletKit/Models/SignMessageResponse.swift
+Sources/WalletKit/Models/Simulation.swift
 Sources/WalletKit/Models/Token.swift
 Sources/WalletKit/Models/TokenSource.swift
 Sources/WalletKit/Models/TokensBatchTransferRequest.swift
@@ -57,6 +58,7 @@ Sources/WalletKit/Models/TokensMintRequest.swift
 Sources/WalletKit/Models/TokensTransferRequest.swift
 Sources/WalletKit/Models/TransactionSubmissionResponse.swift
 Sources/WalletKit/Models/TransactionsBatchSignAndSendRequest.swift
+Sources/WalletKit/Models/TransactionsPreviewBundleRequest.swift
 Sources/WalletKit/Models/TransactionsPreviewRequest.swift
 Sources/WalletKit/Models/TransactionsSignAndSendRequest.swift
 Sources/WalletKit/Models/TransactionsSignMessageRequest.swift
@@ -109,6 +111,7 @@ docs/PreviewResponse.md
 docs/Session.md
 docs/SessionChallenge.md
 docs/SignMessageResponse.md
+docs/Simulation.md
 docs/Token.md
 docs/TokenSource.md
 docs/TokensAPI.md
@@ -119,6 +122,7 @@ docs/TokensTransferRequest.md
 docs/TransactionSubmissionResponse.md
 docs/TransactionsAPI.md
 docs/TransactionsBatchSignAndSendRequest.md
+docs/TransactionsPreviewBundleRequest.md
 docs/TransactionsPreviewRequest.md
 docs/TransactionsSignAndSendRequest.md
 docs/TransactionsSignMessageRequest.md
