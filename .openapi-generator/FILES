@@ -3,6 +3,7 @@
 Sources/WalletKit/APIHelper.swift
 Sources/WalletKit/APIs.swift
 Sources/WalletKit/APIs/ActivityAPI.swift
+Sources/WalletKit/APIs/ContractsAPI.swift
 Sources/WalletKit/APIs/GasAPI.swift
 Sources/WalletKit/APIs/NftsAPI.swift
 Sources/WalletKit/APIs/TokensAPI.swift
@@ -82,6 +83,7 @@ docs/ChangeUserPinRequest.md
 docs/ChangeUserPinResponse.md
 docs/ContractMetadata.md
 docs/ContractType.md
+docs/ContractsAPI.md
 docs/CreateWalletRequest.md
 docs/ExportWalletRequest.md
 docs/ExportWalletResponse.md

@@ -17,10 +17,10 @@ public struct PreviewResponse: Codable, JSONEncodable, Hashable {
     public var to: String
     public var contract: ContractMetadata?
     public var functionName: String?
-    public var arguments: [String: String]
+    public var arguments: [String: AnyCodable]?
     public var simulation: Simulation?
 
-    public init(network: Network, from: String, to: String, contract: ContractMetadata? = nil, functionName: String? = nil, arguments: [String: String], simulation: Simulation? = nil) {
+    public init(network: Network, from: String, to: String, contract: ContractMetadata? = nil, functionName: String? = nil, arguments: [String: AnyCodable]? = nil, simulation: Simulation? = nil) {
         self.network = network
         self.from = from
         self.to = to
@@ -49,7 +49,7 @@ public struct PreviewResponse: Codable, JSONEncodable, Hashable {
         try container.encode(to, forKey: .to)
         try container.encodeIfPresent(contract, forKey: .contract)
         try container.encodeIfPresent(functionName, forKey: .functionName)
-        try container.encode(arguments, forKey: .arguments)
+        try container.encodeIfPresent(arguments, forKey: .arguments)
         try container.encodeIfPresent(simulation, forKey: .simulation)
     }
 }

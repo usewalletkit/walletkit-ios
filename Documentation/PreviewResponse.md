@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **to** | **String** |  | 
 **contract** | [**ContractMetadata**](ContractMetadata.md) |  | [optional] 
 **functionName** | **String** |  | [optional] 
-**arguments** | **[String: String]** |  | 
+**arguments** | **[String: AnyCodable]** |  | [optional] 
 **simulation** | [**Simulation**](Simulation.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
