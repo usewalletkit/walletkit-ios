@@ -1,0 +1,27 @@
+# Publish to CocoaPods at tag push
+# For more information see: https://github.com/marketplace/actions/deploy-to-cocoapod-action
+
+name: CocoaPods
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install CocoaPods
+      run: gem install cocoapods
+    - name: Publish to CocoaPods
+      run: |
+        set -eo pipefail
+        export WALLET_KIT_VERSION=$(git describe --tags `git rev-list --tags --max-count=1`)
+        pod spec lint --allow-warnings
+        pod trunk push --allow-warnings
+      env:
+        COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
